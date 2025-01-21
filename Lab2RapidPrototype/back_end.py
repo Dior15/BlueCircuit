@@ -1,20 +1,7 @@
 import csv
 
-database_file = "music.csv"
-
 #Function to read items from csv file
-def read_items():
-    with open(database_file, mode="r") as file:
-        reader = csv.Dictreader(file)
-        return list(reader)
-
-
-#Function to write items to the csv file
-def write_items(items):
-    with open(database_file, mode="w", newline="") as file:
-        fieldnames = ["Name", "Genre", "Debut Year", "Top Album", "Number of Albums", "Active"]
-        writer = csv.DictWriter(file, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(items)
-
-
+with open('Lab2RapidPrototype\music.csv', mode="r") as file:
+    csvFile = csv.reader(file)
+    for lines in csvFile:
+        print(lines)
