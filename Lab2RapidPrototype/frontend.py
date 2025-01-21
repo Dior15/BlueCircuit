@@ -18,9 +18,9 @@ def add():
     active = input("Are they still active? (Y/N): ")
 
     if active == "Y":
-        items.append(True)
+        items.append("Yes")
     else: 
-        items.append(False)
+        items.append("No")
 
     
     with open('Lab2RapidPrototype\music.csv', mode="a") as file:
