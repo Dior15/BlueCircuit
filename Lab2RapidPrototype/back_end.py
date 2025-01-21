@@ -10,7 +10,7 @@ def read_items():
 
 
 #Function to write items to the csv file
-def write_items():
+def write_items(items):
     with open(database_file, mode="w", newline="") as file:
         fieldnames = ["Name", "Genre", "Debut Year", "Top Album", "Number of Albums", "Active"]
         writer = csv.DictWriter(file, fieldnames=fieldnames)
