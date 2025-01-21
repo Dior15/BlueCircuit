@@ -4,7 +4,7 @@ database_file = "music.csv"
 
 #Function to read items from csv file
 def read_items():
-    with open(database_file, mode="r") as a file:
+    with open(database_file, mode="r") as file:
         reader = csv.Dictreader(file)
         return list(reader)
 
