@@ -28,8 +28,12 @@ def menu():
     print("1. View catalog")
     print("2. Add a new song")
     print("3. Edit or delete an existing song")
-    option = input("Which option would you like to select: ")
+    option = int(input("Which option would you like to select: "))
     checkOptions(option)
-    
-menu()
+
+def main():
+    printIntro()
+    menu()
+
+main()
 
