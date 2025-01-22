@@ -1,6 +1,6 @@
 import backend
 
-FILE_PATH = 'KhristianPrototype/music.csv'
+FILE_PATH = 'Lab2RapidPrototype/KhristianPrototype/music.csv'
 
 def view():
     """View all items in the catalog."""
