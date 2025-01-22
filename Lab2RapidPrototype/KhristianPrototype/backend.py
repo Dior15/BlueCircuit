@@ -40,25 +40,3 @@ def edit_item(file_path, artist_name, new_item):
             print("Artist not found in the catalog.")
     except FileNotFoundError:
         print(f"File {file_path} not found. No changes were made.")
-# def edit_item(file_path, old_item, new_item):
-#     """Edits an existing item in the CSV file."""
-#     try:
-#         updated = False
-#         items = []
-#         with open(file_path, mode="r") as file:
-#             csv_reader = csv.reader(file)
-#             for line in csv_reader:
-#                 if line and line == old_item:
-#                     items.append(new_item)
-#                     updated = True
-#                 else:
-#                     items.append(line)
-#         with open(file_path, mode="w", newline='') as file:
-#             csv_writer = csv.writer(file)
-#             csv_writer.writerows(items)
-#         if updated:
-#             print("Item updated successfully!")
-#         else:
-#             print("Item not found in the catalog.")
-#     except FileNotFoundError:
-#         print(f"File {file_path} not found. No changes were made.")

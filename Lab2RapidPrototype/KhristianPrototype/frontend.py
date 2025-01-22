@@ -2,6 +2,33 @@ import backend
 
 FILE_PATH = 'Lab2RapidPrototype/KhristianPrototype/music.csv'
 
+def print_intro():
+    """Print the introduction message."""
+    print("Welcome to your music catalog. Here you can view, add, and edit items.")
+
+def check_options(option):
+    """Check and execute menu options."""
+    if option == 1:
+        view()
+    elif option == 2:
+        add()
+    elif option == 3:
+        edit()
+    else:
+        print("Invalid option. Please try again.")
+
+def menu():
+    """Display the menu and get user input."""
+    print("\nMenu:")
+    print("1. View catalog")
+    print("2. Add a new item")
+    print("3. Edit or delete an existing item")
+    try:
+        option = int(input("Which option would you like to select: "))
+        check_options(option)
+    except ValueError:
+        print("Invalid input. Please enter a number.")
+
 def view():
     """View all items in the catalog."""
     items = backend.read_items(FILE_PATH)
