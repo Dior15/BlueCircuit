@@ -45,10 +45,10 @@ def add():
     genre = input("Enter the genre name: ")
     year = input("Enter the release year: ")
     album = input("Enter the album name: ")
-    numAlbum = input("Enter the number of albums: ")
+    num_album = input("Enter the number of albums: ")
     active = input("Enter if the artist is active (Yes or No): ")
 
-    backend.add_item(FILE_PATH, [artist, genre, year, album, numAlbum, active])
+    backend.add_item(FILE_PATH, [artist, genre, year, album, num_album, active])
 
 def edit():
     """Prompt the user to edit an existing item."""
@@ -58,7 +58,7 @@ def edit():
     new_genre = input("Enter the new genre name: ")
     new_year = input("Enter the new release year: ")
     new_album = input("Enter the new album name: ")
-    new_numAlbum = input("Enter the new number of albums: ")
+    new_num_album = input("Enter the new number of albums: ")
     new_active = input("Enter if the artist is active (Yes or No): ")
 
-    backend.edit_item(FILE_PATH, artist, [new_artist, new_genre, new_year, new_album, new_numAlbum, new_active])
+    backend.edit_item(FILE_PATH, artist, [new_artist, new_genre, new_year, new_album, new_num_album, new_active])
