@@ -1,24 +1,108 @@
-<<<<<<< HEAD
-body{
+header{
     background-color: black;
+    color: white;
+    display: flex;
+    height: 80px;
+    justify-content: space-between;
+    align-items: center;
 }
 
-img{
-    height: 300px;
-=======
-*
-{
-  margin: 0px;
-  padding: 0px;
-  box-sizing: border-box;
+#web-name{
+    font-size: 20pt;
+    margin-left: 5%;
 }
 
-.entry {
-  margin-left:10%;
-  margin-top: 1%;
-  width: 80%;
-  height: 100px;
-  border-style:dashed;
-  border-color: black;
->>>>>>> 3bbc8eea25febf0af874998ec8b150a0cb1cb69c
+#signin-header{
+    margin-right: 40px;
+    width: 90px;
+}
+
+#signin-or-up{
+    justify-self: center;
+}
+
+.signin, #bottom{
+    margin-right: 12px;
+}
+
+.signup, #bottom{
+    margin-left: 12px;
+}
+
+#search-bar{
+    justify-self: center;
+    width: 300px;
+}
+
+h3{
+    justify-self: center;
+}
+
+#pop-movie-header{
+    margin-top:30px;
+}
+
+#popular-movies{
+    display: inline-flex;
+    margin-left: 310px;
+    align-items: center;
+}
+
+#movie-poster{
+    width: 150px;
+    height: 230px;
+    background-color: gainsboro;
+}
+
+.flex-item{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.scroll-btn{
+    height: 40px;
+}
+
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+#trendingCarousel{
+    /* Styling for container of trending carousel */
+    border-style:dashed;
+    border-color:black;
+    width:90vh;
+    height:35vh;
+    margin-left:auto;
+    margin-right:auto;
+    padding-top:2.5vh;
+    padding-left:auto;
+    padding-right:auto;
+}
+.trendingCarouselElement{
+    /* Main styling for elements within trending carousel */
+    border-style:double;
+    border-color:black;
+    float:left;
+    text-align:center;
+}
+.trendingCarouselMain{
+    /* Size overrides for the main element of the trending carousel */
+    width:25vh;
+    height:30vh;
+    margin-left:6vh;
+    margin-right:6vh;
+    padding-top:10vh;
+}
+
+.trendingCarouselSec{
+    /* Size overrides for side elements of trending carousel */
+    width:20vh;
+    height:25vh;
+    padding-top:7.5vh;
+    margin-top: 2.5vh;
+}
+#trendingCarouselLeft{
+    margin-left:6vh;
 }
