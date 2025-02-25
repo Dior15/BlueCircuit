@@ -1,0 +1,39 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+#trendingCarousel{
+  /* Styling for container of trending carousel */
+  border-style:dashed;
+  border-color:black;
+  width:90vh;
+  height:35vh;
+  margin-left:auto;
+  margin-right:auto;
+  padding-top:2.5vh;
+  /* padding-left:6vh;
+  padding-right:6vh; */
+}
+.trendingCarouselElement{
+  /* Main styling for elements within trending carousel */
+  border-style:double;
+  border-color:black;
+  float:left;
+  text-align:center;
+}
+.trendingCarouselMain{
+  /* Size overrides for the main element of the trending carousel */
+  width:25vh;
+  height:30vh;
+  margin-left:6vh;
+  margin-right:6vh;
+  padding-top:10vh;
+}
+.trendingCarouselSec{
+  /* Size overrides for side elements of trending carousel */
+  width:20vh;
+  height:25vh;
+  padding-top:7.5vh;
+  margin-top: 2.5vh;
+}
