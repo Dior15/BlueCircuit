@@ -33,21 +33,25 @@
     <div id="trendingCarousel">
         <button id="carouselLeftButton"><b><</b></button>
 
-        <div class="trendingCarouselElement trendingCarouselSide" id="trendingCarouselLeft">
-            <p></p> <!-- Placeholder, will be updated dynamically -->
-            <!-- {{poster_urls}} -->
-        </div>
+        <div class="trendingCarouselElement trendingCarouselSide" id="trendingCarouselLeft">{{poster_urls}}</div>
 
         <div class="trendingCarouselElement" id="trendingCarouselMain">
-            <p></p> <!-- Placeholder, will be updated dynamically -->
+            <!-- Placeholder, will be updated dynamically -->
         </div>
 
         <div class="trendingCarouselElement trendingCarouselSide" id="trendingCarouselRight">
-            <p></p> <!-- Placeholder, will be updated dynamically -->
+            <!-- Placeholder, will be updated dynamically -->
         </div>
 
         <button id="carouselRightButton"><b>></b></button>
+
+        <div id="blackout1" class="blackout"></div>
+        <div id="blackout2" class="blackout"></div>
+        <div id="blackout3" class="blackout"></div>
     </div>
+
+    
+
 
     <script>
         // Pass movie titles from Flask to JavaScript
