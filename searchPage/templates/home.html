@@ -35,13 +35,9 @@
 
         <div class="trendingCarouselElement trendingCarouselSide" id="trendingCarouselLeft">{{poster_urls}}</div>
 
-        <div class="trendingCarouselElement" id="trendingCarouselMain">
-            <!-- Placeholder, will be updated dynamically -->
-        </div>
+        <div class="trendingCarouselElement" id="trendingCarouselMain"><!-- Placeholder, will be updated dynamically --></div>
 
-        <div class="trendingCarouselElement trendingCarouselSide" id="trendingCarouselRight">
-            <!-- Placeholder, will be updated dynamically -->
-        </div>
+        <div class="trendingCarouselElement trendingCarouselSide" id="trendingCarouselRight"><!-- Placeholder, will be updated dynamically --></div>
 
         <button id="carouselRightButton"><b>></b></button>
 
@@ -55,7 +51,7 @@
 
     <script>
         // Pass movie titles from Flask to JavaScript
-        let trendingMovies = {{ poster_urls | tojson }};
+        // let trendingMovies = {{ poster_urls | tojson }};
     </script>
 
     <script src="{{ url_for('static', filename='trending-carousel-temp.js') }}"></script>
