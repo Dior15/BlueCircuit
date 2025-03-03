@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieFlix</title>
+
+    <link href="{{ url_for('static', filename='trending-carousel-temp.css') }}" rel="stylesheet">
+</head>
+
+<body>
+
+    <h1>Welcome to MovieFlix</h1>
+
+    <!-- Search Bar Form -->
+    <form action="/search" method="POST">
+        <label for="query">Enter Search Term:</label>
+        <input type="text" id="query" name="query" required>
+
+        <label for="category">Search By:</label>
+        <select id="category" name="category">
+            <option value="movie">Movie</option>
+            <option value="tv">TV Show</option>
+            <option value="person">Person</option>
+        </select>
+
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- Trending Movie Carousel -->
+    <div id="trendingCarousel">
+        <button id="carouselLeftButton"><b><</b></button>
+
+        <div class="trendingCarouselElement trendingCarouselSide" id="trendingCarouselLeft">{{poster_urls}}</div>
+
+        <div class="trendingCarouselElement" id="trendingCarouselMain">
+            <!-- Placeholder, will be updated dynamically -->
+        </div>
+
+        <div class="trendingCarouselElement trendingCarouselSide" id="trendingCarouselRight">
+            <!-- Placeholder, will be updated dynamically -->
+        </div>
+
+        <button id="carouselRightButton"><b>></b></button>
+
+        <div id="blackout1" class="blackout"></div>
+        <div id="blackout2" class="blackout"></div>
+        <div id="blackout3" class="blackout"></div>
+    </div>
+
+    
+
+
+    <script>
+        // Pass movie titles from Flask to JavaScript
+        let trendingMovies = {{ poster_urls | tojson }};
+    </script>
+
+    <script src="{{ url_for('static', filename='trending-carousel-temp.js') }}"></script>
+
+</body>
+</html>
