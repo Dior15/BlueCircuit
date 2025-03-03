@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieFlix Search</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Welcome to MovieFlix</h1>
+    <form action="/search" method="POST">
+        <label for="query">Enter Search Term:</label>
+        <input type="text" id="query" name="query" required>
+        
+        <label for="category">Search By:</label>
+        <select id="category" name="category">
+            <option value="movie">Movie</option>
+            <option value="tv">TV Show</option>
+            <option value="person">Person</option>
+        </select>
+        
+        <button type="submit">Search</button>
+    </form>
+</body>
+</html>
