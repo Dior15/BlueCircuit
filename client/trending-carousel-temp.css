@@ -8,7 +8,7 @@
   border-style:dashed;
   border-color:black;
   width:90vh;
-  height:35vh;
+  height:43vh;
   margin-left:auto;
   margin-right:auto;
   padding-top:2.5vh;
@@ -17,25 +17,24 @@
 }
 .trendingCarouselElement{
   /* Main styling for elements within trending carousel */
-  border-style:double;
-  border-color:black;
+  /* border-style:double;
+  border-color:black; */
   float:left;
   text-align:center;
+  background-color:black;
 }
 .trendingCarouselSide{
   /* Size overrides for side elements of trending carousel */
   width:20vh;
-  height:25vh;
-  padding-top:7.5vh;
+  height:30vh;
   margin-top: 2.5vh;
 }
 #trendingCarouselMain{
   /* Size overrides for the main element of the trending carousel */
   width:25vh;
-  height:30vh;
+  height:37.5vh;
   margin-left:6vh;
   margin-right:6vh;
-  padding-top:10vh;
 }
 #trendingCarouselLeft{
   margin-left:2.5vh;
@@ -44,12 +43,49 @@
   width:3vh;
   height:3vh;
   float:left;
-  margin-top:12.5vh;
+  margin-top:15vh;
   margin-left:0.5vh;
 }
 #carouselRightButton{
   width:3vh;
   height:3vh;
   margin-left:2.5vh;
-  margin-top:12.5vh;
+  margin-top:15vh;
+}
+.trendingCarouselElement img {
+  width:20vh;
+  height:30vh;
+  border-style:double;
+  border-color:red;
+}
+#trendingCarouselMain img{
+  width:25vh;
+  height:37.5vh;
+  border-style:double;
+  border-color:red;
+}
+.blackout{
+  background-color:black;
+  opacity:0;
+}
+#blackout1{
+  position:absolute;
+  width:20vh;
+  height:30vh;
+  margin-top:-15.5vh;
+  margin-left:6vh;
+}
+#blackout2{
+  position:absolute;
+  width:25vh;
+  height:37.5vh;
+  margin-top:-18vh;
+  margin-left:32vh;
+}
+#blackout3{
+  position:absolute;
+  width:20vh;
+  height:30vh;
+  margin-top:-15.5vh;
+  margin-left:63vh;
 }
