@@ -30,7 +30,11 @@ class imageCarousel {
         }
     
         this.redrawCarousel();
-        this.currentlyRotating = false;
+
+        await this.sleep(600);
+        this.currentlyRotating = false;  
+        
+
     }
   }
 
@@ -79,6 +83,7 @@ class imageCarousel {
       
       console.log(opacity);
     }, 15); 
+
   }
 
   // Automatic carousel spin
