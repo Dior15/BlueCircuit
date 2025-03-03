@@ -22,7 +22,14 @@
   float:left;
   text-align:center;
 }
-.trendingCarouselMain{
+.trendingCarouselSide{
+  /* Size overrides for side elements of trending carousel */
+  width:20vh;
+  height:25vh;
+  padding-top:7.5vh;
+  margin-top: 2.5vh;
+}
+#trendingCarouselMain{
   /* Size overrides for the main element of the trending carousel */
   width:25vh;
   height:30vh;
@@ -30,13 +37,19 @@
   margin-right:6vh;
   padding-top:10vh;
 }
-.trendingCarouselSec{
-  /* Size overrides for side elements of trending carousel */
-  width:20vh;
-  height:25vh;
-  padding-top:7.5vh;
-  margin-top: 2.5vh;
-}
 #trendingCarouselLeft{
-  margin-left:6vh;
+  margin-left:2.5vh;
+}
+#carouselLeftButton{
+  width:3vh;
+  height:3vh;
+  float:left;
+  margin-top:12.5vh;
+  margin-left:0.5vh;
+}
+#carouselRightButton{
+  width:3vh;
+  height:3vh;
+  margin-left:2.5vh;
+  margin-top:12.5vh;
 }
