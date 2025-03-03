@@ -1,10 +1,18 @@
 header{
-    background-color: black;
+    background-color: #1c1c1c;
     color: white;
     display: flex;
     height: 80px;
     justify-content: space-between;
     align-items: center;
+}
+
+body{
+    background-color: #0A0A0A;
+}
+
+footer{
+    height: 80px;
 }
 
 #web-name{
@@ -21,22 +29,61 @@ header{
     justify-self: center;
 }
 
-.signin, #bottom{
+.signin, #lower{
     margin-right: 12px;
 }
 
-.signup, #bottom{
+.signup, #lower{
     margin-left: 12px;
 }
 
 #search-bar{
     justify-self: center;
     width: 300px;
+    height: 30px;
+    background-color: #d9d9d9;
 }
 
 h3{
     justify-self: center;
+    color: white;
 }
+
+#lower-section{
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-evenly;
+
+}
+
+.lower-section{
+    height: 100px;
+    background-color: grey;
+    width: 80px;
+}
+
+.signin{
+    background-color: #1E90FF;
+    border: 0;
+    border-radius: 49px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #pop-movie-header{
     margin-top:30px;
@@ -62,6 +109,35 @@ h3{
 .scroll-btn{
     height: 40px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#trending-placeholder{
+    height: 100px;
+    background-color: black;
+    width: 200px;
+}
+
+
 
 *{
     margin: 0px;
