@@ -23,6 +23,7 @@ def home():
     # return render_template('trending-carousel-temp.html', poster_urls=poster_urls)
     return render_template('home.html', poster_urls=poster_urls)
 
+
 @app.route('/search', methods=['POST'])
 def search():
     # Get user search input
@@ -42,6 +43,14 @@ def search():
         return "Invalid category", 400  # Error handling
 
     return render_template('results.html', results=search.results, category=category, query=query)
+
+@app.route('/login')
+def login():
+    return render_template('loginpage.html')
+
+@app.route('/signup')
+def signup():
+    return render_template('accountcreationpage.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

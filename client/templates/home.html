@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MovieFlix</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename ='style.css')}}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='trending-carousel-temp.css') }}" >
+    </head>
+
+    <body>
+        <header>
+            <div id="web-name">MovieFlix</div>
+
+            <form action="/search" method="POST">
+                <label for="query">Search: </label>
+                <input type="text" id="query" name="query" required>
+
+                <label for="category">Search By:</label>
+                <select id="category" name="category">
+                    <option value="movie">Movie</option>
+                    <option value="tv">TV Show</option>
+                    <option value="person">Person</option>
+                </select>
+
+                <button type="submit">Search</button>
+            </form>
+            <a href="{{ url_for('login') }}""><button class="signin" id="signin-header">Sign In</button></a>
+        </header>
+
+        <!-- Trending Movie Carousel -->
+        <br><br><br>
+        <h3>Popular Movies this Week</h3>
+        <div id="trendingCarousel">
+            <button id="carouselLeftButton"><b><</b></button>
+
+            <div class="trendingCarouselElement trendingCarouselSide" id="trendingCarouselLeft">{{poster_urls}}</div>
+
+            <div class="trendingCarouselElement" id="trendingCarouselMain"></div>
+
+            <div class="trendingCarouselElement trendingCarouselSide" id="trendingCarouselRight"></div>
+
+            <button id="carouselRightButton"><b>></b></button>
+
+            <div id="blackout1" class="blackout"></div>
+            <div id="blackout2" class="blackout"></div>
+            <div id="blackout3" class="blackout"></div>
+        </div>
+
+        <br><br><br><br>
+
+        <div id="lower-section">
+            <h3>Top Rated Movie this Week</h3>
+            <h3>What's New?</h3>
+            <div class="movieElement bottom" id="top-rated"></div> 
+            <div class="movieElement bottom" id="whats-new"></div>
+        </div>
+
+        <br><br><br><br>
+
+
+        <h3>Already a user or new to the site?</h3>
+        <div id="signin-or-up">
+            <a href="{{ url_for('login') }}"><button class="signin" id="lower">Sign in</button></a> 
+            or 
+            <a href="{{ url_for('signup') }}"><button class="signup" id="lower">Sign up</button></a>
+        </div>
+        
+        <footer></footer>
+
+        <script src="{{ url_for('static', filename='trending-carousel-temp.js') }}"></script>
+
+    </body>
+</html>
