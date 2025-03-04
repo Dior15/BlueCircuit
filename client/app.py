@@ -20,7 +20,6 @@ def home():
         poster_url = f"https://image.tmdb.org/t/p/w500{movie['poster_path']}"  # Movie poster
         poster_urls += poster_url+" "
 
-    # return render_template('trending-carousel-temp.html', poster_urls=poster_urls)
     return render_template('home.html', poster_urls=poster_urls)
 
 

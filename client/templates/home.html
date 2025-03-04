@@ -14,11 +14,9 @@
         <header>
             <div id="web-name">MovieFlix</div>
 
-            <form action="/search" method="POST">
-                <label for="query">Search: </label>
-                <input type="text" id="query" name="query" required>
+            <form action="/search" method="POST" id="search-bar">
+                <input type="text" id="query" name="query" placeholder="Search" required style="width: 500px;">
 
-                <label for="category">Search By:</label>
                 <select id="category" name="category">
                     <option value="movie">Movie</option>
                     <option value="tv">TV Show</option>
@@ -27,6 +25,7 @@
 
                 <button type="submit">Search</button>
             </form>
+
             <a href="{{ url_for('login') }}""><button class="signin" id="signin-header">Sign In</button></a>
         </header>
 
