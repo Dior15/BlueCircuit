@@ -31,7 +31,7 @@ button:hover{
 #web-name{
     font-family: Broadway, sans-serif;
     font-size: 30pt;
-    margin-left: 5%;
+    margin-left: 2%;
     transition: transform 0.3s ease;
 }
 
