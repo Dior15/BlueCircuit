@@ -35,9 +35,23 @@
   height:37.5vh;
   margin-left:6vh;
   margin-right:6vh;
+  transition: transform 0.3s ease;
+}
+#trendingCarouselMain:hover{
+  transform: scale(1.05);
 }
 #trendingCarouselLeft{
   margin-left:2.5vh;
+  transition: transform 0.3s ease;
+}
+#trendingCarouselLeft:hover{
+  transform: scale(1.05);
+}
+#trendingCarouselRight{
+  transition: transform 0.3s ease;
+}
+#trendingCarouselRight:hover{
+  transform: scale(1.05);
 }
 #carouselLeftButton{
   width:3vh;
@@ -49,7 +63,8 @@
 #carouselRightButton{
   width:3vh;
   height:3vh;
-  margin-left:2.5vh;
+  float:left;
+  margin-left:2vh;
   margin-top:15vh;
 }
 .trendingCarouselElement img {
@@ -67,25 +82,27 @@
 .blackout{
   background-color:black;
   opacity:0;
+  position: absolute;
+  pointer-events: none;
 }
 #blackout1{
   position:absolute;
   width:20vh;
   height:30vh;
-  margin-top:-15.5vh;
+  margin-top:2.5vh;
   margin-left:6vh;
 }
 #blackout2{
   position:absolute;
   width:25vh;
   height:37.5vh;
-  margin-top:-18vh;
+  margin-top:0vh;
   margin-left:32vh;
 }
 #blackout3{
   position:absolute;
   width:20vh;
   height:30vh;
-  margin-top:-15.5vh;
+  margin-top:2.5vh;
   margin-left:63vh;
 }

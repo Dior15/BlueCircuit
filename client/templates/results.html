@@ -1,36 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Results</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <h1>Search Results for "{{ query }}" in {{ category }}</h1>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Search Results</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='results.css') }}">
+    </head>
 
-    {% if results %}
-        <ul>
-            {% for item in results %}
-                {% if category == "movie" %}
-                    <li>
-                        <strong>{{ item.title }}</strong> ({{ item.get('release_date', 'N/A') }}) - Popularity: {{ item.popularity }}
-                    </li>
-                {% elif category == "tv" %}
-                    <li>
-                        <strong>{{ item.name }}</strong> ({{ item.get('first_air_date', 'N/A') }}) - Popularity: {{ item.popularity }}
-                    </li>
-                {% elif category == "person" %}
-                    <li>
-                        <strong>{{ item.name }}</strong> - Popularity: {{ item.popularity }}
-                    </li>
-                {% endif %}
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No results found.</p>
-    {% endif %}
+    <body>
+        <h1>Results for "{{ query }}" in {{ category }}</h1>
 
-    <a href="/">Back to Search</a>
-</body>
+        {% if results %}
+            <ul>
+                {% for item in results %}
+                    {% if category == "movie" %}
+                        <li>
+                            <strong>{{ item.title }}</strong> ({{ item.get('release_date', 'N/A') }}) - Popularity: {{ item.popularity }}
+                        </li>
+                    {% elif category == "tv" %}
+                        <li>
+                            <strong>{{ item.name }}</strong> ({{ item.get('first_air_date', 'N/A') }}) - Popularity: {{ item.popularity }}
+                        </li>
+                    {% elif category == "person" %}
+                        <li>
+                            <strong>{{ item.name }}</strong> - Popularity: {{ item.popularity }}
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No results found.</p>
+        {% endif %}
+
+        <a href="/">Back to Home</a>
+    </body>
 </html>
