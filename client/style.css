@@ -1,24 +1,74 @@
-<<<<<<< HEAD
+header{
+    background-color: #1c1c1c;
+    color: white;
+    display: flex;
+    height: 80px;
+    justify-content: space-between;
+    align-items: center;
+}
+
 body{
-    background-color: black;
+    background-color: #0A0A0A;
+    color: white;
 }
 
-img{
-    height: 300px;
-=======
-*
-{
-  margin: 0px;
-  padding: 0px;
-  box-sizing: border-box;
+footer{
+    height: 80px;
 }
 
-.entry {
-  margin-left:10%;
-  margin-top: 1%;
-  width: 80%;
-  height: 100px;
-  border-style:dashed;
-  border-color: black;
->>>>>>> 3bbc8eea25febf0af874998ec8b150a0cb1cb69c
+#web-name{
+    font-size: 20pt;
+    margin-left: 5%;
+}
+
+#signin-header{
+    margin-right: 40px;
+    width: 90px;
+}
+
+#signin-or-up{
+    justify-self: center;
+}
+
+.signin, #lower{
+    margin-right: 12px;
+}
+
+.signup, #lower{
+    margin-left: 12px;
+}
+
+#search-bar{
+    justify-self: center;
+    width: 300px;
+    height: 30px;
+    background-color: #d9d9d9;
+}
+
+h3{
+    justify-self: center;
+    color: white;
+}
+
+#lower-section{
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-evenly;
+
+}
+
+.lower-section{
+    height: 100px;
+    background-color: grey;
+    width: 80px;
+}
+
+.signin{
+    background-color: #1E90FF;
+    border: 0;
+    border-radius: 49px;
+}
+
+.movieElement, .bottom{
+    height: 30vh
 }

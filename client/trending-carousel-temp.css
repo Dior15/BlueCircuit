@@ -1,0 +1,56 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+#trendingCarousel{
+  /* Styling for container of trending carousel */
+  border-style:dashed;
+  border-color:white;
+  width:90vh;
+  height:35vh;
+  margin-left:auto;
+  margin-right:auto;
+  padding-top:2.5vh;
+  padding-left:auto;
+  padding-right:auto;
+  color: white;
+}
+.movieElement{
+  /* Main styling for elements within trending carousel */
+  border-style:double;
+  border-color:white;
+  float:left;
+  text-align:center;
+}
+.trendingCarouselSide{
+  /* Size overrides for side elements of trending carousel */
+  width:20vh;
+  height:25vh;
+  padding-top:7.5vh;
+  margin-top: 2.5vh;
+}
+#trendingCarouselMain{
+  /* Size overrides for the main element of the trending carousel */
+  width:25vh;
+  height:30vh;
+  margin-left:6vh;
+  margin-right:6vh;
+  padding-top:10vh;
+}
+#trendingCarouselLeft{
+  margin-left:2.5vh;
+}
+#carouselLeftButton{
+  width:3vh;
+  height:3vh;
+  float:left;
+  margin-top:12.5vh;
+  margin-left:0.5vh;
+}
+#carouselRightButton{
+  width:3vh;
+  height:3vh;
+  margin-left:2.5vh;
+  margin-top:12.5vh;
+}
