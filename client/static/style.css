@@ -43,9 +43,11 @@ footer{
     justify-content: center;
     align-items: center; 
     gap: 5px;
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
+    width:50vw;
+}
+#searchItems{
+  position:absolute;
+  margin-left:25vw;
 }
 
 h3{

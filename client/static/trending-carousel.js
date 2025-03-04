@@ -19,7 +19,7 @@ class imageCarousel {
   }
 
   async rotateCarousel(val) {
-    if (!this.currentlyRotating) {
+    if (!this.currentlyRotating && document.hasFocus()) { // document.hasFocus() stops weird flickering when tabbing out and back in
       this.currentlyRotating = true;
       // Reassigns the index of the left most element in the carousel to be references when redrawing the carousel using the array of trending movies
         this.currentDisplay = (this.currentDisplay + val) % 9;
