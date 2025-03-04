@@ -80,8 +80,7 @@ class imageCarousel {
       blackout1.style.opacity = "" + opacity + "";
       blackout2.style.opacity = "" + opacity + "";
       blackout3.style.opacity = "" + opacity + "";
-      
-      console.log(opacity);
+ 
     }, 15); 
 
   }
