@@ -50,14 +50,6 @@
         <div id="blackout3" class="blackout"></div>
     </div>
 
-    
-
-
-    <script>
-        // Pass movie titles from Flask to JavaScript
-        let trendingMovies = {{ poster_urls | tojson }};
-    </script>
-
     <script src="{{ url_for('static', filename='trending-carousel-temp.js') }}"></script>
 
 </body>
