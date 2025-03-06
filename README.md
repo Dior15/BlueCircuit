@@ -6,3 +6,30 @@ A Software Design &amp; Analysis Course Project
 <div align="center">
   <img src="homepage.png" alt="Homepage">
 </div>
+
+### Results Pages
+
+<div align="center">
+  <img src="results.png" alt="Homepage">
+</div>
+
+### Trending Carousel
+<div align="center">
+  <img src="carousel.gif" alt="Homepage">
+</div>
+
+## Requirements
+
+Use of MovieFlix will require the Python3 and the python libraries 'Flask' and 'tmdbsimple'
+
+These libraries can be installed by using pip in your shell of choice and running the commands:
+- pip install flask
+- pip install tmdbsimple
+
+## Setup
+
+To run MovieFlix locally, simply run the app.py file in your IDE and access the page by directing your browser to the IP address displayed in your terminal
+
+<div align="center">
+  <img src="setup.png" alt="Homepage">
+</div>
