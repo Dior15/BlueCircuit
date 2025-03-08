@@ -28,7 +28,8 @@ These libraries can be installed by using pip in your shell of choice and runnin
 
 ## Setup
 
-To run MovieFlix locally, simply run the app.py file in your IDE and access the page by directing your browser to the IP address displayed in your terminal
+You will first need a txt file with your API Key for the TMDB API in your root directory named 'apikey.txt'
+Then, to run MovieFlix locally, simply run the app.py file in your IDE and access the page by directing your browser to the IP address displayed in your terminal
 
 <div align="center">
   <img src="setup.png" alt="Homepage">
