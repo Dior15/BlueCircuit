@@ -20,7 +20,7 @@ A Software Design &amp; Analysis Course Project
 
 ## Requirements
 
-Use of MovieFlix will require the Python3 and the python libraries 'Flask' and 'tmdbsimple'
+Use of MovieFlix will require Python3 and the Python libraries 'Flask' and 'tmdbsimple'
 
 These libraries can be installed by using pip in your shell of choice and running the commands:
 - pip install flask
