@@ -4,6 +4,7 @@
   box-sizing: border-box;
 }
 #trendingContainer{
+  /* Container holding the image carousel and its buttons */
   justify-content: center;
   display:flex;
   width:98vh;
@@ -26,6 +27,7 @@
   scrollbar-width:none;
 }
 #trendingCarousel::-webkit-scrollbar {
+  /* Another way to remove the scrollbar from the image carousel for certain browsers */
   display:none;
 }
 
@@ -33,13 +35,13 @@
   /* Left button for the trending movie carousel */
   width:3vh;
   height:3vh;
-  margin-top:15vh;
+  margin-top:18vh;
 }
 #carouselRightButton{
   /* Right button for the trending movie carousel */
   width:3vh;
   height:3vh;
-  margin-top:15vh;
+  margin-top:18vh;
 }
 
 .trendElement{
@@ -53,11 +55,13 @@
   flex-basis:100%;
 }
 .trendElement img{
+  /* Styles the image to fit within the its div container */
   width:25vh;
   height:37.5vh;
   scroll-snap-type:center;
   transition: transform 0.3s ease;
 }
 .trendElement img:hover{
+  /* Makes the image grow a little when the mouse hovers over it */
   transform:scale(1.05);
 }
