@@ -3,106 +3,65 @@
   padding: 0px;
   box-sizing: border-box;
 }
+#trendingContainer{
+  /* Container holding the image carousel and its buttons */
+  justify-content: center;
+  display:flex;
+  width:98vh;
+  margin-left:auto;
+  margin-right:auto;
+}
 #trendingCarousel{
-  /* Styling for container of trending carousel */
-  border-style:dashed;
-  border-color:black;
+  /* Container for the trending movie carousel */
   width:90vh;
   height:43vh;
   margin-left:auto;
   margin-right:auto;
   padding-top:2.5vh;
-  padding-left:auto;
-  padding-right:auto;
+  display:flex;
+  overflow:hidden;
+  scroll-behavior:smooth;
+  scroll-snap-type:x mandatory;
+
+  -ms-overflow-style:none;
+  scrollbar-width:none;
 }
-.trendingCarouselElement{
-  /* Main styling for elements within trending carousel */
-  /* border-style:double;
-  border-color:black; */
-  float:left;
-  text-align:center;
-  background-color:black;
+#trendingCarousel::-webkit-scrollbar {
+  /* Another way to remove the scrollbar from the image carousel for certain browsers */
+  display:none;
 }
-.trendingCarouselSide{
-  /* Size overrides for side elements of trending carousel */
-  width:20vh;
-  height:30vh;
-  margin-top: 2.5vh;
-}
-#trendingCarouselMain{
-  /* Size overrides for the main element of the trending carousel */
-  width:25vh;
-  height:37.5vh;
-  margin-left:6vh;
-  margin-right:6vh;
-  transition: transform 0.3s ease;
-}
-#trendingCarouselMain:hover{
-  transform: scale(1.05);
-}
-#trendingCarouselLeft{
-  margin-left:2.5vh;
-  transition: transform 0.3s ease;
-}
-#trendingCarouselLeft:hover{
-  transform: scale(1.05);
-}
-#trendingCarouselRight{
-  transition: transform 0.3s ease;
-}
-#trendingCarouselRight:hover{
-  transform: scale(1.05);
-}
+
 #carouselLeftButton{
+  /* Left button for the trending movie carousel */
   width:3vh;
   height:3vh;
-  float:left;
-  margin-top:15vh;
-  margin-left:0.5vh;
+  margin-top:18vh;
 }
 #carouselRightButton{
+  /* Right button for the trending movie carousel */
   width:3vh;
   height:3vh;
-  float:left;
-  margin-left:2vh;
-  margin-top:15vh;
+  margin-top:18vh;
 }
-.trendingCarouselElement img {
-  width:20vh;
-  height:30vh;
-  border-style:double;
-  border-color:red;
-}
-#trendingCarouselMain img{
+
+.trendElement{
+  /* Each movie card that exists within the trending movie carousel */
+  background:white;
   width:25vh;
   height:37.5vh;
-  border-style:double;
-  border-color:red;
+  scroll-snap-type:center;
+  margin-left:2.5vh;
+  margin-right:2.5vh;
+  flex-basis:100%;
 }
-.blackout{
-  background-color:black;
-  opacity:0;
-  position: absolute;
-  pointer-events: none;
-}
-#blackout1{
-  position:absolute;
-  width:20vh;
-  height:30vh;
-  margin-top:2.5vh;
-  margin-left:6vh;
-}
-#blackout2{
-  position:absolute;
+.trendElement img{
+  /* Styles the image to fit within the its div container */
   width:25vh;
   height:37.5vh;
-  margin-top:0vh;
-  margin-left:32vh;
+  scroll-snap-type:center;
+  transition: transform 0.3s ease;
 }
-#blackout3{
-  position:absolute;
-  width:20vh;
-  height:30vh;
-  margin-top:2.5vh;
-  margin-left:62.95vh;
+.trendElement img:hover{
+  /* Makes the image grow a little when the mouse hovers over it */
+  transform:scale(1.05);
 }
