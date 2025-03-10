@@ -34,21 +34,27 @@
         <!-- Trending Movie Carousel -->
         <br>
         <center><h3>Popular Movies this Week</h3></center>
-        <div id="trendingCarousel">
-            <button id="carouselLeftButton"><b><</b></button>
+        
+        <centre>
+        <div id="trendingContainer">
+          <button id="carouselLeftButton"><b><</b></button>
+          <div id="trendingCarousel">
 
-            <div class="trendingCarouselElement trendingCarouselSide" id="trendingCarouselLeft">{{poster_urls}}</div>
+              <!-- Divs to hold each element of the image carousel -->
+              <div id="trend1" class="trendElement">{{poster_urls}}</div>
+              <div id="trend2" class="trendElement"></div>
+              <div id="trend3" class="trendElement"></div>
+              <div id="trend4" class="trendElement"></div>
+              <div id="trend5" class="trendElement"></div>
+              <div id="trend6" class="trendElement"></div>
+              <div id="trend7" class="trendElement"></div>
+              <div id="trend8" class="trendElement"></div>
+              <div id="trend9" class="trendElement"></div>
+  
+          </div>
 
-            <div class="trendingCarouselElement" id="trendingCarouselMain"></div>
-
-            <div class="trendingCarouselElement trendingCarouselSide" id="trendingCarouselRight"></div>
-
-            <button id="carouselRightButton"><b>></b></button>
-
-            <div id="blackout1" class="blackout"></div>
-            <div id="blackout2" class="blackout"></div>
-            <div id="blackout3" class="blackout"></div>
-        </div>
+          <button id="carouselRightButton"><b>></b></button>
+        </div></centre>
 
         <div id="lower-section">
             <h3>Top Rated Movie this Week</h3>

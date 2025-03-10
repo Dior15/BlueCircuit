@@ -6,93 +6,57 @@ class imageCarousel {
   // Indicates the array index of the left most movie currently being displayed by the image carousel
   currentlyRotating = false;
   // Indicates if the carousel is already rotating to stop the button from being pressed during the animation
+  trendingCarousel = null;
 
   constructor() {
-    let trendingMoviesString = document.getElementById("trendingCarouselLeft").getHTML();
+    let trendingMoviesString = document.getElementById("trend1").getHTML();
     this.trendingMovies = trendingMoviesString.split(' ');
+    this.trendingCarousel = document.getElementById("trendingCarousel");
     // Retrieving 
 
-    document.getElementById("trendingCarouselLeft").innerHTML = "<img src=\"" + this.trendingMovies[this.currentDisplay % 9] + "\" class=\"carouselImage1\">";
-    document.getElementById("trendingCarouselMain").innerHTML = "<img src=\"" + this.trendingMovies[(this.currentDisplay + 1) % 9] + "\" class=\"carouselImage2\">";
-    document.getElementById("trendingCarouselRight").innerHTML = "<img src=\"" + this.trendingMovies[(this.currentDisplay + 2) % 9] + "\" class=\"carouselImage3\">";
+    document.getElementById("trend1").innerHTML = "<img src=\"" + this.trendingMovies[0] + "\" class=\"carouselImage1\">";
+    document.getElementById("trend2").innerHTML = "<img src=\"" + this.trendingMovies[1] + "\" class=\"carouselImage2\">";
+    document.getElementById("trend3").innerHTML = "<img src=\"" + this.trendingMovies[2] + "\" class=\"carouselImage3\">";
+    document.getElementById("trend4").innerHTML = "<img src=\"" + this.trendingMovies[3] + "\" class=\"carouselImage1\">";
+    document.getElementById("trend5").innerHTML = "<img src=\"" + this.trendingMovies[4] + "\" class=\"carouselImage2\">";
+    document.getElementById("trend6").innerHTML = "<img src=\"" + this.trendingMovies[5] + "\" class=\"carouselImage3\">";    
+    document.getElementById("trend7").innerHTML = "<img src=\"" + this.trendingMovies[6] + "\" class=\"carouselImage1\">";
+    document.getElementById("trend8").innerHTML = "<img src=\"" + this.trendingMovies[7] + "\" class=\"carouselImage2\">";
+    document.getElementById("trend9").innerHTML = "<img src=\"" + this.trendingMovies[8] + "\" class=\"carouselImage3\">";
 
   }
 
-  async rotateCarousel(val) {
+  async rotateCarousel(direction) {
     if (!this.currentlyRotating && document.hasFocus()) { // document.hasFocus() stops weird flickering when tabbing out and back in
-      this.currentlyRotating = true;
-      // Reassigns the index of the left most element in the carousel to be references when redrawing the carousel using the array of trending movies
-        this.currentDisplay = (this.currentDisplay + val) % 9;
-    
-        if (this.currentDisplay < 0) { 
-          // Looping when negative because modulo doesn't work the way I expected it to with negative numbers(?)
-          this.currentDisplay = 8;
-        }
-    
-        this.redrawCarousel();
+      this.currentlyRotating = true; // Prevents from this function running again while the animation is still running
+      this.currentDisplay += direction;
 
-        await this.sleep(600);
-        this.currentlyRotating = false;  
-        
+      if (this.currentDisplay < 0) { // When the image carousel wants to go left but is at left edge
+        this.currentDisplay = 6;
+        this.trendingCarousel.scrollLeft += 1000000;
+      } else if (6 < this.currentDisplay) { // When the image carousel wants to go right but is at right edge
+        this.currentDisplay = 0;
+        this.trendingCarousel.scrollLeft -= 1000000;
+      } else { // When the image carousel is at neither edge
+        this.trendingCarousel.scrollLeft += Math.ceil(direction * (parseFloat(getComputedStyle(document.getElementById("trend2")).marginLeft.replace("px", "")) * 2 + parseFloat(getComputedStyle(document.getElementById("trend2")).width.replace("px", ""))));
+      }
+      
 
+      await this.sleep(300);
+
+      this.currentlyRotating = false;  
     }
   }
 
-  async redrawCarousel() {
-  // Redraws the movies in the carousel
-
-  // There are 3 transparent divs above the images that will blackout the images when they are transitioning
-  // Their opacity will be adjusted to fade in and out over the images
-    let opacity = 0;
-
-    let blackout1 = document.getElementById("blackout1");
-    let blackout2 = document.getElementById("blackout2");
-    let blackout3 = document.getElementById("blackout3");
-
-    // Fading the blackout divs in
-    let interval = setInterval(function(){
-      opacity += 0.066;
-      if (1 <= opacity) {
-        opacity = 1;
-        clearInterval(interval);
-      }
-      blackout1.style.opacity = "" + opacity + "";
-      blackout2.style.opacity = "" + opacity + "";
-      blackout3.style.opacity = "" + opacity + "";
-    }, 15); 
-
-    await this.sleep(300);
-    // Waiting for the divs to fade in
-    // Without this, the following code will run at the same time and cause issues
-    
-    document.getElementById("trendingCarouselLeft").innerHTML = "<img src=\"" + this.trendingMovies[this.currentDisplay % 9] + "\">";
-    document.getElementById("trendingCarouselMain").innerHTML = "<img src=\"" + this.trendingMovies[(this.currentDisplay + 1) % 9] + "\">";
-    document.getElementById("trendingCarouselRight").innerHTML = "<img src=\"" + this.trendingMovies[(this.currentDisplay + 2) % 9] + "\">";
-    // Setting the new images to appear in the carousel
-
-    // Fading out the blackout divs
-    let interval1 = setInterval(function(){
-      opacity -= 0.066;
-      if (opacity <= 0) {
-        opacity = 0;
-        clearInterval(interval1);
-      }
-      blackout1.style.opacity = "" + opacity + "";
-      blackout2.style.opacity = "" + opacity + "";
-      blackout3.style.opacity = "" + opacity + "";
- 
-    }, 15); 
-
-  }
-
   // Automatic carousel spin
+  automaticSpinDelay = 5000;
   async automaticCarouselSpin() {
-    await this.sleep(5000);
+    await this.sleep(automaticSpinDelay);
 
     // Automatic scrolling through the image carousel
     let interval = setInterval(function(){
       this.rotateCarousel(1);
-    }, 5000); 
+    }, automaticSpinDelay); 
   }
 
   // Used to pause the execution of code in the redrawCarousel method
@@ -113,3 +77,4 @@ let carouselRightButton = document.getElementById("carouselRightButton").addEven
 let automaticInterval = setInterval(function(){
   trendingCarousel.rotateCarousel(1);
 }, 4000);
+
