@@ -13,6 +13,7 @@ def testGetTopXMovies():
     assert "title" in topMovies[0]  # Ensure each movie has a title
 
 def testGetPosterUrl():
+    # Test fetching poster URL
     movie = posterEngine.getTopXMovies(1)[0]  # Get top movie
     assert movie is not None # Ensure movie exists
     assert posterEngine.getPosterUrl(movie).endswith(".jpg") == True # Ensure URL ends with .jpg

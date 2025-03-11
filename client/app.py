@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 import tmdbsimple as tmdb
 from poster import *
-from search import MovieSearch
+from search import *
 
 # Set TMDB API key
 with open("apikey.txt", "r") as file:

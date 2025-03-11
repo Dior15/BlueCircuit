@@ -5,7 +5,7 @@ from search import MovieSearch
 searchEngine = MovieSearch()
 
 def testSearchMovies():
-    """Test movie search with a valid query"""
+    # Test movie search with a valid query
     response = searchEngine.searchMovies("Inception")
     assert response is not None  # Ensure response exists
     assert isinstance(searchEngine.search.results, list)  # Ensure results are a list
@@ -13,7 +13,7 @@ def testSearchMovies():
     assert "title" in searchEngine.search.results[0]  # Ensure title is in response
 
 def testSearchTv():
-    """Test TV search with a valid query"""
+    # Test TV search with a valid query
     response = searchEngine.searchTv("Breaking Bad")
     assert response is not None
     assert isinstance(searchEngine.search.results, list)
@@ -21,7 +21,7 @@ def testSearchTv():
     assert "name" in searchEngine.search.results[0]  # TV shows have "name" instead of "title"
 
 def testSearchPeople():
-    """Test person search with a valid query"""
+    # Test person search with a valid query
     response = searchEngine.searchPeople("Leonardo DiCaprio")
     assert response is not None
     assert isinstance(searchEngine.search.results, list)
@@ -29,12 +29,12 @@ def testSearchPeople():
     assert "name" in searchEngine.search.results[0]  # People have "name" field
 
 def testSearchInvalidCategory():
-    """Test search with an invalid category"""
+    # Test search with an invalid category
     response = searchEngine.searchByCategory("Test", "invalid")
     assert response is None  # Should return None for invalid categories
 
 def testEmptyQuery():
-    """Test search with an empty query"""
+    # Test search with an empty query
     response = searchEngine.searchMovies("")
     assert response is not None  # API should return a response
     assert isinstance(searchEngine.search.results, list)  # Should return a list
