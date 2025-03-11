@@ -19,10 +19,10 @@ class MovieSearch:
 
     def searchByCategory(self, query, category):
         if category == "movie":
-            return self.search_movies(query)
+            return self.searchMovies(query)
         elif category == "tv":
-            return self.search_tv(query)
+            return self.searchTv(query)
         elif category == "person":
-            return self.search_people(query)
+            return self.searchPeople(query)
         else:
             return None
