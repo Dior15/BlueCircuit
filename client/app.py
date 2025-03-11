@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request
 import tmdbsimple as tmdb
+from poster import *
+from search import MovieSearch
 
 # Set TMDB API key
 with open("apikey.txt", "r") as file:
@@ -8,19 +10,22 @@ with open("apikey.txt", "r") as file:
 # Initialize Flask app
 app = Flask(__name__)
 
+# Initialize search and poster classes
+searchEngine = MovieSearch()
+posterEngine = MoviePoster()
+
 @app.route('/')
 def home():
     # Fetch trending movies
-    popular_movies = tmdb.Movies().popular()
-    top_9_movies = popular_movies['results'][:9]  # Get top 9 trending movies
-    poster_urls = ""
+    top9Movies = posterEngine.getTopXMovies(9)  # Get top 9 trending movies
+    posterUrls = ""
 
     # Construct full image URLs for posters
-    for movie in top_9_movies:
-        poster_url = f"https://image.tmdb.org/t/p/w500{movie['poster_path']}"  # Movie poster
-        poster_urls += poster_url+" "
+    for movie in top9Movies:
+        posterUrl = posterEngine.getPosterUrl(movie)
+        posterUrls += posterUrl+" "
 
-    return render_template('home.html', poster_urls=poster_urls)
+    return render_template('home.html', poster_urls=posterUrls)
 
 
 @app.route('/search', methods=['POST'])
@@ -29,19 +34,13 @@ def search():
     query = request.form.get('query')
     category = request.form.get('category')
 
-    search = tmdb.Search()
-
     # Perform search based on category
-    if category == "movie":
-        search.movie(query=query)
-    elif category == "tv":
-        search.tv(query=query)
-    elif category == "person":
-        search.person(query=query)
-    else:
+    results = searchEngine.searchByCategory(query, category)
+
+    if results is None:
         return "Invalid category", 400  # Error handling
 
-    return render_template('results.html', results=search.results, category=category, query=query)
+    return render_template('results.html', results=searchEngine.search.results, category=category, query=query)
 
 @app.route('/login')
 def login():

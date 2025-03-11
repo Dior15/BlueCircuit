@@ -1,3 +1,5 @@
 .vscode
 .intellij
 apikey.txt
+.pytest_cache
+__pycache__
