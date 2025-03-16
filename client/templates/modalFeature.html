@@ -86,22 +86,22 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 <script>
 // Get the modals
-var modal1 = document.getElementById("loginModal");
-var modal2 = document.getElementById("createAccountModal");
+var loginModal = document.getElementById("loginModal");
+var accountCreateModal = document.getElementById("createAccountModal");
 
 // Get the buttons that open the modals
-var btn1 = document.getElementById("loginButton");
-var btn2 = document.getElementById("createAccountButton");
+var loginBtn = document.getElementById("loginButton");
+var createAccountBtn = document.getElementById("createAccountButton");
 
 // Get the <span> elements that close the modals
 var closeButtons = document.getElementsByClassName("close");
 
 // When the user clicks the button, open the respective modal
-btn1.onclick = function() {
-  modal1.style.display = "block";
+loginBtn.onclick = function() {
+  loginModal.style.display = "block";
 }
-btn2.onclick = function() {
-  modal2.style.display = "block";
+createAccountBtn.onclick = function() {
+  accountCreateModal.style.display = "block";
 }
 
 // Close modals when clicking on the close button
@@ -113,11 +113,11 @@ for (let i = 0; i < closeButtons.length; i++) {
 
 // When the user clicks anywhere outside of a modal, close it
 window.onclick = function(event) {
-  if (event.target == modal1) {
-    modal1.style.display = "none";
+  if (event.target == loginModal) {
+    loginModal.style.display = "none";
   }
-  if (event.target == modal2) {
-    modal2.style.display = "none";
+  if (event.target == accountCreateModal) {
+    accountCreateModal.style.display = "none";
   }
 }
 </script>
