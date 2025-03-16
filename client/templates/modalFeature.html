@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<h2>Login/Create Account Prototype</h2>
+
+<!-- open the modals, put this in replacement of the current  -->
+<button id="loginButton">Login</button>
+<button id="createAccountButton">Create Account</button>
+
+<!-- login modal -->
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h1>Login To MovieFlix</h1>
+    <!-- This input tag will need to be integrated to the backend-->
+    <p>Username:</p>
+    <input></input> 
+    <p>Password:</p>
+    <input></input>
+    <button>Login</button>
+  </div>
+</div>
+
+<!-- create account modal -->
+<div id="createAccountModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h1>Create An Account With MovieFlix</h1>
+    <p>Email</p>
+    <input></input>
+    <p>Username:</p>
+    <input></input>
+    <p>Create password:</p>
+    <input></input>
+    <p>Confirm Password:</p>
+    <input></input>
+    <button>Create Account</button> 
+  </div>
+</div>
+
+<script>
+// Get the modals
+var modal1 = document.getElementById("loginModal");
+var modal2 = document.getElementById("createAccountModal");
+
+// Get the buttons that open the modals
+var btn1 = document.getElementById("loginButton");
+var btn2 = document.getElementById("createAccountButton");
+
+// Get the <span> elements that close the modals
+var closeButtons = document.getElementsByClassName("close");
+
+// When the user clicks the button, open the respective modal
+btn1.onclick = function() {
+  modal1.style.display = "block";
+}
+btn2.onclick = function() {
+  modal2.style.display = "block";
+}
+
+// Close modals when clicking on the close button
+for (let i = 0; i < closeButtons.length; i++) {
+  closeButtons[i].onclick = function() {
+    this.parentElement.parentElement.style.display = "none";
+  }
+}
+
+// When the user clicks anywhere outside of a modal, close it
+window.onclick = function(event) {
+  if (event.target == modal1) {
+    modal1.style.display = "none";
+  }
+  if (event.target == modal2) {
+    modal2.style.display = "none";
+  }
+}
+</script>
+
+</body>
+</html>
