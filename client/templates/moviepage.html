@@ -6,54 +6,49 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>MovieFlix</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename ='style.css')}}">
         <link rel="stylesheet" href="{{ url_for('static', filename='moviepagestyle.css')}}">
     </head>
 
     <body>
-        <nav class="navbar header box">
-            <div class="navbar-brand title is-3 web-name">MovieFlix</div>
-            <form action="/search" method="POST" class="navbar-item" id="search-bar">
-                <input type="text" id="query" name="query" placeholder="Search" required style="width: 500px;">
+      <header>
+        <div id="web-name">MovieFlix</div>
 
-                <select id="category" name="category">
-                    <option value="movie">Movie</option>
-                    <option value="tv">TV Show</option>
-                    <option value="person">Person</option>
-                </select>
+        <div id="searchItems">
+          <form action="/search" method="POST" id="search-bar">
+              <input type="text" id="query" name="query" placeholder="Search" required style="width: 500px;">
 
-                <button type="submit" id="searchButton">Search</button>
-            </form>
-            <div class="navbar-end">
-                <div class="navbar-item">
-                  <div class="buttons">
-                    <a class="button">
-                      <strong>Sign up</strong>
-                    </a>
-                    <a class="button">
-                      Log in
-                    </a>
-                  </div>
-                </div>
-              </div>
+              <select id="category" name="category">
+                  <option value="movie">Movie</option>
+                  <option value="tv">TV Show</option>
+                  <option value="person">Person</option>
+              </select>
 
-        </nav>
-        
-        <div class="is-flex">
-          <div class="movie-poster"><img src="{{ poster_url }}" alt="{{ title }}"></div>
-          <div id="movie-info">
-              <h1 class="movie-title">{{ title }}</h1>
-              <div class="is-flex spaced-between">
-                <div class="genre">{{ genres | join(', ') }}</div>
-              </div>
-              <div class="">
-                <p>Runtime: {{ runtime }} minutes</p>
-                <p>Director: {{ director }}</p>
-                <p>Cast: {{ cast | join(', ') }}</p>
-              </div>
-              
-          </div>
+              <button type="submit" id="searchButton">Search</button>
+          </form>
         </div>
+
+        <button class="signin" id="signin-header">Sign In</button>
+      </header>
         
+      <div class="is-flex">
+        <div class="movie-poster"><img src="{{ poster_url }}" alt="{{ title }}"></div>
+        <div id="movie-info">
+
+          <h1 class="movie-title">{{ title }}</h1>
+
+          <div class="is-flex spaced-between">
+            <div class="genre">{{ genres | join(', ') }}</div>
+          </div>
+          
+          <div class="">
+            <p>Runtime: {{ runtime }} minutes</p>
+            <p>Director: {{ director }}</p>
+            <p>Cast: {{ cast | join(', ') }}</p>
+          </div>
+            
+        </div>
+      </div>
 
     </body>
 </html>
