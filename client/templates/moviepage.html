@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MovieFlix</title>
+        <link rel="stylesheet" href="../static/moviepagestyle.css">
+    </head>
+
+    <body>
+        <nav class="navbar header box">
+            <div class="navbar-brand title is-3 web-name">MovieFlix</div>
+            <form action="/search" method="POST" class="navbar-item" id="search-bar">
+                <input type="text" id="query" name="query" placeholder="Search" required style="width: 500px;">
+
+                <select id="category" name="category">
+                    <option value="movie">Movie</option>
+                    <option value="tv">TV Show</option>
+                    <option value="person">Person</option>
+                </select>
+
+                <button type="submit" id="searchButton">Search</button>
+            </form>
+            <div class="navbar-end">
+                <div class="navbar-item">
+                  <div class="buttons">
+                    <a class="button">
+                      <strong>Sign up</strong>
+                    </a>
+                    <a class="button">
+                      Log in
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+        </nav>
+        
+        <div class="is-flex">
+          <div class="movie-poster">movie poster</div>
+          <div id="movie-info">
+              <h1 class="movie-title">Blank Title</h1>
+              <div class="is-flex spaced-between">
+                <div class="genre">genre 1</div>
+                <div class="genre">genre 2</div>
+              </div>
+              <div class="">
+                <p>Runtime: </p>
+                <p>Director: </p>
+                <p>Cast: </p>
+                <p>Production Company: </p>
+              </div>
+              
+          </div>
+        </div>
+        
+
+    </body>
+</html>
