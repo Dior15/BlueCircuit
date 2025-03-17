@@ -39,20 +39,16 @@
         <div id="trendingContainer">
           <button id="carouselLeftButton"><b><</b></button>
           <div id="trendingCarousel">
-
-              <!-- Divs to hold each element of the image carousel -->
-              <div id="trend1" class="trendElement">{{poster_urls}}</div>
-              <div id="trend2" class="trendElement"></div>
-              <div id="trend3" class="trendElement"></div>
-              <div id="trend4" class="trendElement"></div>
-              <div id="trend5" class="trendElement"></div>
-              <div id="trend6" class="trendElement"></div>
-              <div id="trend7" class="trendElement"></div>
-              <div id="trend8" class="trendElement"></div>
-              <div id="trend9" class="trendElement"></div>
-  
+            <a href="{{ url_for('movie', movie_id=movieIds[0])}}"><div id="trend1" class="trendElement">{{posterUrls}}</div></a>
+            <a href="{{ url_for('movie', movie_id=movieIds[1])}}"><div id="trend2" class="trendElement"></div></a>
+            <a href="{{ url_for('movie', movie_id=movieIds[2])}}"><div id="trend3" class="trendElement"></div></a>
+            <a href="{{ url_for('movie', movie_id=movieIds[3])}}"><div id="trend4" class="trendElement"></div></a>
+            <a href="{{ url_for('movie', movie_id=movieIds[4])}}"><div id="trend5" class="trendElement"></div></a>
+            <a href="{{ url_for('movie', movie_id=movieIds[5])}}"><div id="trend6" class="trendElement"></div></a>
+            <a href="{{ url_for('movie', movie_id=movieIds[6])}}"><div id="trend7" class="trendElement"></div></a>
+            <a href="{{ url_for('movie', movie_id=movieIds[7])}}"><div id="trend8" class="trendElement"></div></a>
+            <a href="{{ url_for('movie', movie_id=movieIds[8])}}"><div id="trend9" class="trendElement"></div></a>
           </div>
-
           <button id="carouselRightButton"><b>></b></button>
         </div>
         

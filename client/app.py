@@ -19,14 +19,14 @@ def home():
     # Fetch trending movies
     top9Movies = movieEngine.getTopXMovies(9)  # Get top 9 trending movies
     posterUrls = ""
+    movieIds = []
 
-    # Construct full image URLs for posters
+    # Construct full image URLs for posters along with movie IDs
     for movie in top9Movies:
-        posterUrl = movieEngine.getPosterUrl(movie)
-        posterUrls += posterUrl+" "
+        movieIds.append(movie["id"])  # Movie ID
+        posterUrls += movieEngine.getPosterUrl(movie) + " "  # Poster URL
 
-    return render_template('home.html', poster_urls=posterUrls)
-
+    return render_template('home.html', posterUrls=posterUrls, movieIds=movieIds)
 
 @app.route('/search', methods=['POST'])
 def search():
@@ -42,13 +42,12 @@ def search():
 
     return render_template('results.html', results=searchEngine.search.results, category=category, query=query)
 
-@app.route('/login')
-def login():
-    return render_template('loginpage.html')
+@app.route('/movie/<int:movie_id>')
+def movie(movie_id):
+    # Get movie details
+    movie = movieEngine.getMovieDict(movie_id)
 
-@app.route('/signup')
-def signup():
-    return render_template('accountcreationpage.html')
+    return render_template('moviepage.html', title = movie['title'], runtime = movie['runtime'], genres = movie['genres'], poster_url = movie['posterUrl'], cast = movie['cast'],  crew = movie['crew'], director = movie['director'])
 
 if __name__ == '__main__':
     app.run(debug=True)
