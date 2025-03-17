@@ -3,9 +3,11 @@
     padding: 0px;
     box-sizing:border-box;
   }
+
   h1 {
     font-size:40px;
   }
+  
   p {
     font-size:20px;
   }
@@ -36,7 +38,7 @@
   }
   
   .no-margin{
-      margin-left: -30vh;;
+      margin-left: -30vh;
   }
   
   .title{

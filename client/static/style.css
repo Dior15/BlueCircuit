@@ -2,6 +2,42 @@
     font-family: Candara, sans-serif;
 }
 
+#web-name a:link {
+    text-decoration: none;
+    font-family: Broadway, sans-serif;
+    font-size: 30pt;
+    margin-left: 2%;
+    transition: transform 0.3s ease;
+    color: white;
+  }
+  
+#web-name a:visited {
+    text-decoration: none;
+    font-family: Broadway, sans-serif;
+    font-size: 30pt;
+    margin-left: 2%;
+    transition: transform 0.3s ease;
+    color: white;
+}
+  
+#web-name a:hover {
+    text-decoration: none;
+    font-family: Broadway, sans-serif;
+    font-size: 30pt;
+    margin-left: 2%;
+    transition: transform 0.3s ease;
+    color: white;
+}
+  
+#web-name a:active {
+    text-decoration: none;
+    font-family: Broadway, sans-serif;
+    font-size: 30pt;
+    margin-left: 2%;
+    transition: transform 0.3s ease;
+    color: white;
+}
+
 header{
     background-color: #1c1c1c;
     color: white;
@@ -33,6 +69,8 @@ button:hover{
     font-size: 30pt;
     margin-left: 2%;
     transition: transform 0.3s ease;
+    color: white;
+    text-decoration: none;
 }
 
 #web-name:hover{
