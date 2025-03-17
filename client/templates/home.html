@@ -7,7 +7,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>MovieFlix</title>
         <link rel="stylesheet" href="{{ url_for('static', filename ='style.css')}}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='trending-carousel.css') }}" >
+        <link rel="stylesheet" href="{{ url_for('static', filename='trending-carousel.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='modal.css') }}">
     </head>
 
     <body>
@@ -28,7 +29,7 @@
               </form>
             </div>
 
-            <a href="{{ url_for('login') }}""><button class="signin" id="signin-header">Sign In</button></a>
+            <button class="signin" id="signin-header">Sign In</button>
         </header>
 
         <!-- Trending Movie Carousel -->
@@ -36,7 +37,7 @@
         <center><h3>Popular Movies this Week</h3></center>
         
         <div id="trendingContainer">
-          <button id="carouselLeftButton"><b></b></button>
+          <button id="carouselLeftButton"><b><</b></button>
           <div id="trendingCarousel">
 
               <!-- Divs to hold each element of the image carousel -->
@@ -65,13 +66,51 @@
 
         <center><h3>Already a user or new to the site?</h3></center>
         <center><div id="signin-or-up">
-            <a href="{{ url_for('login') }}"><button class="signin" id="lower">Sign in</button></a> 
+            <button class="signin" class="lower" id="loginButton2">Sign in</button>
             or 
-            <a href="{{ url_for('signup') }}"><button class="signup" id="lower">Sign up</button></a>
+            <button class="signup" class="lower" id="createAccountButton">Sign up</button>
         </div></center>
+
+        
+        <!-- THESE DON'T APPEAR ON THE PAGE -->
+        <!-- Create Login Modal -->
+        <div id="loginModal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <h1>Login To MovieFlix</h1>
+            <!-- This input tag will need to be integrated to the backend-->
+            <center><p><input placeholder="Username"></input></p></center>
+             
+            <center><p><input placeholder="Password" type="password"></input></p></center>
+            
+            <br>
+
+            <center><button>Login</button></center>
+          </div>
+        </div>
+        
+        <!-- Create Account Modal -->
+        <div id="createAccountModal" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <h1>Create An Account</h1>
+            <center><p><input placeholder="Email"></input></p></center>
+            
+            <center><p><input placeholder="Username"></input></p></center>
+            
+            <center><p><input placeholder="Password" type="password"></input></p></center>
+            
+            <center><p><input placeholder="Confirm Password" type="password"></input></p></center>
+            
+            <br>
+
+            <center><button>Create Account</button>
+          </div>
+        </div>
         
         <footer></footer>
 
         <script src="{{ url_for('static', filename='trending-carousel.js') }}"></script>
+        <script src="{{ url_for('static', filename='modal.js') }}"></script>
     </body>
 </html>

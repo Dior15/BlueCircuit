@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 import tmdbsimple as tmdb
-from poster import *
+from movies import *
 from search import *
 
 # Set TMDB API key
@@ -12,17 +12,17 @@ app = Flask(__name__)
 
 # Initialize search and poster classes
 searchEngine = MovieSearch()
-posterEngine = MoviePoster()
+movieEngine = Movies()
 
 @app.route('/')
 def home():
     # Fetch trending movies
-    top9Movies = posterEngine.getTopXMovies(9)  # Get top 9 trending movies
+    top9Movies = movieEngine.getTopXMovies(9)  # Get top 9 trending movies
     posterUrls = ""
 
     # Construct full image URLs for posters
     for movie in top9Movies:
-        posterUrl = posterEngine.getPosterUrl(movie)
+        posterUrl = movieEngine.getPosterUrl(movie)
         posterUrls += posterUrl+" "
 
     return render_template('home.html', poster_urls=posterUrls)

@@ -1,5 +1,5 @@
 * {
-    font-family: Candara, sans-serif
+    font-family: Candara, sans-serif;
 }
 
 header{
@@ -53,7 +53,7 @@ button:hover{
     width: 90px;
 }
 
-.signup, #lower{
+.signup, .lower{
     margin-left: 12px;
 }
 
@@ -99,5 +99,7 @@ h3{
 }
 
 .movieElement, .bottom{
-    height: 30vh
+    height: 30vh;
+    border: 0;
+    border-radius: 49px;
 }
