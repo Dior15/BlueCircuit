@@ -24,7 +24,7 @@ body {
   border: 1px solid #888;
   width: fit-content;
   align-items: right;
-  border-radius: 25px;;
+  border-radius: 25px;
 } 
 
 /* The Close Button */
@@ -60,7 +60,20 @@ body {
   margin-right: 1vh;
 }
 
+#createAccountModal input {
+  margin-left:auto;
+  margin-right:0px;
+}
+
 h1{
   text-align: center;
   margin-bottom: 1vh;
+}
+
+#inputAssembly {
+  display:flex;
+}
+
+#labels {
+  display:block;
 }

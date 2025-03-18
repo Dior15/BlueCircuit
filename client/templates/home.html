@@ -102,14 +102,22 @@
           <div class="modal-content">
             <span class="close">&times;</span>
             <h1>Create A MovieFlix Account</h1>
-            <p><span class="label">Email:</span><input type="email" placeholder="Enter an email"></input></p>
-            
-            <p><span class="label">Username:</span><input placeholder="Enter a username"></input></p>
-            
-            <p><span class="label">Password:</span><input placeholder="Enter a password" type="password"></input></p>
-            
-            <p><span class="label">Confirm Password:</span><input placeholder="Confirm password" type="password"></input></p>
-            
+            <div id="inputAssembly">
+              <div id="labels">
+                <p><span class="label">Email:</span></p>
+                <p><span class="label">Username:</span></p>
+                <p><span class="label">Password:</span></p>
+                <p><span class="label">Confirm Password:</span></p>
+              </div>
+              
+              <span id="createAccountInput">
+                <p><input type="email" placeholder="Enter an email"></input></p>
+                <p><input placeholder="Enter a username"></input></p>
+                <p><input placeholder="Enter a password" type="password"></input></p>
+                <p><input placeholder="Confirm password" type="password"></input></p>
+              </span>
+            </div>
+
             <br>
 
             <center><button>Create Account</button>
