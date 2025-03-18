@@ -13,9 +13,25 @@ A Software Design &amp; Analysis Course Project
   <img src="pictures/results.png" alt="Homepage">
 </div>
 
+### Movie Pages
+
+<div align="center">
+  <img src="pictures/moviepage.png" alt="Homepage">
+</div>
+
 ### Trending Carousel
 <div align="center">
   <img src="pictures/carousel.gif" alt="Homepage">
+</div>
+
+### Login Modal
+<div align="center">
+  <img src="pictures/loginmodal.png" alt="Homepage">
+</div>
+
+### Account Creation Modal
+<div align="center">
+  <img src="pictures/accountcreationmodal.png" alt="Homepage">
 </div>
 
 ## Requirements
