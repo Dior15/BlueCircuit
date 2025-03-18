@@ -22,7 +22,7 @@ body {
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 60vh;
+  width: fit-content;
   align-items: right;
   border-radius: 25px;;
 } 
