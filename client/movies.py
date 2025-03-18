@@ -11,8 +11,15 @@ class Movies:
 
     def getTopXMovies(self, x):
         popularMovies = self.movies.popular()
-        topXMovies = popularMovies['results'][:x]
+        topXMovies = [movie for movie in popularMovies['results'] if movie['original_language'] == 'en' and movie['popularity'] > 10][:x]
         return topXMovies
+    
+    def getLatestMovie(self):
+        # Get the most recently released popular english movie
+        popularMovies = self.movies.popular()
+        englishMovies = [movie for movie in popularMovies['results'] if movie['original_language'] == 'en']
+        latestMovie = max(englishMovies, key=lambda x: x['release_date'])
+        return latestMovie
 
     def getPosterUrl(self, movie):
         # Get full poster URL or a placeholder if unavailable

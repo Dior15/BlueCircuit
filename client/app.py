@@ -28,8 +28,7 @@ def home():
 
     topRated = movieEngine.getTopXMovies(1)  # Get top 9 rated movies
     topRatedPoster = movieEngine.getPosterUrl(topRated[0])  # Get top rated movie poster URL
-    latest = tmdb.Movies().now_playing()  # Get latest movie
-    latest = latest['results'][10]
+    latest = movieEngine.getLatestMovie()  # Get latest movie
     latestPoster = movieEngine.getPosterUrl(latest)  # Get latest movie poster URL
     
     return render_template('home.html', posterUrls=posterUrls, movieIds=movieIds, topRated=topRated, topRatedPoster=topRatedPoster, latest=latest, latestPoster=latestPoster)
