@@ -26,7 +26,13 @@ def home():
         movieIds.append(movie["id"])  # Movie ID
         posterUrls += movieEngine.getPosterUrl(movie) + " "  # Poster URL
 
-    return render_template('home.html', posterUrls=posterUrls, movieIds=movieIds)
+    topRated = movieEngine.getTopXMovies(1)  # Get top 9 rated movies
+    topRatedPoster = movieEngine.getPosterUrl(topRated[0])  # Get top rated movie poster URL
+    latest = tmdb.Movies().now_playing()  # Get latest movie
+    latest = latest['results'][10]
+    latestPoster = movieEngine.getPosterUrl(latest)  # Get latest movie poster URL
+    
+    return render_template('home.html', posterUrls=posterUrls, movieIds=movieIds, topRated=topRated, topRatedPoster=topRatedPoster, latest=latest, latestPoster=latestPoster)
 
 @app.route('/search', methods=['POST'])
 def search():

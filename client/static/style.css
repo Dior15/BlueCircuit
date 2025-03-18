@@ -113,6 +113,14 @@ button:hover{
     padding-left: 1vh;
 }
 
+#category{
+    height:4vh;
+}
+
+#searchButton{
+    height:4vh;
+}
+
 .is-flex{
     display: flex;
     justify-content: space-evenly; /*change later for other flex*/
@@ -155,12 +163,20 @@ h3{
     color: white;
 }
 
-.movieElement{
+#movieElementBottom{
     border: 0;
     background-color: grey;
     width:25vh;
     height:37.5vh;
     margin-top: 2vh;
+}
+
+#topRated{
+    height: 37.5vh;
+}
+
+#latest{
+    height: 37.5vh;
 }
 
 #top-rated{

@@ -60,13 +60,13 @@
         <!-- Section with Top Rated & What's New Section-->
         <div class="is-flex">
             <div class="stacked-flex" id="top-rated">
-                <h3>Top Rated Movie this Week</h3>
-                <div class="movieElement bottom"></div> 
+                <h3>Top Rated Movie this Week</h3><br>
+                <a href="{{ url_for('movie', movie_id=movieIds[0])}}"><div class="movieElementBottom"><img src="{{topRatedPoster}}" alt="" id="topRated"></div></a>
             </div>
             
             <div class="stacked-flex" id="whats-new">
-                <h3>What's New?</h3>
-                <div class="movieElement bottom"></div>
+                <h3>What's New?</h3> <br>
+                <a href="{{ url_for('movie', movie_id=latest.id)}}"><div class="movieElementBottom"><img src="{{latestPoster}}" alt="" id="latest"></div></a>
             </div>
         </div>
 
