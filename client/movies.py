@@ -6,7 +6,7 @@ with open("apikey.txt", "r") as file:
 
 class Movies:
     def __init__(self):
-        """Initialize movie object by fetching details from TMDB based on movie ID"""
+        # Initialize movie object by fetching details from TMDB based on movie ID
         self.movies = tmdb.Movies()
 
     def getTopXMovies(self, x):
@@ -15,23 +15,23 @@ class Movies:
         return topXMovies
 
     def getPosterUrl(self, movie):
-        """Get full poster URL or a placeholder if unavailable"""
+        # Get full poster URL or a placeholder if unavailable
         if 'poster_path' in movie and movie['poster_path']:
             url = f"https://image.tmdb.org/t/p/w500{movie['poster_path']}"
         return url
 
     def getCast(self, movieId):
-        """Get the main cast (first 5 actors)"""
+        # Get the main cast (first 5 actors)
         creditsData = tmdb.Movies(movieId).credits()
         return [member["name"] for member in creditsData.get("cast", [])[:5]]
 
     def getCrew(self, movieId):
-        """Get all crew members"""
+        # Get all crew members
         creditsData = tmdb.Movies(movieId).credits()
         return [member["name"] for member in creditsData.get("crew", [])]
 
     def getDirector(self, movieId):
-        """Find the director from the crew list"""
+        # Find the director from the crew list
         creditsData = tmdb.Movies(movieId).credits()
         for member in creditsData.get("crew", []):
             if member["job"] == "Director":
@@ -39,17 +39,17 @@ class Movies:
         return "Unknown Director"  # Return default if no director is found
     
     def getReleaseDate(self, movieId):
-        """Get the release date of the movie"""
+        # Get the release date of the movie
         movieData = tmdb.Movies(movieId).info()
         return movieData.get("release_date", "Unknown Release Date")
     
     def getSynopsis(self, movieId):
-        """Get the movie synopsis"""
+        # Get the movie synopsis
         movieData = tmdb.Movies(movieId).info()
         return movieData.get("overview", "No synopsis available")
 
     def getMovieDict(self, movieId):
-        """Return movie details as a dictionary"""
+        # Return movie details as a dictionary
         movieData = tmdb.Movies(movieId).info()  # Fetch movie details
 
         return {
