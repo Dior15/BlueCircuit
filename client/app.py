@@ -40,14 +40,14 @@ def search():
     if results is None:
         return "Invalid category", 400  # Error handling
 
-    return render_template('results.html', results=searchEngine.search.results, category=category, query=query)
+    return render_template('results.html', results=results, category=category, query=query)
 
 @app.route('/movie/<int:movie_id>')
 def movie(movie_id):
     # Get movie details
     movie = movieEngine.getMovieDict(movie_id)
 
-    return render_template('moviepage.html', title = movie['title'], runtime = movie['runtime'], genres = movie['genres'], poster_url = movie['posterUrl'], cast = movie['cast'],  crew = movie['crew'], director = movie['director'])
+    return render_template('moviepage.html', title = movie['title'], runtime = movie['runtime'], genres = movie['genres'], poster_url = movie['posterUrl'], cast = movie['cast'],  crew = movie['crew'], director = movie['director'], releaseDate = movie['releaseDate'], synopsis = movie['synopsis'])
 
 if __name__ == '__main__':
     app.run(debug=True)

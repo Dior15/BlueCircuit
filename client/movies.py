@@ -37,6 +37,16 @@ class Movies:
             if member["job"] == "Director":
                 return member["name"]
         return "Unknown Director"  # Return default if no director is found
+    
+    def getReleaseDate(self, movieId):
+        """Get the release date of the movie"""
+        movieData = tmdb.Movies(movieId).info()
+        return movieData.get("release_date", "Unknown Release Date")
+    
+    def getSynopsis(self, movieId):
+        """Get the movie synopsis"""
+        movieData = tmdb.Movies(movieId).info()
+        return movieData.get("overview", "No synopsis available")
 
     def getMovieDict(self, movieId):
         """Return movie details as a dictionary"""
@@ -50,4 +60,6 @@ class Movies:
             "cast": self.getCast(movieId),
             "crew": self.getCrew(movieId),
             "director": self.getDirector(movieId),
+            "releaseDate": self.getReleaseDate(movieId),
+            "synopsis": self.getSynopsis(movieId)   
         }

@@ -9,13 +9,27 @@ class MovieSearch:
         self.search = tmdb.Search()
 
     def searchMovies(self, query):
-        return self.search.movie(query=query)
+        movies = self.search.movie(query=query)
+        filteredMovies = [movie for movie in movies['results'] if movie.get('vote_average', 0) >= 0.01]
+        return sorted(filteredMovies, key=lambda x: x.get('popularity', 0), reverse=True)
 
     def searchTv(self, query):
-        return self.search.tv(query=query)
+        shows = self.search.tv(query=query)
+        filteredShows = [show for show in shows['results'] if show.get('vote_average', 0) >= 0.01]
+        return sorted(filteredShows, key=lambda x: x.get('popularity', 0), reverse=True)
 
     def searchPeople(self, query):
-        return self.search.person(query=query)
+        people = self.search.person(query=query)
+
+        # Filter people by popularity and known roles
+        filteredPeople = []
+        for person in people['results']:
+            popularity = person.get('popularity', 0)
+
+            if (popularity >= 0.01):
+                filteredPeople.append(person)
+
+        return sorted(filteredPeople, key=lambda x: x.get('popularity', 0), reverse=True)
 
     def searchByCategory(self, query, category):
         if category == "movie":

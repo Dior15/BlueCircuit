@@ -36,15 +36,25 @@
         <div id="movie-info">
 
           <h1 class="movie-title">{{ title }}</h1>
+        
+          <br>
 
           <div class="is-flex spaced-between">
             <div class="genre">{{ genres | join(', ') }}</div>
           </div>
+
+          <br>
           
           <div class="">
-            <p>Runtime: {{ runtime }} minutes</p>
-            <p>Director: {{ director }}</p>
+            <p>Release Date: {{ releaseDate if releaseDate else "Unknown" }}</p>
+            <br>
+            <p>Runtime: {{ runtime if runtime else "Unknown"}} minutes</p>
+            <br>
+            <p>Director: {{ director if director else "Unknown"}}</p>
+            <br>
             <p>Cast: {{ cast | join(', ') }}</p>
+            <br>
+            <p>Synopsis: {{ synopsis or "N/A"}}</p>
           </div>
             
         </div>
