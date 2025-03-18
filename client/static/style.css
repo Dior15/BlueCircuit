@@ -173,16 +173,33 @@ h3{
 
 #topRated{
     height: 37.5vh;
+    transition: transform 0.3s ease;
+}
+#topRated:hover {
+  transform: scale(1.05);
 }
 
 #latest{
     height: 37.5vh;
+    transition: transform 0.3s ease;
+}
+
+#latest:hover {
+  transform: scale(1.05);
 }
 
 #top-rated{
     margin-right: -20vh;
 }
 
+#top-rated h3 {
+  margin-bottom:2vh;
+}
+
 #whats-new{
     margin-left: -20vh;
+}
+
+#whats-new h3 {
+  margin-bottom:2vh;
 }
