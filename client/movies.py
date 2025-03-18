@@ -1,4 +1,5 @@
 import tmdbsimple as tmdb
+from datetime import datetime
 
 # Set API key from file
 with open("apikey.txt", "r") as file:
@@ -9,10 +10,37 @@ class Movies:
         # Initialize movie object by fetching details from TMDB based on movie ID
         self.movies = tmdb.Movies()
 
-    def getTopXMovies(self, x):
-        popularMovies = self.movies.popular()
-        topXMovies = [movie for movie in popularMovies['results'] if movie['original_language'] == 'en' and movie['popularity'] > 10][:x]
-        return topXMovies
+    def getPopularXMovies(self,x):
+        allMovies = []
+        for page in range(1, 2):  
+            popularMovies = self.movies.popular(page=page)
+            allMovies.extend(popularMovies['results'])
+        
+        # Filter and sort movies by popularity
+        englishMovies = [movie for movie in allMovies if movie['original_language'] == 'en'and movie['popularity'] > 10]
+        sortedMovies = sorted(englishMovies, key=lambda x: x['popularity'], reverse=True)
+        
+        return sortedMovies[:x]
+    
+    def getTopRatedXMovies(self, x):
+        moviesList = []
+        currentYear = datetime.today().year  # Get the current year
+
+        for page in range(1, 20):
+            response = self.movies.top_rated(page=page)  # Fetch a new page
+            moviesList.extend(response.get('results', []))  # Add to our movie list
+
+        recentMovies = [
+            movie for movie in moviesList 
+            if 'release_date' in movie and movie['release_date']  # Ensure release_date exists
+            and int(movie['release_date'][:4]) >= (currentYear - 1)  # Only last year's movies
+        ]
+
+        # Sort by popularity (highest first)
+        sortedMovies = sorted(recentMovies, key=lambda x: x.get('popularity', 0), reverse=True)
+
+        return sortedMovies[:x]  # Return only the top X movies
+
     
     def getLatestMovie(self):
         # Get the most recently released popular english movie

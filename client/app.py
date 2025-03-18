@@ -17,7 +17,7 @@ movieEngine = Movies()
 @app.route('/')
 def home():
     # Fetch trending movies
-    top9Movies = movieEngine.getTopXMovies(9)  # Get top 9 trending movies
+    top9Movies = movieEngine.getTopRatedXMovies(9)  # Get top 9 trending movies
     posterUrls = ""
     movieIds = []
 
@@ -26,7 +26,7 @@ def home():
         movieIds.append(movie["id"])  # Movie ID
         posterUrls += movieEngine.getPosterUrl(movie) + " "  # Poster URL
 
-    topRated = movieEngine.getTopXMovies(1)  # Get top 9 rated movies
+    topRated = movieEngine.getPopularXMovies(1)  # Get top 9 rated movies
     topRatedPoster = movieEngine.getPosterUrl(topRated[0])  # Get top rated movie poster URL
     latest = movieEngine.getLatestMovie()  # Get latest movie
     latestPoster = movieEngine.getPosterUrl(latest)  # Get latest movie poster URL
