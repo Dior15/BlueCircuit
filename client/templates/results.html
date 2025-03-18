@@ -9,25 +9,29 @@
     </head>
 
     <body>
-      <header>
-        <div id="web-name"><a href="{{ url_for('home')}}">MovieFlix</a></div>
-
-        <div id="searchItems">
-          <form action="/search" method="POST" id="search-bar">
-              <input type="text" id="query" name="query" placeholder="Search" required style="width: 500px;">
-
-              <select id="category" name="category">
-                  <option value="movie">Movie</option>
-                  <option value="tv">TV Show</option>
-                  <option value="person">Person</option>
-              </select>
-
-              <button type="submit" id="searchButton">Search</button>
-          </form>
-        </div>
-
-        <button class="signin" id="signin-header">Sign In</button>
-      </header>
+        <header>
+            <div id="web-name">MovieFlix</div>
+  
+              <div id="searchItems">
+                <form action="/search" method="POST" id="search-bar">
+                    <input type="text" id="query" name="query" placeholder="Enter a search" required style="width: 500px;">
+  
+                    <select id="category" name="category">
+                        <option value="movie">Movie</option>
+                        <option value="tv">TV Show</option>
+                        <option value="person">Person</option>
+                    </select>
+  
+                    <button type="submit" id="searchButton">Search</button>
+                </form>
+              </div>
+  
+              <div class="is-flex">
+                  <button class="signin header-buttons" id="signin-header">Sign In</button>
+              </div>
+             
+              
+          </header>
 
         <h1>Results for "{{ query }}" in {{ category }}</h1>
 

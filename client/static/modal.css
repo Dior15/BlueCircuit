@@ -29,14 +29,14 @@ body {
 
 /* The Close Button */
 .close {
-  color: red;
+  color: #2F4F4F;
   float: right;
   font-size: 28px;
   font-weight: bold;
 }
 
 .close:hover, .close:focus {
-  color: #000;
+  color: white;
   text-decoration: none;
   cursor: pointer;
 }
@@ -48,8 +48,19 @@ body {
   width:40vh;
 }
 #createAccountModal button, #loginModal button {
-  background-color: #1E90FF;
+  background-color: #B22222;
   border: 0;
   border-radius: 49px;
   width:15vh;
+  color: white;
+  height: 4vh;
+}
+
+.label{
+  margin-right: 1vh;
+}
+
+h1{
+  text-align: center;
+  margin-bottom: 1vh;
 }

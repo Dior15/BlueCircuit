@@ -17,7 +17,7 @@
 
             <div id="searchItems">
               <form action="/search" method="POST" id="search-bar">
-                  <input type="text" id="query" name="query" placeholder="Search" required style="width: 500px;">
+                  <input type="text" id="query" name="query" placeholder="Enter a search" style="width: 500px;">
 
                   <select id="category" name="category">
                       <option value="movie">Movie</option>
@@ -29,11 +29,15 @@
               </form>
             </div>
 
-            <button class="signin" id="signin-header">Sign In</button>
+            <div class="is-flex">
+                <button class="signin header-buttons" id="signin-header">Sign In</button>
+            </div>
+           
+            
         </header>
 
         <!-- Trending Movie Carousel -->
-        <br>
+        <br><br>
         <center><h3>Popular Movies this Week</h3></center>
         
         <div id="trendingContainer">
@@ -52,19 +56,27 @@
           <button id="carouselRightButton"><b>></b></button>
         </div>
         
+        <br><br>
         <!-- Section with Top Rated & What's New Section-->
-        <div id="lower-section">
-            <h3>Top Rated Movie this Week</h3>
-            <h3>What's New?</h3>
-            <div class="movieElement bottom" id="top-rated"></div> 
-            <div class="movieElement bottom" id="whats-new"></div>
+        <div class="is-flex">
+            <div class="stacked-flex" id="top-rated">
+                <h3>Top Rated Movie this Week</h3>
+                <div class="movieElement bottom"></div> 
+            </div>
+            
+            <div class="stacked-flex" id="whats-new">
+                <h3>What's New?</h3>
+                <div class="movieElement bottom"></div>
+            </div>
         </div>
+
+        <br><br>
 
         <center><h3>Already a user or new to the site?</h3></center>
         <center><div id="signin-or-up">
-            <button class="signin" class="lower" id="loginButton2">Sign in</button>
+            <button class="signin lower lower-buttons" id="loginButton2">Sign in</button>
             or 
-            <button class="signup" class="lower" id="createAccountButton">Sign up</button>
+            <button class="signup lower lower-buttons" id="createAccountButton">Sign up</button>
         </div></center>
 
         
@@ -75,9 +87,9 @@
             <span class="close">&times;</span>
             <h1>Login To MovieFlix</h1>
             <!-- This input tag will need to be integrated to the backend-->
-            <center><p><input placeholder="Username"></input></p></center>
+            <center><p><span class="label">Username:</span><input placeholder="Enter username" required></input></p></center>
              
-            <center><p><input placeholder="Password" type="password"></input></p></center>
+            <center><p ><span class="label">Password:</span> <input placeholder="Enter password" type="password" required></input></p></center>
             
             <br>
 
@@ -89,14 +101,14 @@
         <div id="createAccountModal" class="modal">
           <div class="modal-content">
             <span class="close">&times;</span>
-            <h1>Create An Account</h1>
-            <center><p><input placeholder="Email"></input></p></center>
+            <h1>Create A MovieFlix Account</h1>
+            <p><span class="label">Email:</span><input type="email" placeholder="Enter an email"></input></p>
             
-            <center><p><input placeholder="Username"></input></p></center>
+            <p><span class="label">Username:</span><input placeholder="Enter a username"></input></p>
             
-            <center><p><input placeholder="Password" type="password"></input></p></center>
+            <p><span class="label">Password:</span><input placeholder="Enter a password" type="password"></input></p>
             
-            <center><p><input placeholder="Confirm Password" type="password"></input></p></center>
+            <p><span class="label">Confirm Password:</span><input placeholder="Confirm password" type="password"></input></p>
             
             <br>
 

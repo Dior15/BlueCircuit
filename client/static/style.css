@@ -42,7 +42,7 @@ header{
     background-color: #1c1c1c;
     color: white;
     display: flex;
-    height: 80px;
+    height: 110px;
     justify-content: space-between;
     align-items: center;
 }
@@ -71,28 +71,63 @@ button:hover{
     transition: transform 0.3s ease;
     color: white;
     text-decoration: none;
+    padding-left: 7vh;
+    padding-top: 1vh;
 }
 
 #web-name:hover{
     transform: scale(1.05);
 }
 
-#signin-header{
-    margin-right: 40px;
-    width: 90px;
+.header-buttons{
+    background-color: #B22222;
+    width: 15vh;
+    height: 4vh;
+    border: 0;
+    border-radius: 49px;
+    margin-right: 10vh;
+    color: white;
+
+}
+
+.lower-buttons{
+    width: 15vh;
+    height: 4vh;
+    border: 0;
+    border-radius: 49px;
+    color: white;
+}
+
+#loginButton2{
+    margin-right: 1vh;
+    background-color: #B22222;
+}
+
+#createAccountButton{
+    margin-left: 1vh;
+    background-color: #2F4F4F;
+}
+
+#query{
+    height:4vh;
+    padding-left: 1vh;
+}
+
+.is-flex{
+    display: flex;
+    justify-content: space-evenly; /*change later for other flex*/
+}
+
+.stacked-flex{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #signin-or-up{
     justify-self: center;
-}
-
-.signin, #lower{
-    margin-right: 12px;
-    width: 90px;
-}
-
-.signup, .lower{
-    margin-left: 12px;
+    margin-top: 1vh;
+    justify-content: center;
 }
 
 #search-bar{
@@ -105,6 +140,9 @@ button:hover{
 
 #searchButton{
     width: 60px;
+    background-color: #B22222;
+    color: white;
+    border: none;
 }
 
 #searchItems{
@@ -117,27 +155,18 @@ h3{
     color: white;
 }
 
-#lower-section{
-    display: grid;
-    grid-template-columns: auto auto;
-    justify-content: space-evenly;
-
-}
-
-.lower-section{
-    height: 100px;
+.movieElement{
+    border: 0;
     background-color: grey;
-    width: 80px;
+    width:25vh;
+    height:37.5vh;
+    margin-top: 2vh;
 }
 
-.signin{
-    background-color: #1E90FF;
-    border: 0;
-    border-radius: 49px;
+#top-rated{
+    margin-right: -20vh;
 }
 
-.movieElement, .bottom{
-    height: 30vh;
-    border: 0;
-    border-radius: 49px;
+#whats-new{
+    margin-left: -20vh;
 }

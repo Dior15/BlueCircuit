@@ -36,12 +36,32 @@
   width:3vh;
   height:3vh;
   margin-top:18vh;
+  border-radius: 50%;
+  border: none;
+  background-color: rgba(178, 34, 34, 0.3);
+  color: #0A0A0A;
 }
 #carouselRightButton{
   /* Right button for the trending movie carousel */
   width:3vh;
   height:3vh;
   margin-top:18vh;
+  border-radius: 50%;
+  background-color: rgba(178, 34, 34, 0.3);
+  color: #0A0A0A;
+  border: none;
+}
+
+#carouselRightButton:hover{
+  /* Right button hover for the trending movie carousel */
+  background-color: #B22222;
+  color: white;
+}
+
+#carouselLeftButton:hover{
+  /* Left button hover for the trending movie carousel */
+  background-color: #B22222;
+  color: white;
 }
 
 .trendElement{
