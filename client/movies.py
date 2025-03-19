@@ -12,13 +12,17 @@ class Movies:
 
     def getPopularXMovies(self,x):
         allMovies = []
-        for page in range(1, 2):  
+        for page in range(1, 11):  
             popularMovies = self.movies.popular(page=page)
             allMovies.extend(popularMovies['results'])
         
-        # Filter and sort movies by popularity
-        englishMovies = [movie for movie in allMovies if movie['original_language'] == 'en'and movie['popularity'] > 10]
-        sortedMovies = sorted(englishMovies, key=lambda x: x['popularity'], reverse=True)
+        # Filter and sort movies
+        filteredMovies = [
+            movie for movie in allMovies 
+            if movie['vote_count'] > 10
+            and movie['adult'] == False
+        ]
+        sortedMovies = sorted(filteredMovies, key=lambda x: x['popularity'], reverse=True)
         
         return sortedMovies[:x]
     
@@ -26,18 +30,16 @@ class Movies:
         moviesList = []
         currentYear = datetime.today().year  # Get the current year
 
-        for page in range(1, 20):
+        for page in range(1, 11):
             response = self.movies.top_rated(page=page)  # Fetch a new page
             moviesList.extend(response.get('results', []))  # Add to our movie list
 
-        recentMovies = [
+        filteredMovies = [
             movie for movie in moviesList 
             if 'release_date' in movie and movie['release_date']  # Ensure release_date exists
             and int(movie['release_date'][:4]) >= (currentYear - 1)  # Only last year's movies
         ]
-
-        # Sort by popularity (highest first)
-        sortedMovies = sorted(recentMovies, key=lambda x: x.get('popularity', 0), reverse=True)
+        sortedMovies = sorted(filteredMovies, key=lambda x: x.get('popularity', 0), reverse=True)
 
         return sortedMovies[:x]  # Return only the top X movies
 
