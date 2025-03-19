@@ -12,7 +12,7 @@ class Movies:
 
     def getPopularXMovies(self,x):
         allMovies = []
-        for page in range(1, 11):  
+        for page in range(1, int(x*2)):  
             popularMovies = self.movies.popular(page=page)
             allMovies.extend(popularMovies['results'])
         
@@ -30,7 +30,7 @@ class Movies:
         moviesList = []
         currentYear = datetime.today().year  # Get the current year
 
-        for page in range(1, 11):
+        for page in range(1, int(x*2)):
             response = self.movies.top_rated(page=page)  # Fetch a new page
             moviesList.extend(response.get('results', []))  # Add to our movie list
 
