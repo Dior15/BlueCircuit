@@ -11,35 +11,43 @@ class Movies:
         self.movies = tmdb.Movies()
 
     def getPopularXMovies(self,x):
-        allMovies = []
-        for page in range(1, int(x*2)):  
+        allMovies = {}
+        uniqueMovieIds = set()  # Set to track movie IDs and avoid duplicates
+
+        for page in range(1, int(x*2)):
             popularMovies = self.movies.popular(page=page)
-            allMovies.extend(popularMovies['results'])
-        
-        # Filter and sort movies
-        filteredMovies = [
-            movie for movie in allMovies 
-            if movie['vote_count'] > 10
-            and movie['adult'] == False
-        ]
-        sortedMovies = sorted(filteredMovies, key=lambda x: x['popularity'], reverse=True)
-        
+            movieResults = popularMovies.get('results', [])
+
+            for movie in movieResults:
+                if (
+                    movie.get('id') not in allMovies # Ensure unique movies
+                    and movie.get('vote_count', 0) >= 10  # At least 10 votes
+                    and not movie.get('adult', False)  # Exclude adult movie
+                ):  
+                    allMovies[movie['id']] = movie
+
+        # Sort by popularity (highest first)
+        sortedMovies = sorted(allMovies.values(), key=lambda x: x.get('popularity', 0), reverse=True)
+
         return sortedMovies[:x]
     
     def getTopRatedXMovies(self, x):
-        moviesList = []
+        allMovies = {}
         currentYear = datetime.today().year  # Get the current year
 
         for page in range(1, int(x*2)):
-            response = self.movies.top_rated(page=page)  # Fetch a new page
-            moviesList.extend(response.get('results', []))  # Add to our movie list
+            topRatedMovies = self.movies.top_rated(page=page)  # Fetch a new page
+            movieResults = topRatedMovies.get('results', [])
 
-        filteredMovies = [
-            movie for movie in moviesList 
-            if 'release_date' in movie and movie['release_date']  # Ensure release_date exists
-            and int(movie['release_date'][:4]) >= (currentYear - 1)  # Only last year's movies
-        ]
-        sortedMovies = sorted(filteredMovies, key=lambda x: x.get('popularity', 0), reverse=True)
+            for movie in movieResults:
+                if (
+                    movie.get('id') not in allMovies # Ensure unique movies
+                    and 'release_date' in movie and movie['release_date']  # Ensure release_date exists
+                    and int(movie['release_date'][:4]) >= (currentYear - 1)  # Only last year's movies
+                ):  
+                    allMovies[movie['id']] = movie
+
+        sortedMovies = sorted(allMovies.values(), key=lambda x: x.get('popularity', 0), reverse=True)
 
         return sortedMovies[:x]  # Return only the top X movies
 
@@ -52,10 +60,19 @@ class Movies:
         return latestMovie
 
     def getPosterUrl(self, movie):
-        # Get full poster URL or a placeholder if unavailable
-        if 'poster_path' in movie and movie['poster_path']:
-            url = f"https://image.tmdb.org/t/p/w500{movie['poster_path']}"
-        return url
+
+        # Validate movie input to prevent crashes
+        if not isinstance(movie, dict):
+            return "https://via.placeholder.com/500x750?text=No+Image+Available"  # Default placeholder
+
+        # Get the poster path if it exists
+        posterPath = movie.get('poster_path')  # Uses .get() to prevent KeyErrors
+
+        if posterPath:  # Ensure posterPath is not None or empty
+            return f"https://image.tmdb.org/t/p/w500{posterPath}"
+
+        # Return a placeholder image if no valid poster is available
+        return "https://via.placeholder.com/500x750?text=No+Image+Available"
 
     def getCast(self, movieId):
         # Get the main cast (first 5 actors)
