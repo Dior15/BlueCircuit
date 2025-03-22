@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import tmdbsimple as tmdb
+import csv, os
 from movies import *
 from search import *
 
@@ -9,6 +10,8 @@ with open("apikey.txt", "r") as file:
     
 # Initialize Flask app
 app = Flask(__name__)
+
+file_path = "client\\UsernamesAndPasswords.csv"
 
 # Initialize search and poster classes
 searchEngine = MovieSearch()
@@ -53,6 +56,65 @@ def movie(movie_id):
     movie = movieEngine.getMovieDict(movie_id)
 
     return render_template('moviepage.html', title = movie['title'], runtime = movie['runtime'], genres = movie['genres'], poster_url = movie['posterUrl'], cast = movie['cast'],  crew = movie['crew'], director = movie['director'], releaseDate = movie['releaseDate'], synopsis = movie['synopsis'])
+
+@app.route('/login', methods=['POST'])
+def login():
+    username = request.json.get('username')
+    password = request.json.get('password')
+    
+    if not username or not password:
+        return jsonify({'success': False, 'message':'Username and password are required'}), 400
+    
+    #Check if the csv file exists
+    if not os.path.exists(file_path):
+        return jsonify({'success': False, 'message':'User does not exist'}), 404
+    
+    #Read the CSV file to check user credentials
+    with open(file_path, 'r') as file:
+        reader = csv.reader(file)
+        for row in reader:
+            if row[0] == username:
+                if row[1] == password:
+                    return jsonify({'success': True, 'messsage': 'Login Successful!'}), 200
+                else:
+                    return jsonify({'success': False, 'message': 'Incorrect password'}), 401
+        #If user is not found
+        return jsonify({'success': False, 'message': 'User does not exist'}), 404
+    
+@app.route('/signup', methods=['POST'])
+def signup():
+    email = request.json.get('email')
+    username = request.json.get('username')
+    password = request.json.get('password')
+    confirmPassword = request.json.get('confirmPassword')
+    
+    if not email or not username or not password:
+        return jsonify({'success': False, 'message': 'Email, username and password are required'}), 400
+    
+    #check if the username is already taken
+    with open(file_path, 'r') as file:
+        reader = csv.reader(file)
+        for row in reader:
+            if row[0] == username:
+                return jsonify({'success': False, 'message': 'Username already taken'}), 409
+            
+    #If username and password match, then user already exists
+    with open(file_path, 'r') as file:
+        reader = csv.reader(file)
+        for row in reader:
+            if row[0] == username and row[1] == password:
+                return jsonify({'success': False, 'message': 'User already exists'}), 409
+    
+    #If passwords do not match 
+    if password != confirmPassword:
+        return jsonify({'success': False, 'message': 'Passwords do not match!'}), 400        
+            
+    #If add the new user, add to the csv file
+    with open(file_path, 'a', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow([username, password])
+        
+    return jsonify({'success': True, 'message': 'Signup successful!'}), 201
 
 if __name__ == '__main__':
     app.run(debug=True)
