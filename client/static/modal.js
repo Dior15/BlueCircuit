@@ -67,7 +67,7 @@ document.getElementById("loginFormSubmit").onclick = function(event) {
       //Redirect to homepage after successful login
       setTimeout(() => {
         window.location.href = "/";
-      }, 1000);
+      }, 1000); //Redirects user to the homepage after 1 second
     } 
     else if (data.success === false && data.message === "Incorrect password"){
       messageElement.textContent = "Incorrect password";
@@ -90,6 +90,7 @@ document.getElementById("loginFormSubmit").onclick = function(event) {
   .catch(error => console.error("Error during login:", error));
 };
 
+
 // Signup form submission
 document.getElementById("signupFormSubmit").onclick = function(event) {
   event.preventDefault(); // Prevent form submission
@@ -99,19 +100,13 @@ document.getElementById("signupFormSubmit").onclick = function(event) {
   const password = document.getElementById("signupPasswordField").value;
   const confirmPassword = document.getElementById("signupConfirmPasswordField").value;
 
-  // Validate input
-  if (!email || !username || !password || !confirmPassword) {
-    alert("All fields are required.");
-    return;
-  }
-
   // Send the signup request to the backend
   fetch('/signup', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ email, username, password }),
+    body: JSON.stringify({ email, username, password, confirmPassword}),
   })
   .then(response => response.json())
   .then(data => {
@@ -124,18 +119,18 @@ document.getElementById("signupFormSubmit").onclick = function(event) {
       messageElement.style.color = "green";
       // Close the modal after a delay
       setTimeout(() => {
-        accountCreateModal.style.display = "none";
+        window.location.href = "/";
       }, 1000);
     }
-    else if (data.success === False && data.message === "Username already taken"){
+    else if (data.success === false && data.message == "Username already taken"){
       messageElement.textContent = "Username already taken";
       messageElement.style.color = "red";
     } 
-    else if (data.success === False && data.message === "User already exists"){
+    else if (data.success === false && data.message == "User already exists"){
       messageElement.textContent = "User already exists";
       messageElement.style.color = "red";
     }
-    else if (data.success === False && data.message === "Passwords do not match!"){
+    else if (data.success === false && data.message == "Passwords do not match!"){
       messageElement.textContent = "Passwords do not match!";
       messageElement.style.color = "red";
     }

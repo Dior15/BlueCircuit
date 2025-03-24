@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, session
 import tmdbsimple as tmdb
 import csv, os
 from movies import *
@@ -88,7 +88,7 @@ def signup():
     password = request.json.get('password')
     confirmPassword = request.json.get('confirmPassword')
     
-    if not email or not username or not password:
+    if not email or not username or not password or not confirmPassword:
         return jsonify({'success': False, 'message': 'Email, username and password are required'}), 400
     
     #check if the username is already taken
@@ -112,9 +112,20 @@ def signup():
     #If add the new user, add to the csv file
     with open(file_path, 'a', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow([username, password])
+        writer.writerow([username, password, email])
         
     return jsonify({'success': True, 'message': 'Signup successful!'}), 201
 
+@app.route('/logout', methods=['POST'])
+def logout():
+     session.pop('user', None)
+     return jsonify({'success': True, 'message': 'Logged out successfully'}), 200
+ 
+@app.route('/check_login', methods=['GET'])
+def check_login():
+    if 'user' in session:
+        return jsonify({'logged_in': True, 'user': session['user']}), 200
+    return jsonify({'logged_in': False}), 200
+     
 if __name__ == '__main__':
     app.run(debug=True)
