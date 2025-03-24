@@ -101,6 +101,14 @@ class Movies:
         # Get the movie synopsis
         movieData = tmdb.Movies(movieId).info()
         return movieData.get("overview", "No synopsis available")
+    
+    def getNumRatings(self, movieId):
+        movieData = tmdb.Movies(movieId).info()
+        return movieData.get("vote_count", None)
+    
+    def getRating(self, movieId):
+        movieData = tmdb.Movies(movieId).info()
+        return movieData.get("vote_average", None)
 
     def getMovieDict(self, movieId):
         # Return movie details as a dictionary
@@ -115,5 +123,7 @@ class Movies:
             "crew": self.getCrew(movieId),
             "director": self.getDirector(movieId),
             "releaseDate": self.getReleaseDate(movieId),
-            "synopsis": self.getSynopsis(movieId)   
+            "synopsis": self.getSynopsis(movieId),
+            "ratingCount": self.getNumRatings(movieId),
+            "rating": self.getRating(movieId)
         }

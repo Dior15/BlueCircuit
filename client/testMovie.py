@@ -4,9 +4,18 @@ from movies import *
 # Initialize Movie instance for testing
 movieEngine = Movies()
 
-def testGetTopXMovies():
+def testGetPopularXMovies():
     """Test fetching top X popular movies"""
-    topMovies = movieEngine.getTopXMovies(5)  # Get top 5 movies
+    topMovies = movieEngine.getPopularXMovies(5)  # Get top 5 movies
+
+    assert topMovies is not None  # Ensure response exists
+    assert isinstance(topMovies, list)  # Ensure it's a list
+    assert len(topMovies) == 5  # Ensure it returns exactly 5 movies
+    assert "title" in topMovies[0]  # Ensure each movie has a title
+
+def testGetTopRatedXMovies():
+    """Test fetching the X top rated movies"""
+    topMovies = movieEngine.getTopRatedXMovies(5)  # Get top 5 movies
 
     assert topMovies is not None  # Ensure response exists
     assert isinstance(topMovies, list)  # Ensure it's a list
@@ -15,7 +24,7 @@ def testGetTopXMovies():
 
 def testGetPosterUrl():
     """Test fetching a valid poster URL"""
-    topMovie = movieEngine.getTopXMovies(1)[0]  # Get the first movie
+    topMovie = movieEngine.getPopularXMovies(1)[0]  # Get the first movie
     posterUrl = movieEngine.getPosterUrl(topMovie)
 
     assert isinstance(posterUrl, str)  # Ensure the URL is a string
@@ -47,6 +56,21 @@ def testGetDirector():
 
     assert isinstance(director, str)  # Ensure director is a string
     assert director == "Christopher Nolan"  # Ensure correct director is returned
+
+def testGetNumRatings():
+    """Test fetching the number of ratings this movie has from tmdb"""
+    movieId = 27205  # TMDB ID for Inception
+    numRatings = movieEngine.getNumRatings(movieId)
+
+    assert isinstance(numRatings, int)  # Ensure numRatings is an int
+
+def testGetRating():
+    """Test fetching the rating of a movie on tmdb"""
+    movieId = 27205  # TMDB ID for Inception
+    rating = movieEngine.getRating(movieId)
+
+    assert isinstance(rating, float)  # Ensure numRatings is a float
+    assert rating <= 10 and rating >= 0 # Ensures the rating is between 0 and 10
 
 def testGetMovieDict():
     """Test fetching full movie details as a dictionary"""
