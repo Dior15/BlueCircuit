@@ -64,6 +64,8 @@ document.getElementById("loginFormSubmit").onclick = function(event) {
       //Login successful
       messageElement.textContent = "Login successful!";
       messageElement.style.color = "green";
+
+
       //Redirect to homepage after successful login
       setTimeout(() => {
         window.location.href = "/";
