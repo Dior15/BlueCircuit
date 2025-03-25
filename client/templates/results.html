@@ -39,16 +39,35 @@
             <ul>
                 {% for item in results %}
                     {% if category == "movie" %}
-                        <a href="{{ url_for('movie', movie_id=item.id)}}"><li>
-                            <strong>{{ item.title }}</strong> <br> {{ item.get('release_date', 'N/A') }} <br><br> {{ item.get('overview', 'N/A') }}
-                        </li></a>
+                        
+                            <li>
+                                <a href="{{ url_for('movie', movie_id=item.id)}}">
+                                    {% if item.poster_path %}
+                                        <img src="https://image.tmdb.org/t/p/w185{{ item.poster_path }}" alt="{{ item.title }} Poster">
+                                    {% endif %}
+                                    <strong>{{ item.title }}</strong> <br> 
+                                    {{ item.get('release_date', 'N/A') }} <br><br> 
+                                    {{ item.get('overview', 'N/A') }}
+                                </a>
+                            </li>
+                        
                     {% elif category == "tv" %}
                         <li>
-                            <strong>{{ item.name }}</strong> <br> {{ item.get('first_air_date', 'N/A') }} <br><br> {{ item.get('overview', 'N/A') }}
+                            {% if item.poster_path %}
+                                <img src="https://image.tmdb.org/t/p/w185{{ item.poster_path }}" alt="{{ item.name }} Poster">
+                            {% endif %}
+                            <strong>{{ item.name }}</strong> <br> 
+                            {{ item.get('first_air_date', 'N/A') }} <br><br> 
+                            {{ item.get('overview', 'N/A') }}
                         </li>
                     {% elif category == "person" %}
                         <li>
-                            <strong>{{ item.name }}</strong> <br> {{ item.get('known_for_department', 'Unknown') }} <br><br> Known for: {{ item['known_for'][0].get('title', 'N/A') }}
+                            {% if item.profile_path %}
+                                <img src="https://image.tmdb.org/t/p/w185{{ item.profile_path }}" alt="{{ item.name }}">
+                            {% endif %}
+                            <strong>{{ item.name }}</strong> <br> 
+                            {{ item.get('known_for_department', 'Unknown') }} <br><br> 
+                            Known for: {{ item['known_for'][0].get('title', item['known_for'][0].get('name', 'N/A')) }}
                         </li>
                     {% endif %}
                 {% endfor %}
