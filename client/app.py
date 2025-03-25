@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, jsonify, session
 import tmdbsimple as tmdb
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
 import csv, os
 from movies import *
 from search import *
@@ -11,7 +13,23 @@ with open("apikey.txt", "r") as file:
 # Initialize Flask app
 app = Flask(__name__)
 
-file_path = "client\\UsernamesAndPasswords.csv"
+#Configure the app using SQLite
+app.secret_key = "BlueCircuit"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
+# User Model
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password_hash = db.Column(db.String(256), nullable=False)
+
+# Create the database tables
+with app.app_context():
+    db.create_all()
+
 
 # Initialize search and poster classes
 searchEngine = MovieSearch()
@@ -59,30 +77,32 @@ def movie(movie_id):
 
 @app.route('/login', methods=['POST'])
 def login():
+    data = request.json
     username = request.json.get('username')
     password = request.json.get('password')
     
+    #Prommpt users to enter required fields
     if not username or not password:
         return jsonify({'success': False, 'message':'Username and password are required'}), 400
     
-    #Check if the csv file exists
-    if not os.path.exists(file_path):
+    user = User.query.filter((User.username == username) | (User.email == username)).first()
+    
+    if not user:
         return jsonify({'success': False, 'message':'User does not exist'}), 404
     
-    #Read the CSV file to check user credentials
-    with open(file_path, 'r') as file:
-        reader = csv.reader(file)
-        for row in reader:
-            if row[0] == username:
-                if row[1] == password:
-                    return jsonify({'success': True, 'messsage': 'Login Successful!'}), 200
-                else:
-                    return jsonify({'success': False, 'message': 'Incorrect password'}), 401
-        #If user is not found
-        return jsonify({'success': False, 'message': 'User does not exist'}), 404
+    #Check hased password
+    if not check_password_hash(user.password_hash, password):
+        return jsonify({'success': False, 'message' : 'Incorrect password'}), 401
+    
+    #Store user session
+    session['user_id'] = user.id
+    
+    return jsonify({'success': True, 'message': 'Login successful!'}), 200
+
     
 @app.route('/signup', methods=['POST'])
 def signup():
+    data = request.json
     email = request.json.get('email')
     username = request.json.get('username')
     password = request.json.get('password')
@@ -91,34 +111,25 @@ def signup():
     if not email or not username or not password or not confirmPassword:
         return jsonify({'success': False, 'message': 'Email, username and password are required'}), 400
     
-    #check if the username is already taken
-    with open(file_path, 'r') as file:
-        reader = csv.reader(file)
-        for row in reader:
-            if row[0] == username:
-                return jsonify({'success': False, 'message': 'Username already taken'}), 409
-            
-    #If username and password match, then user already exists
-    with open(file_path, 'r') as file:
-        reader = csv.reader(file)
-        for row in reader:
-            if row[0] == username and row[1] == password:
-                return jsonify({'success': False, 'message': 'User already exists'}), 409
-    
-    #If passwords do not match 
     if password != confirmPassword:
-        return jsonify({'success': False, 'message': 'Passwords do not match!'}), 400        
-            
-    #If add the new user, add to the csv file
-    with open(file_path, 'a', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow([username, password, email])
-        
+        return jsonify({'success' : False, 'message': 'Passwords do not match'}), 400
+    
+    #Check if user exists
+    if User.query.filter_by(username=username).first() or User.query.filter_by(email=email).first():
+        return jsonify({'success': False, 'message': 'User already exists'}), 409
+    
+    
+    #Hash the passwords and save the user
+    hashed_password = generate_password_hash(password)
+    new_user = User(username=username, email=email, password_hash=hashed_password)
+    db.session.add(new_user)
+    db.session.commit()
+    
     return jsonify({'success': True, 'message': 'Signup successful!'}), 201
 
 @app.route('/logout', methods=['POST'])
 def logout():
-     session.pop('user', None)
+     session.pop('user_id', None)
      return jsonify({'success': True, 'message': 'Logged out successfully'}), 200
  
 @app.route('/check_login', methods=['GET'])

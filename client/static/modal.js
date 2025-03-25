@@ -69,6 +69,10 @@ document.getElementById("loginFormSubmit").onclick = function(event) {
         window.location.href = "/";
       }, 1000); //Redirects user to the homepage after 1 second
     } 
+    else if (data.success === false && data.message === "Username and password are required"){
+      messageElement.textCaontent = "Username and password are required";
+      messageElement.style.color = "red";
+    }
     else if (data.success === false && data.message === "Incorrect password"){
       messageElement.textContent = "Incorrect password";
       messageElement.style.color = "red";
@@ -121,6 +125,10 @@ document.getElementById("signupFormSubmit").onclick = function(event) {
       setTimeout(() => {
         window.location.href = "/";
       }, 1000);
+    }
+    else if (data.success === false && data.message === "Username and password are required"){
+      messageElement.textCaontent = "Username and password are required";
+      messageElement.style.color = "red";
     }
     else if (data.success === false && data.message == "Username already taken"){
       messageElement.textContent = "Username already taken";
