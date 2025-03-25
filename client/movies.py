@@ -59,17 +59,17 @@ class Movies:
         latestMovie = max(englishMovies, key=lambda x: x['release_date'])
         return latestMovie
 
-    def getPosterUrl(self, movie):
+    def getPosterUrl(self, media):
 
         # Validate movie input to prevent crashes
-        if not isinstance(movie, dict):
+        if not isinstance(media, dict):
             return "https://via.placeholder.com/500x750?text=No+Image+Available"  # Default placeholder
 
         # Get the poster path if it exists
-        posterPath = movie.get('poster_path')  # Uses .get() to prevent KeyErrors
+        path = media.get('poster_path') or media.get('profile_path') # Uses .get() to prevent KeyErrors
 
-        if posterPath:  # Ensure posterPath is not None or empty
-            return f"https://image.tmdb.org/t/p/w500{posterPath}"
+        if path:  # Ensure posterPath is not None or empty
+            return f"https://image.tmdb.org/t/p/w500{path}"
 
         # Return a placeholder image if no valid poster is available
         return "https://via.placeholder.com/500x750?text=No+Image+Available"

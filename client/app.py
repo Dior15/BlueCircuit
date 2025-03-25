@@ -60,11 +60,24 @@ def search():
     query = request.form.get('query')
     category = request.form.get('category')
 
-    # Perform search based on category
-    results = searchEngine.searchByCategory(query, category)
+    search = tmdb.Search()
 
-    if results is None:
-        return "Invalid category", 400  # Error handling
+    # Search by category
+    if category == "movie":
+        search.movie(query=query)
+    elif category == "tv":
+        search.tv(query=query)
+    elif category == "person":
+        search.person(query=query)
+    else:
+        return "Invalid category", 400
+
+    # Get result
+    results = search.results
+
+    # Add poster URLs to each result using getPosterUrl
+    for result in results:
+        result['poster_url'] = movieEngine.getPosterUrl(result)
 
     return render_template('results.html', results=results, category=category, query=query)
 
