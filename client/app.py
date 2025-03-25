@@ -30,7 +30,6 @@ class User(db.Model):
 with app.app_context():
     db.create_all()
 
-
 # Initialize search and poster classes
 searchEngine = MovieSearch()
 movieEngine = Movies()
@@ -60,20 +59,15 @@ def search():
     query = request.form.get('query')
     category = request.form.get('category')
 
-    search = tmdb.Search()
-
     # Search by category
     if category == "movie":
-        search.movie(query=query)
+        results = searchEngine.searchMovies(query=query)
     elif category == "tv":
-        search.tv(query=query)
+        results = searchEngine.searchTv(query=query)
     elif category == "person":
-        search.person(query=query)
+        results = searchEngine.searchPeople(query=query)
     else:
         return "Invalid category", 400
-
-    # Get result
-    results = search.results
 
     # Add poster URLs to each result using getPosterUrl
     for result in results:

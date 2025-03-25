@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Search Results</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='results.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename ='style.css')}}">
+    </head>
+
+    <body>
+        <header>
+            <div id="web-name"><a href="{{ url_for('home')}}">MovieFlix</a></div>
+  
+              <div id="searchItems">
+                <form action="/search" method="POST" id="search-bar">
+                    <input type="text" id="query" name="query" placeholder="Enter a search" required style="width: 500px;">
+  
+                    <select id="category" name="category">
+                        <option value="movie">Movie</option>
+                        <option value="tv">TV Show</option>
+                        <option value="person">Person</option>
+                    </select>
+  
+                    <button type="submit" id="searchButton">Search</button>
+                </form>
+              </div>
+  
+              <div class="is-flex">
+                  <button class="signin header-buttons" id="signin-header">Sign In</button>
+              </div>
+             
+              
+          </header>
+
+        <h1>"{{ username }}"'s Watchlist</h1>
+
+        {% if results %}
+            <ul>
+                {% for item in results %}
+                    {% if category == "movie" %}
+                        
+                            <li>
+                                <a href="{{ url_for('movie', movie_id=item.id)}}">
+                                    {% if item.poster_path %}
+                                        <img src= "{{ item.poster_url }}" alt="{{ item.title }} Poster">
+                                    {% endif %}
+                                    <strong>{{ item.title }}</strong> <br> 
+                                    {{ item.get('release_date', 'N/A') }} <br><br> 
+                                    {{ item.get('overview', 'N/A') }}
+                                </a>
+                            </li>
+                        
+                    {% elif category == "tv" %}
+                        <li>
+                            {% if item.poster_path %}
+                                <img src= "{{ item.poster_url }}" alt="{{ item.name }} Poster">
+                            {% endif %}
+                            <strong>{{ item.name }}</strong> <br> 
+                            {{ item.get('first_air_date', 'N/A') }} <br><br> 
+                            {{ item.get('overview', 'N/A') }}
+                        </li>
+                    {% elif category == "person" %}
+                        <li>
+                            {% if item.profile_path %}
+                                <img src= "{{ item.poster_url }}" alt="{{ item.name }}">
+                            {% endif %}
+                            <strong>{{ item.name }}</strong> <br> 
+                            {{ item.get('known_for_department', 'Unknown') }} <br><br> 
+                            Known for: {{ item['known_for'][0].get('title', item['known_for'][0].get('name', 'N/A')) }}
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Watchlist is empty</p>
+        {% endif %}
+
+        <a href="/" id="returnButton">Back to Home</a>
+    </body>
+</html>
