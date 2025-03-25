@@ -33,7 +33,7 @@
               
           </header>
 
-        <h1>Results for "{{ query }}" in {{ category }}</h1>
+        <h1>Results for '{{ query }}' in {{ category }}</h1>
 
         {% if results %}
             <ul>
@@ -53,21 +53,25 @@
                         
                     {% elif category == "tv" %}
                         <li>
-                            {% if item.poster_path %}
-                                <img src= "{{ item.poster_url }}" alt="{{ item.name }} Poster">
-                            {% endif %}
-                            <strong>{{ item.name }}</strong> <br> 
-                            {{ item.get('first_air_date', 'N/A') }} <br><br> 
-                            {{ item.get('overview', 'N/A') }}
+                            <a href="{{ url_for('tv', tv_id=item.id)}}">
+                                {% if item.poster_path %}
+                                    <img src= "{{ item.poster_url }}" alt="{{ item.name }} Poster">
+                                {% endif %}
+                                <strong>{{ item.name }}</strong> <br> 
+                                {{ item.get('first_air_date', 'N/A') }} <br><br> 
+                                {{ item.get('overview', 'N/A') }}
+                            </a>
                         </li>
                     {% elif category == "person" %}
                         <li>
-                            {% if item.profile_path %}
-                                <img src= "{{ item.poster_url }}" alt="{{ item.name }}">
-                            {% endif %}
-                            <strong>{{ item.name }}</strong> <br> 
-                            {{ item.get('known_for_department', 'Unknown') }} <br><br> 
-                            Known for: {{ item['known_for'][0].get('title', item['known_for'][0].get('name', 'N/A')) }}
+                            <a href="{{ url_for('person', person_id=item.id)}}">
+                                {% if item.profile_path %}
+                                    <img src= "{{ item.poster_url }}" alt="{{ item.name }}">
+                                {% endif %}
+                                <strong>{{ item.name }}</strong> <br> 
+                                {{ item.get('known_for_department', 'Unknown') }} <br><br> 
+                                Known for: {{ item['known_for'][0].get('title', item['known_for'][0].get('name', 'N/A')) }}
+                            </a>
                         </li>
                     {% endif %}
                 {% endfor %}

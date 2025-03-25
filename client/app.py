@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, jsonify, session
 import tmdbsimple as tmdb
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
-import csv, os
 from movies import *
 from search import *
 
@@ -80,7 +79,41 @@ def movie(movie_id):
     # Get movie details
     movie = movieEngine.getMovieDict(movie_id)
 
-    return render_template('moviepage.html', title = movie['title'], runtime = movie['runtime'], genres = movie['genres'], poster_url = movie['posterUrl'], cast = movie['cast'],  crew = movie['crew'], director = movie['director'], releaseDate = movie['releaseDate'], synopsis = movie['synopsis'])
+    return render_template('moviepage.html', **movie)
+
+@app.route('/tv/<int:tv_id>')
+def tv(tv_id):
+    # Get movie details
+    tvShow = tmdb.TV(tv_id).info()
+    tvCredits = tmdb.TV(tv_id).credits()
+
+    tvData = {
+        "title": tvShow.get("name", "Unknown Title"),
+        "firstAirDate": tvShow.get("first_air_date", "Unknown"),
+        "genres": [genre['name'] for genre in tvShow.get("genres", [])],
+        "creator": tvShow["created_by"][0]["name"] if tvShow.get("created_by") else "Unknown Creator",
+        "cast": [member['name'] for member in tvCredits.get("cast", [])[:5]],
+        "synopsis": tvShow.get("overview", ""),
+        "posterUrl": movieEngine.getPosterUrl(tvShow)
+    }
+
+    return render_template('tvpage.html', **tvData)
+
+@app.route('/person/<int:person_id>')
+def person(person_id):
+    personData = tmdb.People(person_id).info()
+    knownFor = tmdb.People(person_id).combined_credits()
+
+    person = {
+        "name": personData.get("name", "Unknown"),
+        "birthDate": personData.get("birthday", "Unknown"),
+        "occupation": personData.get("known_for_department", "Unknown"),
+        "knownFor": [c.get("title", c.get("name", "N/A")) for c in knownFor.get("cast", [])[:5]],
+        "biography": personData.get("biography", "No information available."),
+        "posterUrl": movieEngine.getPosterUrl(personData)
+    }
+
+    return render_template("personpage.html", **person)
 
 @app.route('/login', methods=['POST'])
 def login():

@@ -39,7 +39,7 @@
         <div class="movie-poster"><img src="{{ posterUrl }}" alt="{{ title }}"></div>
         <div id="movie-info">
 
-          <h1 class="movie-title">{{ title }}</h1>
+          <h1 class="movie-title">{{ name }}</h1>
         
           <br>
 
@@ -50,11 +50,9 @@
           <br>
           
           <div class="">
-            <p>Release Date: {{ releaseDate if releaseDate else "Unknown" }}</p>
+            <p>First Air Date: {{ firstAirDate if firstAirDate else "Unknown" }}</p>
             <br>
-            <p>Runtime: {{ runtime if runtime else "Unknown"}} minutes</p>
-            <br>
-            <p>Director: {{ director if director else "Unknown"}}</p>
+            <p>Creator: {{ creator if creator else "Unknown"}}</p>
             <br>
             <p>Cast: {{ cast | join(', ') }}</p>
             <br>

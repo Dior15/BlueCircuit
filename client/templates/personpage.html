@@ -39,26 +39,22 @@
         <div class="movie-poster"><img src="{{ posterUrl }}" alt="{{ title }}"></div>
         <div id="movie-info">
 
-          <h1 class="movie-title">{{ title }}</h1>
+          <h1 class="movie-title">{{ name }}</h1>
         
           <br>
 
           <div class="is-flex spaced-between">
-            <div class="genre">{{ genres | join(', ') }}</div>
+            <div class="genre">{{ occupation }}</div>
           </div>
 
           <br>
           
           <div class="">
-            <p>Release Date: {{ releaseDate if releaseDate else "Unknown" }}</p>
+            <p>Born: {{ birthDate if birthDate else "Unknown" }}</p>
             <br>
-            <p>Runtime: {{ runtime if runtime else "Unknown"}} minutes</p>
+            <p>Known for: {{ knownFor | join(', ')}}</p>
             <br>
-            <p>Director: {{ director if director else "Unknown"}}</p>
-            <br>
-            <p>Cast: {{ cast | join(', ') }}</p>
-            <br>
-            <p>Synopsis: {{ synopsis or "N/A"}}</p>
+            <p>About: {{ biography or "No information available"}}</p>
           </div>
             
         </div>
