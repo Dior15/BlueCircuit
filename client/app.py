@@ -94,7 +94,7 @@ def login():
     username = request.json.get('username')
     password = request.json.get('password')
     
-    #Prommpt users to enter required fields
+    #Prompt users to enter required fields
     if not username or not password:
         return jsonify({'success': False, 'message':'Username and password are required'}), 400
     
@@ -147,8 +147,9 @@ def logout():
  
 @app.route('/check_login', methods=['GET'])
 def check_login():
-    if 'user' in session:
-        return jsonify({'logged_in': True, 'user': session['user']}), 200
+    if 'user_id' in session:
+        user = User.query.get(session['user_id'])
+        return jsonify({'logged_in': True, 'user': user.username}), 200
     return jsonify({'logged_in': False}), 200
      
 if __name__ == '__main__':
