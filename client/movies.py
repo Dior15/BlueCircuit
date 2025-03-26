@@ -77,7 +77,8 @@ class Movies:
     def getCast(self, movieId):
         # Get the main cast (first 5 actors)
         creditsData = tmdb.Movies(movieId).credits()
-        return [member["name"] for member in creditsData.get("cast", [])[:5]]
+        # return [member["name"] for member in creditsData.get("cast", [])[:5]]
+        return [{"id": member["id"], "name": member["name"]} for member in creditsData.get("cast", [])[:5]]
 
     def getCrew(self, movieId):
         # Get all crew members

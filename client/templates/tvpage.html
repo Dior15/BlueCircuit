@@ -39,7 +39,7 @@
         <div class="movie-poster"><img src="{{ posterUrl }}" alt="{{ title }}"></div>
         <div id="movie-info">
 
-          <h1 class="movie-title">{{ name }}</h1>
+          <h1 class="movie-title">{{ title }}</h1>
         
           <br>
 
@@ -54,7 +54,11 @@
             <br>
             <p>Creator: {{ creator if creator else "Unknown"}}</p>
             <br>
-            <p>Cast: {{ cast | join(', ') }}</p>
+            <p>Cast: 
+              {% for member in cast %}
+                <a href="{{ url_for('person', person_id=member.id) }}">{{ member.name }}</a>{% if not loop.last %}, {% endif %}
+              {% endfor %}
+            </p>
             <br>
             <p>Synopsis: {{ synopsis or "N/A"}}</p>
           </div>

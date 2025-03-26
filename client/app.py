@@ -92,7 +92,8 @@ def tv(tv_id):
         "firstAirDate": tvShow.get("first_air_date", "Unknown"),
         "genres": [genre['name'] for genre in tvShow.get("genres", [])],
         "creator": tvShow["created_by"][0]["name"] if tvShow.get("created_by") else "Unknown Creator",
-        "cast": [member['name'] for member in tvCredits.get("cast", [])[:5]],
+        # "cast": [member['name'] for member in tvCredits.get("cast", [])[:5]],
+        "cast": [{"id": member["id"], "name": member["name"]} for member in tvCredits.get("cast", [])[:5]],
         "synopsis": tvShow.get("overview", ""),
         "posterUrl": movieEngine.getPosterUrl(tvShow)
     }
