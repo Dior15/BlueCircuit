@@ -40,7 +40,7 @@
         <div id="movie-info">
 
           <h1 class="movie-title">{{ title }}</h1>
-        
+
           <br>
 
           <div class="is-flex spaced-between">
@@ -48,8 +48,20 @@
           </div>
 
           <br>
+
+          <div class="rating-container">
+            {% set ringColor = '#00ff88' if rating >= 7 else '#ffaa00' if rating >= 5 else '#ff4444' %}
+            <div id="rating-circle" 
+              style="border-color: {{ ringColor }}; 
+                    background: conic-gradient({{ ringColor }} {{ rating }}%, #444444 {{ rating }}%);">
+                <span>{{ rating }}%</span>
+            </div>
+            <p id="rating-count">Based on {{ ratingCount }} ratings</p>
+          </div>
+
+          <br>
           
-          <div class="">
+          <div class="info">
             <p>Release Date: {{ releaseDate if releaseDate else "Unknown" }}</p>
             <br>
             <p>Runtime: {{ runtime if runtime else "Unknown"}} minutes</p>

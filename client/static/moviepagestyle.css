@@ -85,3 +85,33 @@ a:active {
     text-decoration: none;
     color: white;
 }
+
+.rating-container {
+    display: flex;
+    flex-direction: column;
+    justify-self: left;
+    margin-top: 1vh;
+    margin-bottom: 2vh;
+}
+
+#rating-circle {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    border: 3px solid #00ff88;
+    transition: transform 0.3s ease;
+    margin: 0 auto;
+}
+
+#rating-count {
+    font-size: 14px;
+    color: #aaaaaa;
+    margin-top: 0.5vh;
+}

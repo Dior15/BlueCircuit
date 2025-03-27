@@ -121,7 +121,6 @@ def login():
     )
     return jsonify(response), status
 
-    
 @app.route('/signup', methods=['POST'])
 def signup():
     data = request.json
