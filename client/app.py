@@ -1,9 +1,11 @@
-from flask import Flask, render_template, request, jsonify, session
+from flask import Flask, render_template, request, jsonify, session, redirect
+from models import db, User, Watchlist
 import tmdbsimple as tmdb
-from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from movies import *
 from search import *
+from login import *
+from watchlist import *
 
 # Set TMDB API key
 with open("apikey.txt", "r") as file:
@@ -16,15 +18,9 @@ app = Flask(__name__)
 app.secret_key = "BlueCircuit"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
 
-# User Model
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password_hash = db.Column(db.String(256), nullable=False)
-
+db.init_app(app)
+    
 # Create the database tables
 with app.app_context():
     db.create_all()
@@ -119,65 +115,72 @@ def person(person_id):
 @app.route('/login', methods=['POST'])
 def login():
     data = request.json
-    username = request.json.get('username')
-    password = request.json.get('password')
-    
-    #Prommpt users to enter required fields
-    if not username or not password:
-        return jsonify({'success': False, 'message':'Username and password are required'}), 400
-    
-    user = User.query.filter((User.username == username) | (User.email == username)).first()
-    
-    if not user:
-        return jsonify({'success': False, 'message':'User does not exist'}), 404
-    
-    #Check hased password
-    if not check_password_hash(user.password_hash, password):
-        return jsonify({'success': False, 'message' : 'Incorrect password'}), 401
-    
-    #Store user session
-    session['user_id'] = user.id
-    
-    return jsonify({'success': True, 'message': 'Login successful!'}), 200
+    response, status = UserLogin.login(
+        username = data.get('username'),
+        password = data.get('password')
+    )
+    return jsonify(response), status
 
     
 @app.route('/signup', methods=['POST'])
 def signup():
     data = request.json
-    email = request.json.get('email')
-    username = request.json.get('username')
-    password = request.json.get('password')
-    confirmPassword = request.json.get('confirmPassword')
-    
-    if not email or not username or not password or not confirmPassword:
-        return jsonify({'success': False, 'message': 'Email, username and password are required'}), 400
-    
-    if password != confirmPassword:
-        return jsonify({'success' : False, 'message': 'Passwords do not match'}), 400
-    
-    #Check if user exists
-    if User.query.filter_by(username=username).first() or User.query.filter_by(email=email).first():
-        return jsonify({'success': False, 'message': 'User already exists'}), 409
-    
-    
-    #Hash the passwords and save the user
-    hashed_password = generate_password_hash(password)
-    new_user = User(username=username, email=email, password_hash=hashed_password)
-    db.session.add(new_user)
-    db.session.commit()
-    
-    return jsonify({'success': True, 'message': 'Signup successful!'}), 201
+    response, status = UserLogin.signup(
+        email = data.get('email'), 
+        username = data.get('username'), 
+        password = data.get('password'), 
+        confirmPassword = data.get('confirmPassword')
+    )
+    return jsonify(response), status
 
 @app.route('/logout', methods=['POST'])
 def logout():
-     session.pop('user_id', None)
-     return jsonify({'success': True, 'message': 'Logged out successfully'}), 200
+    response, status = UserLogin.logout()
+    return jsonify(response), status
  
 @app.route('/check_login', methods=['GET'])
 def check_login():
-    if 'user' in session:
-        return jsonify({'logged_in': True, 'user': session['user']}), 200
-    return jsonify({'logged_in': False}), 200
+    response, status = UserLogin.check_login()
+    return jsonify(response), status
+
+
+@app.route('/watchlist', methods=['GET'])
+def get_watchlist():
+    if 'user_id' not in session:
+        return redirect('/')
+    
+    user_id = session['user_id']
+    
+    #Get all movie ID's from the user's watchlist
+    watchlist_entries = Watchlist.query.filter_by(user_id=user_id).all()
+    movie_ids = [entry.movie_id for entry in watchlist_entries]
+    
+    # Get full movie details from the Movie Class
+    movies = [movieEngine.getMovieDict(mid) for mid in movie_ids]
+    
+    return render_template('watchlist.html', movies=movies)
+
+@app.route('/watchlist/add', methods=['POST'])
+def add_to_watchlist():
+    if 'user_id' not in session:
+        return jsonify({'success': False, 'message': 'Login required'}), 401
+    
+    movie_id = request.json.get('movie_id')
+    user_id = session['user_id']
+    
+    response, status = UserWatchlist.add_movie(user_id, movie_id)
+    return jsonify(response), status
+
+@app.route('/watchlist/remove', methods=['POST'])
+def remove_watchlist():
+    if 'user_id' not in session:
+        return jsonify({'success': False, 'message': 'Login required'}), 401
+    
+    movie_id = request.json.get('movie_id')
+    user_id = session['user_id']
+    
+    response, status = UserWatchlist.remove_movie(user_id, movie_id)
+    return jsonify(response), status
      
 if __name__ == '__main__':
     app.run(debug=True)
