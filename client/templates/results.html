@@ -26,7 +26,7 @@
                 </form>
               </div>
   
-              <div class="is-flex">
+              <div class="is-flex" id="user-section">
                   <button class="signin header-buttons" id="signin-header">Sign In</button>
               </div>
              
@@ -77,5 +77,8 @@
         {% endif %}
 
         <a href="/" id="returnButton">Back to Home</a>
+
+        <script src="{{ url_for('static', filename='logoutFunctionality.js')}}"></script>
+
     </body>
 </html>

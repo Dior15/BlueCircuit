@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
           userSection.innerHTML = `
             <div class="dropdown">
               <div class="dropdown-content">
-                <a href="/watchList" id="welcomeButton"><button>Welcome, ${data.user}!!</button></a>
+                <a href="/watchList" id="welcomeButton"><button>👁 Welcome, ${data.user}!!</button></a>
                 <a href="/logout" id="logout-link"><button>Logout</button></a>
               </div>
             </div>
