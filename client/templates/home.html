@@ -87,14 +87,16 @@
           <div class="modal-content">
             <span class="close">&times;</span>
             <h1>Login To MovieFlix</h1>
-            <!-- This input tag will need to be integrated to the backend-->
-            <center><p><span class="label">Username:</span><input placeholder="Enter username or email" id="loginUsernameField" required></input></p></center>
-             
-            <center><p ><span class="label">Password:</span> <input placeholder="Enter password" id="loginPasswordField" type="password" required></input></p></center>
-            
-            <br>
+            <form>
+              <!-- This input tag will need to be integrated to the backend-->
+              <center><p><span class="label">Username:</span><input placeholder="Enter username or email" id="loginUsernameField" required></input></p></center>
+              
+              <center><p ><span class="label">Password:</span> <input placeholder="Enter password" id="loginPasswordField" type="password" required></input></p></center>
+              
+              <br>
 
-            <center><button id="loginFormSubmit">Login</button></center>
+              <center><button type="submit" id="loginFormSubmit">Login</button></center>
+            </form>
             <!-- Placeholder for login messages-->
             <div id ="loginMessage" style="text-align: center; margin-top: 10px;"></div>
           </div>
@@ -113,17 +115,19 @@
                 <p><span class="label">Confirm Password:</span></p>
               </div>
               
-              <span id="createAccountInput">
-                <p><input type="email" placeholder="Enter an email" id="signupEmailField"></input></p>
-                <p><input placeholder="Enter a username" id="signupUsernameField" type="username"></input></p>
-                <p><input placeholder="Enter a password" id="signupPasswordField" type="password"></input></p>
-                <p><input placeholder="Confirm password" id="signupConfirmPasswordField" type="password"></input></p>
-              </span>
-            </div>
+              <form>
+                <span id="createAccountInput">
+                  <p><input type="email" placeholder="Enter an email" id="signupEmailField"></input></p>
+                  <p><input placeholder="Enter a username" id="signupUsernameField" type="username"></input></p>
+                  <p><input placeholder="Enter a password" id="signupPasswordField" type="password"></input></p>
+                  <p><input placeholder="Confirm password" id="signupConfirmPasswordField" type="password"></input></p>
+                </span>
+              </div>
 
-            <br>
+              <br>
 
-            <center><button id="signupFormSubmit">Create Account</button>
+              <center><button type="submit" id="signupFormSubmit">Create Account</button>
+            </form>
             <!-- Placeholder for signup messages-->
             <div id ="signupMessage" style="text-align: center; margin-top: 10px;"></div>
           </div>
