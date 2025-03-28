@@ -6,13 +6,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (data.logged_in) {
           userSection.innerHTML = `
             <div class="dropdown">
-              <button class="is-flex">Welcome, ${data.user}!</button>
               <div class="dropdown-content">
-                <a href="/profile">${data.user}'s watchlist</a>
-                <a href="/logout" id="logout-link">Logout</a>
+                <a href="/watchList" id="welcomeButton"><button>Welcome, ${data.user}!!</button></a>
+                <a href="/logout" id="logout-link"><button>Logout</button></a>
               </div>
             </div>
           `;
+          document.getElementById("signin-or-up").innerHTML=""; // Removing the sign in and sign up buttons from the bottom of the page when the user is logged in
           // event listener to log tthe user out
           document.getElementById('logout-link').addEventListener('click', (e) => {
             e.preventDefault();
