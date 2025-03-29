@@ -41,7 +41,7 @@ def home():
         movieIds.append(movie["id"])  # Movie ID
         posterUrls += movieEngine.getPosterUrl(movie) + " "  # Poster URL
 
-    topRated = movieEngine.getTopRatedXMovies(1)  # Get top 9 rated movies
+    topRated = movieEngine.getTopRatedXMovies(2)  # Get top 9 rated movies
     topRatedPoster = movieEngine.getPosterUrl(topRated[0])  # Get top rated movie poster URL
     latest = movieEngine.getLatestMovie()  # Get latest movie
     latestPoster = movieEngine.getPosterUrl(latest)  # Get latest movie poster URL
