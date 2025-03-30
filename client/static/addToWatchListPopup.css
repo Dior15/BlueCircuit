@@ -1,0 +1,100 @@
+* {
+  margin:0px;
+  padding:0px;
+  box-sizing:border-box;
+  background-color:black;
+}
+
+#addToWatchListPopup {
+  width:60vh;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:35vh;
+  padding-top:4vh;
+  padding-bottom:4vh;
+  border-style:solid;
+  border-width:1px;
+  border-color:gray;
+  border-radius:25px;
+  background-color:black;
+  color:white;
+}
+
+#topOfRatingForm {
+  display:flex;
+}
+
+#ratingInputLabel {
+  margin-left:2vh;
+  margin-right:2vh;
+  font-size:2.5vh;
+  font-family: Broadway, sans-serif;
+  background-color:black;
+}
+
+#ratingInput {
+  width:36vh;
+  margin-top:0.3vh;
+  background-color:black;
+}
+
+#submitRating {
+  height:3vh;
+  width:18vh;
+  margin-left:2vh;
+  margin-top:1vh;
+  color:white;
+  background-color:#B22222;
+  border:0;
+  border-radius:25px;
+}
+
+#sliderValue {
+  margin-left:17.75vh;
+  font-size:3vh;
+  font-family: Broadway, sans-serif;
+  background-color:black;
+}
+
+/*Chromium styling*/
+#ratingInput {
+  -webkit-appearance: none; /* Removes default styles in WebKit browsers */
+  appearance: none;
+  background: transparent; /* Make sure background doesn't interfere */
+}
+#ratingInput::-webkit-slider-runnable-track {
+  background: #B22222;
+  height: 1vh;
+  border-radius:25px;
+}
+#ratingInput::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  margin-top:-0.4vh;
+  height: 2vh;
+  width: 0.75vh;
+  background: #f0f0f0;
+  border-style:solid;
+  border-color: #b7b7b7b7;
+  border-width:1.5px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+#ratingInput::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+/*Firefox styling*/
+#ratingInput::-moz-range-track {
+  background:#B22222;
+  height:1vh;
+  border-radius:25px;
+}
+#ratingInput::-moz-range-thumb {
+  height:2vh;
+  width:0.75vh;
+  transition: transform 0.3s ease;
+}
+#ratingInput::-moz-range-thumb:hover {
+  transform: scale(1.2);
+}
