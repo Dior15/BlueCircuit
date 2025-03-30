@@ -14,6 +14,13 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
           `;
           document.getElementById("signin-or-up").innerHTML=""; // Removing the sign in and sign up buttons from the bottom of the page when the user is logged in
+          
+          // Adding an event listener to the watchlist link to redirect to the watchlist page
+          document.getElementById('watchlist').addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.href = '/watchlist.html'; // Redirect to watchlist.html
+          });
+          
           // event listener to log tthe user out
           document.getElementById('logout-link').addEventListener('click', (e) => {
             e.preventDefault();

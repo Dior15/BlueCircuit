@@ -59,8 +59,9 @@
             <p id="rating-count">Based on {{ ratingCount }} ratings</p>
           </div>
 
+          <button class="header-buttons" id="add-to-watchlist">Add to Watchlist</button>
           <br>
-          
+          <br>
           <div class="info">
             <p>Release Date: {{ releaseDate if releaseDate else "Unknown" }}</p>
             <br>
@@ -81,6 +82,6 @@
       </div>
 
       <script src="{{ url_for('static', filename='logoutFunctionality.js')}}"></script>
-
+      <script src="{{ url_for('static', filename='addToWatchlist.js')}}"></script>
     </body>
 </html>
