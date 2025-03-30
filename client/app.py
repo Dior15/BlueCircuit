@@ -1,10 +1,11 @@
-from flask import Flask, render_template, request, jsonify, session
+from flask import Flask, render_template, request, jsonify, session, redirect
+from models import db, User, Watchlist
 import tmdbsimple as tmdb
-from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
-import csv, os
 from movies import *
 from search import *
+from login import *
+from watchlist import *
 
 # Set TMDB API key
 with open("apikey.txt", "r") as file:
@@ -17,19 +18,12 @@ app = Flask(__name__)
 app.secret_key = "BlueCircuit"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
 
-# User Model
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password_hash = db.Column(db.String(256), nullable=False)
-
+db.init_app(app)
+    
 # Create the database tables
 with app.app_context():
     db.create_all()
-
 
 # Initialize search and poster classes
 searchEngine = MovieSearch()
@@ -48,6 +42,7 @@ def home():
         posterUrls += movieEngine.getPosterUrl(movie) + " "  # Poster URL
 
     topRated = movieEngine.getTopRatedXMovies(2)  # Get top 9 rated movies
+    topRated = movieEngine.getTopRatedXMovies(2)  # Get top 9 rated movies
     topRatedPoster = movieEngine.getPosterUrl(topRated[0])  # Get top rated movie poster URL
     latest = movieEngine.getLatestMovie()  # Get latest movie
     latestPoster = movieEngine.getPosterUrl(latest)  # Get latest movie poster URL
@@ -60,20 +55,15 @@ def search():
     query = request.form.get('query')
     category = request.form.get('category')
 
-    search = tmdb.Search()
-
     # Search by category
     if category == "movie":
-        search.movie(query=query)
+        results = searchEngine.searchMovies(query=query)
     elif category == "tv":
-        search.tv(query=query)
+        results = searchEngine.searchTv(query=query)
     elif category == "person":
-        search.person(query=query)
+        results = searchEngine.searchPeople(query=query)
     else:
         return "Invalid category", 400
-
-    # Get result
-    results = search.results
 
     # Add poster URLs to each result using getPosterUrl
     for result in results:
@@ -86,71 +76,111 @@ def movie(movie_id):
     # Get movie details
     movie = movieEngine.getMovieDict(movie_id)
 
-    return render_template('moviepage.html', title = movie['title'], runtime = movie['runtime'], genres = movie['genres'], poster_url = movie['posterUrl'], cast = movie['cast'],  crew = movie['crew'], director = movie['director'], releaseDate = movie['releaseDate'], synopsis = movie['synopsis'])
+    return render_template('moviepage.html', **movie)
+
+@app.route('/tv/<int:tv_id>')
+def tv(tv_id):
+    # Get movie details
+    tvShow = tmdb.TV(tv_id).info()
+    tvCredits = tmdb.TV(tv_id).credits()
+
+    tvData = {
+        "title": tvShow.get("name", "Unknown Title"),
+        "firstAirDate": tvShow.get("first_air_date", "Unknown"),
+        "genres": [genre['name'] for genre in tvShow.get("genres", [])],
+        "creator": tvShow["created_by"][0]["name"] if tvShow.get("created_by") else "Unknown Creator",
+        # "cast": [member['name'] for member in tvCredits.get("cast", [])[:5]],
+        "cast": [{"id": member["id"], "name": member["name"]} for member in tvCredits.get("cast", [])[:5]],
+        "synopsis": tvShow.get("overview", ""),
+        "posterUrl": movieEngine.getPosterUrl(tvShow)
+    }
+
+    return render_template('tvpage.html', **tvData)
+
+@app.route('/person/<int:person_id>')
+def person(person_id):
+    personData = tmdb.People(person_id).info()
+    knownFor = tmdb.People(person_id).combined_credits()
+
+    person = {
+        "name": personData.get("name", "Unknown"),
+        "birthDate": personData.get("birthday", "Unknown"),
+        "occupation": personData.get("known_for_department", "Unknown"),
+        "knownFor": [c.get("title", c.get("name", "N/A")) for c in knownFor.get("cast", [])[:5]],
+        "biography": personData.get("biography", "No information available."),
+        "posterUrl": movieEngine.getPosterUrl(personData)
+    }
+
+    return render_template("personpage.html", **person)
 
 @app.route('/login', methods=['POST'])
 def login():
     data = request.json
-    username = request.json.get('username')
-    password = request.json.get('password')
-    
-    #Prompt users to enter required fields
-    if not username or not password:
-        return jsonify({'success': False, 'message':'Username and password are required'}), 400
-    
-    user = User.query.filter((User.username == username) | (User.email == username)).first()
-    
-    if not user:
-        return jsonify({'success': False, 'message':'User does not exist'}), 404
-    
-    #Check hased password
-    if not check_password_hash(user.password_hash, password):
-        return jsonify({'success': False, 'message' : 'Incorrect password'}), 401
-    
-    #Store user session
-    session['user_id'] = user.id
-    
-    return jsonify({'success': True, 'message': 'Login successful!'}), 200
+    response, status = UserLogin.login(
+        username = data.get('username'),
+        password = data.get('password')
+    )
+    return jsonify(response), status
 
-    
 @app.route('/signup', methods=['POST'])
 def signup():
     data = request.json
-    email = request.json.get('email')
-    username = request.json.get('username')
-    password = request.json.get('password')
-    confirmPassword = request.json.get('confirmPassword')
-    
-    if not email or not username or not password or not confirmPassword:
-        return jsonify({'success': False, 'message': 'Email, username and password are required'}), 400
-    
-    if password != confirmPassword:
-        return jsonify({'success' : False, 'message': 'Passwords do not match'}), 400
-    
-    #Check if user exists
-    if User.query.filter_by(username=username).first() or User.query.filter_by(email=email).first():
-        return jsonify({'success': False, 'message': 'User already exists'}), 409
-    
-    
-    #Hash the passwords and save the user
-    hashed_password = generate_password_hash(password)
-    new_user = User(username=username, email=email, password_hash=hashed_password)
-    db.session.add(new_user)
-    db.session.commit()
-    
-    return jsonify({'success': True, 'message': 'Signup successful!'}), 201
+    response, status = UserLogin.signup(
+        email = data.get('email'), 
+        username = data.get('username'), 
+        password = data.get('password'), 
+        confirmPassword = data.get('confirmPassword')
+    )
+    return jsonify(response), status
 
 @app.route('/logout', methods=['POST'])
 def logout():
-     session.pop('user_id', None)
-     return jsonify({'success': True, 'message': 'Logged out successfully'}), 200
+    response, status = UserLogin.logout()
+    return jsonify(response), status
  
 @app.route('/check_login', methods=['GET'])
 def check_login():
-    if 'user_id' in session:
-        user = User.query.get(session['user_id'])
-        return jsonify({'logged_in': True, 'user': user.username}), 200
-    return jsonify({'logged_in': False}), 200
+    response, status = UserLogin.check_login()
+    return jsonify(response), status
+
+
+@app.route('/watchlist', methods=['GET'])
+def get_watchlist():
+    if 'user_id' not in session:
+        return redirect('/')
+    
+    user_id = session['user_id']
+    
+    #Get all movie ID's from the user's watchlist
+    watchlist_entries = Watchlist.query.filter_by(user_id=user_id).all()
+    movie_ids = [entry.movie_id for entry in watchlist_entries]
+    
+    # Get full movie details from the Movie Class
+    movies = [movieEngine.getMovieDict(mid) for mid in movie_ids]
+    
+    return render_template('watchlist.html', movies=movies)
+
+@app.route('/watchlist/add', methods=['POST'])
+def add_to_watchlist():
+    if 'user_id' not in session:
+        return jsonify({'success': False, 'message': 'Login required'}), 401
+    
+    movie_id = request.json.get('movie_id')
+    user_id = session['user_id']
+    
+    response, status = UserWatchlist.add_movie(user_id, movie_id)
+    return jsonify(response), status
+
+@app.route('/watchlist/remove', methods=['POST'])
+def remove_watchlist():
+    if 'user_id' not in session:
+        return jsonify({'success': False, 'message': 'Login required'}), 401
+    
+    movie_id = request.json.get('movie_id')
+    user_id = session['user_id']
+    
+    response, status = UserWatchlist.remove_movie(user_id, movie_id)
+    return jsonify(response), status
      
 if __name__ == '__main__':
     app.run(debug=True)

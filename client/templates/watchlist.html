@@ -26,14 +26,14 @@
                 </form>
               </div>
   
-              <div class="is-flex" id="user-section">
+              <div class="is-flex">
                   <button class="signin header-buttons" id="signin-header">Sign In</button>
               </div>
              
               
           </header>
 
-        <h1>Results for '{{ query }}' in {{ category }}</h1>
+        <h1>"{{ username }}"'s Watchlist</h1>
 
         {% if results %}
             <ul>
@@ -53,36 +53,29 @@
                         
                     {% elif category == "tv" %}
                         <li>
-                            <a href="{{ url_for('tv', tv_id=item.id)}}">
-                                {% if item.poster_path %}
-                                    <img src= "{{ item.poster_url }}" alt="{{ item.name }} Poster">
-                                {% endif %}
-                                <strong>{{ item.name }}</strong> <br> 
-                                {{ item.get('first_air_date', 'N/A') }} <br><br> 
-                                {{ item.get('overview', 'N/A') }}
-                            </a>
+                            {% if item.poster_path %}
+                                <img src= "{{ item.poster_url }}" alt="{{ item.name }} Poster">
+                            {% endif %}
+                            <strong>{{ item.name }}</strong> <br> 
+                            {{ item.get('first_air_date', 'N/A') }} <br><br> 
+                            {{ item.get('overview', 'N/A') }}
                         </li>
                     {% elif category == "person" %}
                         <li>
-                            <a href="{{ url_for('person', person_id=item.id)}}">
-                                {% if item.profile_path %}
-                                    <img src= "{{ item.poster_url }}" alt="{{ item.name }}">
-                                {% endif %}
-                                <strong>{{ item.name }}</strong> <br> 
-                                {{ item.get('known_for_department', 'Unknown') }} <br><br> 
-                                Known for: {{ item['known_for'][0].get('title', item['known_for'][0].get('name', 'N/A')) }}
-                            </a>
+                            {% if item.profile_path %}
+                                <img src= "{{ item.poster_url }}" alt="{{ item.name }}">
+                            {% endif %}
+                            <strong>{{ item.name }}</strong> <br> 
+                            {{ item.get('known_for_department', 'Unknown') }} <br><br> 
+                            Known for: {{ item['known_for'][0].get('title', item['known_for'][0].get('name', 'N/A')) }}
                         </li>
                     {% endif %}
                 {% endfor %}
             </ul>
         {% else %}
-            <p>No results found.</p>
+            <p>Watchlist is empty</p>
         {% endif %}
 
         <a href="/" id="returnButton">Back to Home</a>
-
-        <script src="{{ url_for('static', filename='logoutFunctionality.js')}}"></script>
-
     </body>
 </html>

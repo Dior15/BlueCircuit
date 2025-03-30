@@ -28,7 +28,7 @@
             </form>
           </div>
 
-          <div class="is-flex" id="user-section">
+          <div class="is-flex">
               <button class="signin header-buttons" id="signin-header">Sign In</button>
           </div>
          
@@ -40,7 +40,7 @@
         <div id="movie-info">
 
           <h1 class="movie-title">{{ title }}</h1>
-
+        
           <br>
 
           <div class="is-flex spaced-between">
@@ -48,25 +48,11 @@
           </div>
 
           <br>
-
-          <div class="rating-container">
-            {% set ringColor = '#00ff88' if rating >= 7 else '#ffaa00' if rating >= 5 else '#ff4444' %}
-            <div id="rating-circle" 
-              style="border-color: {{ ringColor }}; 
-                    background: conic-gradient({{ ringColor }} {{ rating }}%, #444444 {{ rating }}%);">
-                <span>{{ rating }}%</span>
-            </div>
-            <p id="rating-count">Based on {{ ratingCount }} ratings</p>
-          </div>
-
-          <br>
           
-          <div class="info">
-            <p>Release Date: {{ releaseDate if releaseDate else "Unknown" }}</p>
+          <div class="">
+            <p>First Air Date: {{ firstAirDate if firstAirDate else "Unknown" }}</p>
             <br>
-            <p>Runtime: {{ runtime if runtime else "Unknown"}} minutes</p>
-            <br>
-            <p>Director: {{ director if director else "Unknown"}}</p>
+            <p>Creator: {{ creator if creator else "Unknown"}}</p>
             <br>
             <p>Cast: 
               {% for member in cast %}
@@ -79,8 +65,6 @@
             
         </div>
       </div>
-
-      <script src="{{ url_for('static', filename='logoutFunctionality.js')}}"></script>
 
     </body>
 </html>

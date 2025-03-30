@@ -77,7 +77,8 @@ class Movies:
     def getCast(self, movieId):
         # Get the main cast (first 5 actors)
         creditsData = tmdb.Movies(movieId).credits()
-        return [member["name"] for member in creditsData.get("cast", [])[:5]]
+        # return [member["name"] for member in creditsData.get("cast", [])[:5]]
+        return [{"id": member["id"], "name": member["name"]} for member in creditsData.get("cast", [])[:5]]
 
     def getCrew(self, movieId):
         # Get all crew members
@@ -108,7 +109,16 @@ class Movies:
     
     def getRating(self, movieId):
         movieData = tmdb.Movies(movieId).info()
-        return movieData.get("vote_average", None)
+        rating = movieData.get("vote_average", "N/A")
+        return (round(rating * 10))
+    
+    def getRatingColor(self, rating):
+        if rating >= 7:
+            return '#00ff88'
+        elif rating >= 5:
+            return '#ffaa00'
+        else:
+            return '#ff4444'
 
     def getMovieDict(self, movieId):
         # Return movie details as a dictionary
@@ -125,5 +135,6 @@ class Movies:
             "releaseDate": self.getReleaseDate(movieId),
             "synopsis": self.getSynopsis(movieId),
             "ratingCount": self.getNumRatings(movieId),
-            "rating": self.getRating(movieId)
+            "rating": self.getRating(movieId),
+            "ratingColor": self.getRatingColor(self.getRating(movieId))
         }
