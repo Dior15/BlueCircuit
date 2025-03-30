@@ -248,3 +248,7 @@ h3{
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
+.dropdown-content a:hover{
+    background-color: #941e1e;
+}
