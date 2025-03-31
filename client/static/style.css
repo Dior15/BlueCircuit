@@ -50,18 +50,6 @@ header{
 body{
     background-color: #0A0A0A;
     color: white;
-    margin-bottom:5vh;
-}
-
-footer{
-    height: 4vh;
-}
-
-footer p {    
-  width: 20vw;
-  margin-left:40vw;
-  margin-top:2vh;
-  text-align:center;
 }
 
 button{
@@ -263,8 +251,12 @@ h3{
 }
 
 footer{
-    background-color: #1c1c1c;
+    background-color: #0a0a0a;
     padding: 2vh;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:2vh;
+    text-align:center;
 }
 
 #add-to-watchlist{

@@ -37,10 +37,8 @@
           <div class="is-flex spaced-between">
             <h1 class="movie-title">{{ title }}</h1>
             <div class="flex">
-              <button class="header-buttons" id="add-to-watchlist">&#43; Add to Watchlist</button>
-              <br>
-              <br>
               <div class="rating-container">
+                <button class="header-buttons" id="add-to-watchlist">&#43; Add to Watchlist</button>
                 {% set ringColor = '#00ff88' if rating >= 70 else '#ffaa00' if rating >= 50 else '#ff4444' %}
                 <div id="rating-circle" 
                   style="border-color: {{ ringColor }}; 
@@ -83,11 +81,11 @@
           
       <br>
       <br>
-      <footer>
-        <p>&copy; BlueCircuit 2025</p>
-      </footer>
-
+      
       <script src="{{ url_for('static', filename='logoutFunctionality.js')}}"></script>
       <script src="{{ url_for('static', filename='addToWatchlist.js')}}"></script>
     </body>
+    <footer>
+      &copy; BlueCircuit 2025
+    </footer>
 </html>
