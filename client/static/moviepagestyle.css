@@ -15,7 +15,6 @@ p {
 
 body{
     background-color: #0a0a0a;
-    margin-bottom:15vh;
 }
 
 .movie-poster{
@@ -89,9 +88,11 @@ a:active {
 }
 
 .rating-container {
+    width:20vh;
     display: flex;
     flex-direction: column;
-    justify-self: left;
+    justify-self: center;
+    justify-content:center;
     margin-top: 1vh;
     margin-bottom: 2vh;
 }
@@ -116,4 +117,18 @@ a:active {
     font-size: 14px;
     color: #aaaaaa;
     margin-top: 0.5vh;
+    justify-self:center;
+}
+
+#add-to-watchlist {
+  background-color: #B22222;
+  width: 15vh;
+  border: 0;
+  border-radius: 49px;
+  color: white;
+  margin-left:2.5vh;
+  margin-right:auto;
+  padding-top:1vh;
+  padding-bottom:1vh;
+  justify-self:center;
 }

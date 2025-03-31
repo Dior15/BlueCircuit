@@ -50,10 +50,18 @@ header{
 body{
     background-color: #0A0A0A;
     color: white;
+    margin-bottom:5vh;
 }
 
 footer{
-    height: 80px;
+    height: 4vh;
+}
+
+footer p {    
+  width: 20vw;
+  margin-left:40vw;
+  margin-top:2vh;
+  text-align:center;
 }
 
 button{
@@ -253,3 +261,5 @@ h3{
   .dropdown-content a:hover{
       background-color: #941e1e;
   }
+
+  
