@@ -156,7 +156,11 @@ def get_watchlist():
     movie_ids = [entry.movie_id for entry in watchlist_entries]
     
     # Get full movie details from the Movie Class
-    movies = [movieEngine.getMovieDict(mid) for mid in movie_ids]
+    movies = []
+    for mid in movie_ids:
+        movie = tmdb.Movies(mid).info()
+        movie['poster_url'] = movieEngine.getPosterUrl(movie)
+        movies.append(movie)
     
     return render_template('watchlist.html', movies=movies)
 
