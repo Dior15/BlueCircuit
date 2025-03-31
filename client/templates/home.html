@@ -39,7 +39,7 @@
         <!-- Trending Movie Carousel -->
         <br><br>
         <center><h3>Trending Movies this Week</h3></center>
-        
+        <br>
         <div id="trendingContainer">
           <button id="carouselLeftButton"><b><</b></button>
           <div id="trendingCarousel">
@@ -56,7 +56,7 @@
           <button id="carouselRightButton"><b>></b></button>
         </div>
         
-        <br><br>
+        <br><br><br>
         <!-- Section with Top Rated & What's New Section-->
         <div class="is-flex">
             <div class="stacked-flex" id="top-rated">
@@ -94,6 +94,13 @@
               <center><p ><span class="label">Password:</span> <input placeholder="Enter password" id="loginPasswordField" type="password" required></input></p></center>
               
               <br>
+            <h1>Login to MovieFlix</h1>
+            <!-- This input tag will need to be integrated to the backend-->
+            <center><p><span class="label">Username:</span><input placeholder="Enter username or email" id="loginUsernameField" required></input></p></center>
+             
+            <center><p ><span class="label">Password:</span> <input placeholder="Enter password" id="loginPasswordField" type="password" required></input></p></center>
+            
+            <br>
 
               <center><button type="submit" id="loginFormSubmit">Login</button></center>
             </form>
@@ -106,7 +113,7 @@
         <div id="createAccountModal" class="modal">
           <div class="modal-content">
             <span class="close">&times;</span>
-            <h1>Create A MovieFlix Account</h1>
+            <h1>Create a MovieFlix Account</h1>
             <div id="inputAssembly">
               <div id="labels">
                 <p><span class="label">Email:</span></p>
@@ -133,7 +140,10 @@
           </div>
         </div>
         
-        <footer></footer>
+        <br>
+        <footer>
+          <p>&copy; BlueCircuit 2025</p>
+        </footer>
 
         <script src="{{ url_for('static', filename='trending-carousel.js') }}"></script>
         <script src="{{ url_for('static', filename='modal.js') }}"></script>

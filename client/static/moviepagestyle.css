@@ -6,6 +6,7 @@
 
 h1 {
     font-size:40px;
+    font-size: 35pt; /*larger font for styling*/
 }
 
 p {
@@ -70,7 +71,7 @@ a:link {
     text-decoration: none;
     transition: transform 0.3s ease;
     color: white;
-  }
+}
   
 a:visited {
     text-decoration: none;
