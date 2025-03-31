@@ -42,6 +42,9 @@
           <div class="is-flex spaced-between">
             <h1 class="movie-title">{{ title }}</h1>
             <div class="flex">
+              <button class="header-buttons" id="add-to-watchlist">&#43; Add to Watchlist</button>
+              <br>
+              <br>
               <div class="rating-container">
                 {% set ringColor = '#00ff88' if rating >= 70 else '#ffaa00' if rating >= 50 else '#ff4444' %}
                 <div id="rating-circle" 
@@ -51,38 +54,39 @@
                 </div>
                 <p id="rating-count">Based on {{ ratingCount }} ratings</p>
               </div>
-    
-              <button class="header-buttons" id="add-to-watchlist">Add to Watchlist</button>
             </div>
             
           </div>
           
-          <div class="is-flex spaced-between">
-            <div class="genre">{{ genres | join(', ') }}</div>
+          <div class="total-info">
+            <div class="is-flex spaced-between">
+              <div class="genre">{{ genres | join(', ') }}</div>
+            </div>
+  
+            <br>
+            <br>
+            <div class="info">
+              <p>Release Date: {{ releaseDate if releaseDate else "Unknown" }}</p>
+              <br>
+              <p>Runtime: {{ runtime if runtime else "Unknown"}} minutes</p>
+              <br>
+              <p>Director: {{ director if director else "Unknown"}}</p>
+              <br>
+              <p>Cast: 
+                {% for member in cast %}
+                  <a href="{{ url_for('person', person_id=member.id) }}">{{ member.name }}</a>{% if not loop.last %}, {% endif %}
+                {% endfor %}
+              </p>
+              <br>
+              <p>Synopsis: {{ synopsis or "N/A"}}</p>
+            </div>
+              
           </div>
-
-          <br>
-          <br>
-          <br>
-          <div class="info">
-            <p>Release Date: {{ releaseDate if releaseDate else "Unknown" }}</p>
-            <br>
-            <p>Runtime: {{ runtime if runtime else "Unknown"}} minutes</p>
-            <br>
-            <p>Director: {{ director if director else "Unknown"}}</p>
-            <br>
-            <p>Cast: 
-              {% for member in cast %}
-                <a href="{{ url_for('person', person_id=member.id) }}">{{ member.name }}</a>{% if not loop.last %}, {% endif %}
-              {% endfor %}
-            </p>
-            <br>
-            <p>Synopsis: {{ synopsis or "N/A"}}</p>
-          </div>
-            
         </div>
-      </div>
-      
+        
+          </div>
+          
+      <br>
       <br>
       <footer>
         <p>&copy; BlueCircuit 2025</p>
