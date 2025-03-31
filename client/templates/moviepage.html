@@ -39,25 +39,25 @@
         <div class="movie-poster"><img src="{{ posterUrl }}" alt="{{ title }}"></div>
         <div id="movie-info">
 
-          <h1 class="movie-title">{{ title }}</h1>
+          <div class="is-flex spaced-between title-rating">
+            <h1 class="movie-title">{{ title }}</h1>
 
-          <br>
+            <div class="rating-container">
+              {% set ringColor = '#00ff88' if rating >= 70 else '#ffaa00' if rating >= 50 else '#ff4444' %}
+              <div id="rating-circle" 
+                style="border-color: {{ ringColor }}; 
+                      background: conic-gradient({{ ringColor }} {{ rating }}%, #444444 {{ rating }}%);">
+                  <span>{{ rating }}%</span>
+              </div>
+              <p id="rating-count">Based on {{ ratingCount }} ratings</p>
+            </div>
+          </div>
 
           <div class="is-flex spaced-between">
             <div class="genre">{{ genres | join(', ') }}</div>
           </div>
 
           <br>
-
-          <div class="rating-container">
-            {% set ringColor = '#00ff88' if rating >= 7 else '#ffaa00' if rating >= 5 else '#ff4444' %}
-            <div id="rating-circle" 
-              style="border-color: {{ ringColor }}; 
-                    background: conic-gradient({{ ringColor }} {{ rating }}%, #444444 {{ rating }}%);">
-                <span>{{ rating }}%</span>
-            </div>
-            <p id="rating-count">Based on {{ ratingCount }} ratings</p>
-          </div>
 
           <br>
           
@@ -79,6 +79,11 @@
             
         </div>
       </div>
+      
+      <br>
+      <footer>
+        <p>&copy; BlueCircuit 2025</p>
+      </footer>
 
     </body>
 </html>

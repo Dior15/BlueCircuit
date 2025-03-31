@@ -161,6 +161,7 @@ button:hover{
 h3{
     justify-self: center;
     color: white;
+    font-size: 18pt; /*larger font for styling*/
 }
 
 #movieElementBottom{
@@ -185,7 +186,7 @@ h3{
 }
 
 #latest:hover {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 #top-rated{
@@ -193,7 +194,7 @@ h3{
 }
 
 #top-rated h3 {
-  margin-bottom:2vh;
+    margin-bottom:2vh;
 }
 
 #whats-new{
@@ -201,5 +202,11 @@ h3{
 }
 
 #whats-new h3 {
-  margin-bottom:2vh;
+    margin-bottom:2vh;
+}
+
+/*footer*/
+footer{
+    background-color: #1c1c1c;
+    padding: 2vh;
 }
