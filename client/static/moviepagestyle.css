@@ -6,7 +6,7 @@
 
 h1 {
     font-size:40px;
-    font-size: 35pt; /*larger font for styling*/
+    margin-top: 5vh;
 }
 
 p {
@@ -15,7 +15,6 @@ p {
 
 body{
     background-color: #0a0a0a;
-    margin-bottom:15vh;
 }
 
 .movie-poster{
