@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="dropdown">
             <a id="welcomeButton"><button> &#x25BC Welcome, ${data.user}!! &#x25BC</button></a>
               <div class="dropdown-content">
-                <a href="/watchList" id="watchlist">Your watchlist</a>
+                <a href="/watchlist" id="watchlist">Your watchlist</a>
                 <a href="/logout" id="logout-link">Logout</a>
               </div>
             </div>
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
           // Adding an event listener to the watchlist link to redirect to the watchlist page
           document.getElementById('watchlist').addEventListener('click', (e) => {
             e.preventDefault();
-            window.location.href = '/watchlist.html'; // Redirect to watchlist.html
+            window.location.href = '/watchlist'; // Redirect to watchlist.html
           });
           
           // event listener to log tthe user out
