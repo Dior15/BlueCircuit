@@ -57,20 +57,6 @@
             
           </div>
           
-          <div class="is-flex spaced-between title-rating">
-            <h1 class="movie-title">{{ title }}</h1>
-
-            <div class="rating-container">
-              {% set ringColor = '#00ff88' if rating >= 70 else '#ffaa00' if rating >= 50 else '#ff4444' %}
-              <div id="rating-circle" 
-                style="border-color: {{ ringColor }}; 
-                      background: conic-gradient({{ ringColor }} {{ rating }}%, #444444 {{ rating }}%);">
-                  <span>{{ rating }}%</span>
-              </div>
-              <p id="rating-count">Based on {{ ratingCount }} ratings</p>
-            </div>
-          </div>
-
           <div class="is-flex spaced-between">
             <div class="genre">{{ genres | join(', ') }}</div>
           </div>
