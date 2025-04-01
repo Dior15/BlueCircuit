@@ -61,7 +61,16 @@
               <br>
               <p>Runtime: {{ runtime if runtime else "Unknown"}} minutes</p>
               <br>
-              <p>Director: {{ director if director else "Unknown"}}</p>
+              <p>
+                Director: 
+                {% for member in director %}
+                  {% if member.id %}
+                    <a href="{{ url_for('person', personId=member.id) }}">{{ member.name }}</a>{% if not loop.last %}, {% endif %}
+                  {% else %}
+                    {{ member.name }}
+                  {% endif %}
+                {% endfor %}
+              </p>
               <br>
               <p>Cast: 
                 {% for member in cast %}

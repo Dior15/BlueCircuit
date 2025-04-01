@@ -56,14 +56,7 @@ def search():
     category = request.form.get('category')
 
     # Search by category
-    if category == "movie":
-        results = searchEngine.searchMovies(query=query)
-    elif category == "tv":
-        results = searchEngine.searchTv(query=query)
-    elif category == "person":
-        results = searchEngine.searchPeople(query=query)
-    else:
-        return "Invalid category", 400
+    results = searchEngine.searchByCategory(query, category)
 
     # Add poster URLs to each result using getPosterUrl
     for result in results:

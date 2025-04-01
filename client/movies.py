@@ -88,10 +88,12 @@ class Movies:
     def getDirector(self, movieId):
         # Find the director from the crew list
         creditsData = tmdb.Movies(movieId).credits()
-        for member in creditsData.get("crew", []):
-            if member["job"] == "Director":
-                return member["name"]
-        return "Unknown Director"  # Return default if no director is found
+        directors = [
+            {"id": member["id"], "name": member["name"]}
+            for member in creditsData.get("crew", [])
+            if member["job"] == "Director"
+        ]
+        return directors if directors else [{"id": None, "name": "Unknown Director"}]  # Return default if no director is found
     
     def getReleaseDate(self, movieId):
         # Get the release date of the movie
@@ -148,7 +150,10 @@ class Movies:
             "title": tvShow.get("name", "Unknown Title"),
             "firstAirDate": tvShow.get("first_air_date", "Unknown"),
             "genres": [genre['name'] for genre in tvShow.get("genres", [])],
-            "creator": tvShow["created_by"][0]["name"] if tvShow.get("created_by") else "Unknown Creator",
+            "creator": [
+                {"id": creator["id"], "name": creator["name"]}
+                for creator in tvShow.get("created_by", [])
+            ] or [{"id": None, "name": "Unknown Creator"}],
             "cast": [{"id": member["id"], "name": member["name"]} for member in tvCredits.get("cast", [])[:5]],
             "synopsis": tvShow.get("overview", ""),
             "posterUrl": self.getPosterUrl(tvShow)
@@ -162,7 +167,19 @@ class Movies:
             "name": person.get("name", "Unknown"),
             "birthDate": person.get("birthday", "Unknown"),
             "occupation": person.get("known_for_department", "Unknown"),
-            "knownFor": [c.get("title", c.get("name", "N/A")) for c in knownFor.get("cast", [])[:5]],
+            "knownFor": sorted(
+                [
+                    {
+                        "id": c.get("id"),
+                        "title": c.get("title") or c.get("name", "N/A"),
+                        "media_type": c.get("media_type", "movie"),
+                        "popularity": c.get("popularity", 0)
+                    }
+                    for c in knownFor.get("cast", [])
+                ],
+                key=lambda x: x["popularity"],
+                reverse=True
+            )[:5],
             "biography": person.get("biography", "No information available."),
             "posterUrl": self.getPosterUrl(person)
         }

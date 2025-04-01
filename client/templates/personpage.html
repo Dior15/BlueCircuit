@@ -47,7 +47,18 @@
           <div class="">
             <p>Born: {{ birthDate if birthDate else "Unknown" }}</p>
             <br>
-            <p>Known for: {{ knownFor | join(', ')}}</p>
+            <p>Known for: 
+              {% for item in knownFor %}
+                {% if item.media_type == "movie" %}
+                  <a href="{{ url_for('movie', movieId=item.id) }}">{{ item.title }}</a>
+                {% elif item.media_type == "tv" %}
+                  <a href="{{ url_for('tv', tvId=item.id) }}">{{ item.title }}</a>
+                {% else %}
+                  {{ item.title }}
+                {% endif %}
+                {% if not loop.last %}, {% endif %}
+              {% endfor %}
+            </p>
             <br>
             <p>About: {{ biography or "No information available"}}</p>
           </div>

@@ -26,7 +26,7 @@ class MovieSearch:
         for person in people['results']:
             popularity = person.get('popularity', 0)
 
-            if (popularity >= 0.01):
+            if (popularity >= 0.1):
                 filteredPeople.append(person)
 
         return sorted(filteredPeople, key=lambda x: x.get('popularity', 0), reverse=True)
@@ -39,4 +39,4 @@ class MovieSearch:
         elif category == "person":
             return self.searchPeople(query)
         else:
-            return None
+            return "Invalid category", 400

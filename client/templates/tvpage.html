@@ -47,11 +47,20 @@
           <div class="">
             <p>First Air Date: {{ firstAirDate if firstAirDate else "Unknown" }}</p>
             <br>
-            <p>Creator: {{ creator if creator else "Unknown"}}</p>
+            <p>
+              Creator: 
+              {% for member in creator %}
+                {% if member.id %}
+                  <a href="{{ url_for('person', personId=member.id) }}">{{ member.name }}</a>{% if not loop.last %}, {% endif %}
+                {% else %}
+                  {{ member.name }}
+                {% endif %}
+              {% endfor %}
+            </p>
             <br>
             <p>Cast: 
               {% for member in cast %}
-                <a href="{{ url_for('person', person_id=member.id) }}">{{ member.name }}</a>{% if not loop.last %}, {% endif %}
+                <a href="{{ url_for('person', personId=member.id) }}">{{ member.name }}</a>{% if not loop.last %}, {% endif %}
               {% endfor %}
             </p>
             <br>
