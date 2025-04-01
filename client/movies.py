@@ -167,19 +167,14 @@ class Movies:
             "name": person.get("name", "Unknown"),
             "birthDate": person.get("birthday", "Unknown"),
             "occupation": person.get("known_for_department", "Unknown"),
-            "knownFor": sorted(
-                [
-                    {
-                        "id": c.get("id"),
-                        "title": c.get("title") or c.get("name", "N/A"),
-                        "media_type": c.get("media_type", "movie"),
-                        "popularity": c.get("popularity", 0)
-                    }
-                    for c in knownFor.get("cast", [])
-                ],
-                key=lambda x: x["popularity"],
-                reverse=True
-            )[:5],
+            "knownFor": [
+                {
+                    "id": c.get("id"),
+                    "title": c.get("title") or c.get("name", "N/A"),
+                    "media_type": c.get("media_type", "movie"),
+                }
+                for c in knownFor.get("cast", [])
+                ][:5],
             "biography": person.get("biography", "No information available."),
             "posterUrl": self.getPosterUrl(person)
         }

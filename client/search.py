@@ -9,27 +9,38 @@ class MovieSearch:
         self.search = tmdb.Search()
 
     def searchMovies(self, query):
-        movies = self.search.movie(query=query)
-        filteredMovies = [movie for movie in movies['results'] if movie.get('vote_average', 0) >= 0.01]
-        return sorted(filteredMovies, key=lambda x: x.get('popularity', 0), reverse=True)
+        allMovies = []
+        for page in range(1, 4):  
+            result = self.search.movie(query=query, page=page)
+            if 'results' in result:
+                allMovies.extend([movie for movie in result['results'] if movie.get('vote_average', 0) >= 0.01])
+            elif not result.get('results'):
+                break
+        return sorted(allMovies, key=lambda x: x.get('popularity', 0), reverse=True)
 
     def searchTv(self, query):
-        shows = self.search.tv(query=query)
-        filteredShows = [show for show in shows['results'] if show.get('vote_average', 0) >= 0.01]
-        return sorted(filteredShows, key=lambda x: x.get('popularity', 0), reverse=True)
+        allShows = []
+        for page in range(1, 4):
+            result = self.search.tv(query=query, page=page)
+            if 'results' in result:
+                filtered = [show for show in result['results'] if show.get('vote_average', 0) >= 0.01]
+                allShows.extend(filtered)
+            if not result.get('results'):
+                break
+        return sorted(allShows, key=lambda x: x.get('popularity', 0), reverse=True)
 
     def searchPeople(self, query):
-        people = self.search.person(query=query)
-
-        # Filter people by popularity and known roles
-        filteredPeople = []
-        for person in people['results']:
-            popularity = person.get('popularity', 0)
-
-            if (popularity >= 0.1):
-                filteredPeople.append(person)
-
-        return sorted(filteredPeople, key=lambda x: x.get('popularity', 0), reverse=True)
+        allPeople = []
+        for page in range(1, 4):  # Loop through first 5 pages
+            result = self.search.person(query=query, page=page)
+            if 'results' in result:
+                for person in result['results']:
+                    popularity = person.get('popularity', 0)
+                    if popularity >= 0.1:
+                        allPeople.append(person)
+            if not result.get('results'):
+                break
+        return sorted(allPeople, key=lambda x: x.get('popularity', 0), reverse=True)
 
     def searchByCategory(self, query, category):
         if category == "movie":

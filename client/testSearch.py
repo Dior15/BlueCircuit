@@ -3,37 +3,46 @@ from search import MovieSearch
 # Initialize MovieSearch instance for testing
 searchEngine = MovieSearch()
 
+def hasDuplicates(results, key="id"):
+    seen = set()
+    for item in results:
+        if key not in item:
+            continue
+        if item[key] in seen:
+            return True
+        seen.add(item[key])
+    return False
+
 def testSearchMovies():
-    # Test movie search with a valid query
     response = searchEngine.searchMovies("Inception")
-    assert response is not None  # Ensure response exists
-    assert isinstance(searchEngine.search.results, list)  # Ensure results are a list
-    assert len(searchEngine.search.results) > 0  # Ensure there are results
-    assert "title" in searchEngine.search.results[0]  # Ensure title is in response
+    assert response is not None
+    assert isinstance(response, list)
+    assert len(response) > 0
+    assert "title" in response[0]
+    assert not hasDuplicates(response), "Duplicate movies found in searchMovies"
 
 def testSearchTv():
-    # Test TV search with a valid query
     response = searchEngine.searchTv("Breaking Bad")
     assert response is not None
-    assert isinstance(searchEngine.search.results, list)
-    assert len(searchEngine.search.results) > 0
-    assert "name" in searchEngine.search.results[0]  # TV shows have "name" instead of "title"
+    assert isinstance(response, list)
+    assert len(response) > 0
+    assert "name" in response[0]
+    assert not hasDuplicates(response), "Duplicate TV shows found in searchTv"
 
 def testSearchPeople():
-    # Test person search with a valid query
     response = searchEngine.searchPeople("Leonardo DiCaprio")
     assert response is not None
-    assert isinstance(searchEngine.search.results, list)
-    assert len(searchEngine.search.results) > 0
-    assert "name" in searchEngine.search.results[0]  # People have "name" field
+    assert isinstance(response, list)
+    assert len(response) > 0
+    assert "name" in response[0]
+    assert not hasDuplicates(response), "Duplicate people found in searchPeople"
 
 def testSearchInvalidCategory():
-    # Test search with an invalid category
     response = searchEngine.searchByCategory("Test", "invalid")
-    assert response is None  # Should return None for invalid categories
+    assert isinstance(response, tuple)
+    assert response[1] == 400  # Should return error status code for invalid category
 
 def testEmptyQuery():
-    # Test search with an empty query
     response = searchEngine.searchMovies("")
-    assert response is not None  # API should return a response
-    assert isinstance(searchEngine.search.results, list)  # Should return a list
+    assert response is not None
+    assert isinstance(response, list)
