@@ -138,3 +138,31 @@ class Movies:
             "rating": self.getRating(movieId),
             "ratingColor": self.getRatingColor(self.getRating(movieId))
         }
+    
+    def getTVDict(self, tvId):
+
+        tvShow = tmdb.TV(tvId).info()
+        tvCredits = tmdb.TV(tvId).credits()
+
+        return {
+            "title": tvShow.get("name", "Unknown Title"),
+            "firstAirDate": tvShow.get("first_air_date", "Unknown"),
+            "genres": [genre['name'] for genre in tvShow.get("genres", [])],
+            "creator": tvShow["created_by"][0]["name"] if tvShow.get("created_by") else "Unknown Creator",
+            "cast": [{"id": member["id"], "name": member["name"]} for member in tvCredits.get("cast", [])[:5]],
+            "synopsis": tvShow.get("overview", ""),
+            "posterUrl": self.getPosterUrl(tvShow)
+        }
+    
+    def getPersonDict(self, personId):
+        person = tmdb.People(personId).info()
+        knownFor = tmdb.People(personId).combined_credits()
+
+        return {
+            "name": person.get("name", "Unknown"),
+            "birthDate": person.get("birthday", "Unknown"),
+            "occupation": person.get("known_for_department", "Unknown"),
+            "knownFor": [c.get("title", c.get("name", "N/A")) for c in knownFor.get("cast", [])[:5]],
+            "biography": person.get("biography", "No information available."),
+            "posterUrl": self.getPosterUrl(person)
+        }

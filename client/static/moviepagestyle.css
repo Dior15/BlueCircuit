@@ -6,7 +6,6 @@
 
 h1 {
     font-size:40px;
-    margin-top: 5vh;
 }
 
 p {
@@ -25,6 +24,7 @@ body{
     background-color: white;
     color: black;
 }
+
 .movie-poster img {
     height:65.625vh;
     width:43.75vh;
@@ -113,15 +113,17 @@ a:active {
 }
 
 #rating-count {
-    font-size: 2vh;
+    font-size: 1.5vh;
     color: #aaaaaa;
     margin-top: 0.5vh;
     justify-self:center;
+    white-space: nowrap;
 }
 
 #add-to-watchlist {
   background-color: #B22222;
   width: 15vh;
+  height: 4vh;
   border: 0;
   border-radius: 49px;
   color: white;
@@ -131,5 +133,10 @@ a:active {
   padding-top:1vh;
   padding-bottom:1vh;
   justify-self:center;
-  font-size:2vh;
+  font-size:1.5vh;
+  white-space: nowrap;
+}
+
+#moviegenre {
+    margin-bottom: 2vh;
 }

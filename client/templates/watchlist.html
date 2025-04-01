@@ -34,7 +34,7 @@
             <ul>
                 {% for item in movies %}                        
                     <li>
-                        <a href="{{ url_for('movie', movie_id=item.id)}}">
+                        <a href="{{ url_for('movie', movieId=item.id)}}">
                             {% if item.poster_path %}
                                 <img src= "{{ item.poster_url }}" alt="{{ item.title }} Poster">
                             {% endif %}

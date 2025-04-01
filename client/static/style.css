@@ -211,7 +211,14 @@ h3{
     padding-left:1vh;
     padding-right:1vh;
     margin-right: 10vh;
-    width:20vh;
+    width:auto;
+    min-width: 20vh;
+    white-space: nowrap;
+    transition: none;
+}
+
+#welcomeButton:hover button {
+    transform: none;
 }
   
 #logout-link button {
