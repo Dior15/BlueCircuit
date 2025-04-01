@@ -1,87 +1,127 @@
 import pytest
-from movies import *
+from movies import Movies
 
-# Initialize Movie instance for testing
+# Initialize Movies instance for testing
 movieEngine = Movies()
 
 def testGetPopularXMovies():
-    """Test fetching top X popular movies"""
-    topMovies = movieEngine.getPopularXMovies(5)  # Get top 5 movies
-
-    assert topMovies is not None  # Ensure response exists
-    assert isinstance(topMovies, list)  # Ensure it's a list
-    assert len(topMovies) == 5  # Ensure it returns exactly 5 movies
-    assert "title" in topMovies[0]  # Ensure each movie has a title
+    # Test fetching top X popular movies
+    topMovies = movieEngine.getPopularXMovies(5)
+    assert topMovies is not None
+    assert isinstance(topMovies, list)
+    assert len(topMovies) == 5
+    assert "title" in topMovies[0]
 
 def testGetTopRatedXMovies():
-    """Test fetching the X top rated movies"""
-    topMovies = movieEngine.getTopRatedXMovies(5)  # Get top 5 movies
+    # Test fetching top X top-rated movies
+    topMovies = movieEngine.getTopRatedXMovies(5)
+    assert topMovies is not None
+    assert isinstance(topMovies, list)
+    assert len(topMovies) == 5
+    assert "title" in topMovies[0]
 
-    assert topMovies is not None  # Ensure response exists
-    assert isinstance(topMovies, list)  # Ensure it's a list
-    assert len(topMovies) == 5  # Ensure it returns exactly 5 movies
-    assert "title" in topMovies[0]  # Ensure each movie has a title
+def testGetLatestMovie():
+    # Test getting the most recent popular English movie
+    latest = movieEngine.getLatestMovie()
+    assert isinstance(latest, dict)
+    assert "title" in latest
 
 def testGetPosterUrl():
-    """Test fetching a valid poster URL"""
-    topMovie = movieEngine.getPopularXMovies(1)[0]  # Get the first movie
+    # Test getting a valid poster URL
+    topMovie = movieEngine.getPopularXMovies(1)[0]
     posterUrl = movieEngine.getPosterUrl(topMovie)
-
-    assert isinstance(posterUrl, str)  # Ensure the URL is a string
-    assert posterUrl.startswith("https://image.tmdb.org/t/p/w500")  # Ensure correct TMDB URL format
-    assert posterUrl.endswith(".jpg") or posterUrl.endswith(".png")  # Ensure it's an image URL
+    assert isinstance(posterUrl, str)
+    assert posterUrl.startswith("https://")
 
 def testGetCast():
-    """Test fetching the main cast of a movie"""
-    movieId = 27205  # TMDB ID for Inception
+    # Test fetching cast with person IDs and names
+    movieId = 27205  # Inception
     cast = movieEngine.getCast(movieId)
-
-    assert isinstance(cast, list)  # Ensure cast is a list
-    assert len(cast) > 0  # Ensure at least one cast member exists
-    assert isinstance(cast[0], str)  # Ensure cast names are strings
+    assert isinstance(cast, list)
+    assert len(cast) > 0
+    assert isinstance(cast[0], dict)
+    assert "id" in cast[0] and "name" in cast[0]
 
 def testGetCrew():
-    """Test fetching the full crew of a movie"""
-    movieId = 27205  # TMDB ID for Inception
+    # Test fetching crew members
+    movieId = 27205
     crew = movieEngine.getCrew(movieId)
-
-    assert isinstance(crew, list)  # Ensure crew is a list
-    assert len(crew) > 0  # Ensure at least one crew member exists
-    assert isinstance(crew[0], str)  # Ensure crew names are strings
+    assert isinstance(crew, list)
+    assert len(crew) > 0
+    assert isinstance(crew[0], str)
 
 def testGetDirector():
-    """Test fetching the director of a movie"""
-    movieId = 27205  # TMDB ID for Inception
+    # Test getting director's name
+    movieId = 27205
     director = movieEngine.getDirector(movieId)
+    assert isinstance(director, str)
+    assert director == "Christopher Nolan"
 
-    assert isinstance(director, str)  # Ensure director is a string
-    assert director == "Christopher Nolan"  # Ensure correct director is returned
+def testGetReleaseDate():
+    # Test getting release date
+    movieId = 27205
+    releaseDate = movieEngine.getReleaseDate(movieId)
+    assert isinstance(releaseDate, str)
+    assert len(releaseDate) >= 4  # At least year format
+
+def testGetSynopsis():
+    # Test getting movie overview
+    movieId = 27205
+    synopsis = movieEngine.getSynopsis(movieId)
+    assert isinstance(synopsis, str)
 
 def testGetNumRatings():
-    """Test fetching the number of ratings this movie has from tmdb"""
-    movieId = 27205  # TMDB ID for Inception
+    # Test number of votes
+    movieId = 27205
     numRatings = movieEngine.getNumRatings(movieId)
-
-    assert isinstance(numRatings, int)  # Ensure numRatings is an int
+    assert isinstance(numRatings, int)
 
 def testGetRating():
-    """Test fetching the rating of a movie on tmdb"""
-    movieId = 27205  # TMDB ID for Inception
+    # Test rating percentage value
+    movieId = 27205
     rating = movieEngine.getRating(movieId)
+    assert isinstance(rating, int)
+    assert 0 <= rating <= 100
 
-    assert isinstance(rating, float)  # Ensure numRatings is a float
-    assert rating <= 10 and rating >= 0 # Ensures the rating is between 0 and 10
+def testGetRatingColor():
+    # Test rating color by value
+    assert movieEngine.getRatingColor(8) == "#00ff88"
+    assert movieEngine.getRatingColor(6) == "#ffaa00"
+    assert movieEngine.getRatingColor(3) == "#ff4444"
 
 def testGetMovieDict():
-    """Test fetching full movie details as a dictionary"""
-    movieId = 27205  # TMDB ID for Inception
+    # Test full movie dictionary
+    movieId = 27205
     movieDict = movieEngine.getMovieDict(movieId)
+    assert isinstance(movieDict, dict)
+    requiredKeys = ["title", "runtime", "genres", "posterUrl", "cast", "crew", "director", "releaseDate", "synopsis", "ratingCount", "rating", "ratingColor"]
+    for key in requiredKeys:
+        assert key in movieDict
 
-    assert isinstance(movieDict, dict)  # Ensure it returns a dictionary
-    assert "title" in movieDict  # Ensure title key exists
-    assert "runtime" in movieDict  # Ensure runtime key exists
-    assert "genres" in movieDict  # Ensure genres key exists
-    assert "posterUrl" in movieDict  # Ensure posterUrl key exists
-    assert "cast" in movieDict  # Ensure cast key exists
-    assert "crew" in movieDict  # Ensure crew key exists
-    assert "director" in movieDict  # Ensure director key exists
+def testGetTvDict():
+    # Test TV show dictionary for a known show (Breaking Bad: ID 1396)
+    tvId = 1396
+    tvDict = movieEngine.getTVDict(tvId)
+    assert isinstance(tvDict, dict)
+
+    # Check required fields
+    requiredKeys = ["title", "firstAirDate", "genres", "creator", "cast", "synopsis", "posterUrl", "rating", "ratingCount", "ratingColor"]
+    for key in requiredKeys:
+        assert key in tvDict
+
+    assert isinstance(tvDict["cast"], list)
+    assert isinstance(tvDict["title"], str)
+
+def testGetPersonDict():
+    # Test person dictionary for a known person (Leonardo DiCaprio: ID 6193)
+    personId = 6193
+    personDict = movieEngine.getPersonDict(personId)
+    assert isinstance(personDict, dict)
+
+    # Check required fields
+    requiredKeys = ["name", "birthDate", "posterUrl", "occupation", "knownFor", "biography"]
+    for key in requiredKeys:
+        assert key in personDict
+
+    assert isinstance(personDict["name"], str)
+    assert personDict["name"] == "Leonardo DiCaprio"

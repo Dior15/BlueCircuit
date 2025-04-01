@@ -1,4 +1,3 @@
-import pytest
 from search import MovieSearch
 
 # Initialize MovieSearch instance for testing
