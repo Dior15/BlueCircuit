@@ -2,7 +2,7 @@ import pytest
 from unittest.mock import MagicMock, patch
 from login import UserLogin
 from models import User
-from app import app
+from MovieFlix import app
 
 def testSignupMissingFields():
     # Test signup with missing fields
