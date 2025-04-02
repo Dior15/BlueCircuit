@@ -16,7 +16,7 @@ class MovieSearch:
                 allMovies.extend([movie for movie in result['results'] if movie.get('vote_average', 0) >= 0.01])
             elif not result.get('results'):
                 break
-        return sorted(allMovies, key=lambda x: x.get('popularity', 0), reverse=True)
+        return sorted(allMovies, key=lambda x: x.get('vote_count', 0), reverse=True)
 
     def searchTv(self, query):
         allShows = []
@@ -27,11 +27,11 @@ class MovieSearch:
                 allShows.extend(filtered)
             if not result.get('results'):
                 break
-        return sorted(allShows, key=lambda x: x.get('popularity', 0), reverse=True)
+        return sorted(allShows, key=lambda x: x.get('vote_count', 0), reverse=True)
 
     def searchPeople(self, query):
         allPeople = []
-        for page in range(1, 4):  # Loop through first 5 pages
+        for page in range(1, 4):
             result = self.search.person(query=query, page=page)
             if 'results' in result:
                 for person in result['results']:

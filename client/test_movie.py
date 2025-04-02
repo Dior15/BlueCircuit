@@ -53,9 +53,13 @@ def testGetCrew():
 def testGetDirector():
     # Test getting director's name
     movieId = 27205
-    director = movieEngine.getDirector(movieId)
-    assert isinstance(director, str)
-    assert director == "Christopher Nolan"
+    directors = movieEngine.getDirector(movieId)
+    assert isinstance(directors, list)
+    assert len(directors) > 0
+    assert isinstance(directors[0], dict)
+    assert "name" in directors[0] and "id" in directors[0]
+    names = [d["name"] for d in directors]
+    assert "Christopher Nolan" in names
 
 def testGetReleaseDate():
     # Test getting release date
@@ -70,24 +74,37 @@ def testGetSynopsis():
     synopsis = movieEngine.getSynopsis(movieId)
     assert isinstance(synopsis, str)
 
-def testGetNumRatings():
+def testMovieGetNumRatings():
     # Test number of votes
     movieId = 27205
-    numRatings = movieEngine.getNumRatings(movieId)
+    numRatings = movieEngine.getMovieNumRatings(movieId)
     assert isinstance(numRatings, int)
 
-def testGetRating():
+def testMovieGetRating():
     # Test rating percentage value
     movieId = 27205
-    rating = movieEngine.getRating(movieId)
+    rating = movieEngine.getMovieRating(movieId)
+    assert isinstance(rating, int)
+    assert 0 <= rating <= 100
+
+def testTvGetNumRatings():
+    # Test number of votes
+    tvId = 1668
+    numRatings = movieEngine.getTvNumRatings(tvId)
+    assert isinstance(numRatings, int)
+
+def testTvGetRating():
+    # Test rating percentage value
+    tvId = 1668
+    rating = movieEngine.getTvRating(tvId)
     assert isinstance(rating, int)
     assert 0 <= rating <= 100
 
 def testGetRatingColor():
     # Test rating color by value
-    assert movieEngine.getRatingColor(8) == "#00ff88"
-    assert movieEngine.getRatingColor(6) == "#ffaa00"
-    assert movieEngine.getRatingColor(3) == "#ff4444"
+    assert movieEngine.getRatingColor(80) == "#00ff88"
+    assert movieEngine.getRatingColor(60) == "#ffaa00"
+    assert movieEngine.getRatingColor(30) == "#ff4444"
 
 def testGetMovieDict():
     # Test full movie dictionary

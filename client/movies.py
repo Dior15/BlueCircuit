@@ -105,19 +105,28 @@ class Movies:
         movieData = tmdb.Movies(movieId).info()
         return movieData.get("overview", "No synopsis available")
     
-    def getNumRatings(self, movieId):
+    def getMovieNumRatings(self, movieId):
         movieData = tmdb.Movies(movieId).info()
         return movieData.get("vote_count", None)
     
-    def getRating(self, movieId):
+    def getMovieRating(self, movieId):
         movieData = tmdb.Movies(movieId).info()
         rating = movieData.get("vote_average", "N/A")
         return (round(rating * 10))
     
+    def getTvNumRatings(self, tvId):
+        movieData = tmdb.TV(tvId).info()
+        return movieData.get("vote_count", None)
+    
+    def getTvRating(self, tvId):
+        movieData = tmdb.TV(tvId).info()
+        rating = movieData.get("vote_average", "N/A")
+        return (round(rating * 10))
+    
     def getRatingColor(self, rating):
-        if rating >= 7:
+        if rating >= 70:
             return '#00ff88'
-        elif rating >= 5:
+        elif rating >= 50:
             return '#ffaa00'
         else:
             return '#ff4444'
@@ -136,9 +145,9 @@ class Movies:
             "director": self.getDirector(movieId),
             "releaseDate": self.getReleaseDate(movieId),
             "synopsis": self.getSynopsis(movieId),
-            "ratingCount": self.getNumRatings(movieId),
-            "rating": self.getRating(movieId),
-            "ratingColor": self.getRatingColor(self.getRating(movieId))
+            "ratingCount": self.getMovieNumRatings(movieId),
+            "rating": self.getMovieRating(movieId),
+            "ratingColor": self.getRatingColor(self.getMovieRating(movieId))
         }
     
     def getTVDict(self, tvId):
@@ -156,7 +165,10 @@ class Movies:
             ] or [{"id": None, "name": "Unknown Creator"}],
             "cast": [{"id": member["id"], "name": member["name"]} for member in tvCredits.get("cast", [])[:5]],
             "synopsis": tvShow.get("overview", ""),
-            "posterUrl": self.getPosterUrl(tvShow)
+            "posterUrl": self.getPosterUrl(tvShow),
+            "ratingCount": self.getTvNumRatings(tvId),
+            "rating": self.getTvRating(tvId),
+            "ratingColor": self.getRatingColor(self.getTvRating(tvId))
         }
     
     def getPersonDict(self, personId):

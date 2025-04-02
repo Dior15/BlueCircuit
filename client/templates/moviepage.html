@@ -43,16 +43,14 @@
             <div class="flex">
               <div class="rating-container">
                 <button class="header-buttons" id="add-to-watchlist">&#43; Add to Watchlist</button>
-                {% set ringColor = '#00ff88' if rating >= 70 else '#ffaa00' if rating >= 50 else '#ff4444' %}
                 <div id="rating-circle" 
-                  style="border-color: {{ ringColor }}; 
-                        background: conic-gradient({{ ringColor }} {{ rating }}%, #444444 {{ rating }}%);">
+                  style="border-color: {{ ratingColor }}; 
+                        background: conic-gradient({{ ratingColor }} {{ rating }}%, #444444 {{ rating }}%);">
                     <span>{{ rating }}%</span>
                 </div>
                 <center><p id="rating-count">Based on {{ ratingCount }} ratings</p></center>
               </div>
             </div>
-            
           </div>
           
           <div class="total-info">
@@ -79,12 +77,12 @@
               </p>
               <br>
               <p>Synopsis: {{ synopsis or "N/A"}}</p>
-            </div>
-              
+            </div>  
           </div>
+
         </div>
-        
-          </div>
+
+      </div>
           
       <br>
       <br>

@@ -34,17 +34,25 @@
         <div class="movie-poster"><img src="{{ posterUrl }}" alt="{{ title }}"></div>
         <div id="movie-info">
 
-          <h1 class="movie-title">{{ title }}</h1>
-        
-          <br>
-
           <div class="is-flex spaced-between">
-            <div class="genre">{{ genres | join(', ') }}</div>
+            <div id="moviegenre">
+              <h1 class="movie-title">{{ title }}</h1>
+              <br>
+              <div class="genre">{{ genres | join(', ') }}</div>
+            </div>
+            <div class="flex">
+              <div class="rating-container">
+                <div id="rating-circle" 
+                  style="border-color: {{ ratingColor }}; 
+                        background: conic-gradient({{ ratingColor }} {{ rating }}%, #444444 {{ rating }}%);">
+                    <span>{{ rating }}%</span>
+                </div>
+                <center><p id="rating-count">Based on {{ ratingCount }} ratings</p></center>
+              </div>
+            </div>
           </div>
-
-          <br>
           
-          <div class="">
+          <div class="total-info">
             <p>First Air Date: {{ firstAirDate if firstAirDate else "Unknown" }}</p>
             <br>
             <p>
