@@ -7,7 +7,7 @@ Overall, MovieFlix is a self-contained, testable, and deployable web app that se
 
 ## Simple Setup
 
-Using MovieFlix is incredibly simple, if you would like to run the application locally without worrying about installing the requirements you can simply download the MovieFlix.exe file. After double clicking the executable a CLI will open similar to the one below, afterward you can direct your browser to the local IP address shown in the terminal.
+Using MovieFlix is incredibly simple; if you would like to run the application locally without worrying about installing the requirements, you can simply download the MovieFlix.exe file. After double-clicking the executable, a terminal will open similar to the one below, and you can direct your browser to the local IP address shown.
 <div align="center">
   <img src="pictures/setup.png">
 </div>
@@ -17,7 +17,7 @@ Using MovieFlix is incredibly simple, if you would like to run the application l
 
 ### Requirements
 
-To run MovieFlix through an IDE it will require Python3 and the Python libraries 'Flask', 'Flask-sqlalchemy', 'werkzeug' and 'tmdbsimple'
+To run MovieFlix through an IDE, it will require Python3 and the Python libraries 'Flask', 'Flask-sqlalchemy', 'werkzeug', and 'tmdbsimple'
 
 These libraries can be installed by using pip in your shell of choice and running the commands:
 - pip install flask
