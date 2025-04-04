@@ -1,22 +1,61 @@
 # MovieFlix by BlueCircuit
-A Software Design &amp; Analysis Course Project
+MovieFlix is a full-stack movie cataloguing and discovery web application, designed using Python, Flask, and The Movie Database (TMDb) API. The goal of the project is to give users a modern, interactive platform where they can search for movies, TV shows, and people (actors, directors, etc.), view detailed information, and build a personalized watchlist. The application mimics the functionality of popular movie platforms by dynamically fetching data from TMDb and presenting it with rich visuals, genre tags, cast listings, posters, ratings, and more.
+
+The backend is powered by Flask and structured around modular files (movies.py, search.py, login.py) that encapsulate all TMDb API logic, user authentication, and search filtering. User accounts are stored in a SQLite database, and Flask sessions manage login state. Users can log in, sign up, and save movies to their watchlists — which are rendered using the same logic as the global search results. The frontend is built with HTML, CSS, and JavaScript, including interactive components like a trending movie carousel, modals, and hover effects. Unit testing is handled with pytest and mocking to ensure isolated, testable logic across user authentication, data fetching, and presentation.
+
+Overall, MovieFlix is a self-contained, testable, and deployable web app that serves as a robust foundation for learning web development, Flask, RESTful APIs, and full-stack architecture.
+
+## Simple Setup
+
+Using MovieFlix is incredibly simple, if you would like to run the application locally without worrying about installing the requirements you can simply download the MovieFlix.exe file. After double clicking the executable a CLI will open similar to the one below, afterward you can direct your browser to the local IP address shown in the terminal.
+<div align="center">
+  <img src="pictures/setup.png">
+</div>
+<br>
+
+## IDE Setup
+
+### Requirements
+
+To run MovieFlix through an IDE it will require Python3 and the Python libraries 'Flask', 'Flask-sqlalchemy', 'werkzeug' and 'tmdbsimple'
+
+These libraries can be installed by using pip in your shell of choice and running the commands:
+- pip install flask
+- pip install tmdbsimple
+- pip install flask-sqlalchemy
+- pip install werkzeug
+
+### To run
+
+After cloning the repository into the directory of your choice. You will first need a txt file with your API Key for the TMDB API in your root directory named 'apikey.txt'
+
+Then, to run MovieFlix locally, simply run the MovieFlix.py file in your IDE and access the page by directing your browser to the local IP address displayed in your terminal
+
+<div align="center">
+  <img src="pictures/setup.png">
+</div>
+<br>
+
+## Images
 
 ### MovieFlix Homepage
-
 <div align="center">
   <img src="pictures/homepage.png?">
 </div>
 
 ### Results Pages
-
 <div align="center">
   <img src="pictures/results.png?">
 </div>
 
-### Movie Pages
-
+### Movie/TV Show Pages
 <div align="center">
   <img src="pictures/moviepage.png?">
+</div>
+
+### Person Pages
+<div align="center">
+  <img src="pictures/personpage.png?">
 </div>
 
 ### Trending Carousel
@@ -34,20 +73,12 @@ A Software Design &amp; Analysis Course Project
   <img src="pictures/accountcreationmodal.png?">
 </div>
 
-## Requirements
-
-Use of MovieFlix will require Python3 and the Python libraries 'Flask' and 'tmdbsimple'
-
-These libraries can be installed by using pip in your shell of choice and running the commands:
-- pip install flask
-- pip install tmdbsimple
-
-## Setup
-
-You will first need a txt file with your API Key for the TMDB API in your root directory named 'apikey.txt'
-
-Then, to run MovieFlix locally, simply run the app.py file in your IDE and access the page by directing your browser to the IP address displayed in your terminal
-
+### Account Dropdown
 <div align="center">
-  <img src="pictures/setup.png"
+  <img src="pictures/accountdropdown.png?">
+</div>
+
+### Watchlist Page
+<div align="center">
+  <img src="pictures/watchlist.png?">
 </div>
