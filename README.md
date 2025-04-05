@@ -12,13 +12,13 @@ Overall, MovieFlix is a self-contained, testable, and deployable web app that se
 
 ## Simple Setup
 
-Using MovieFlix is incredibly simple; if you would like to run the application locally without worrying about installing the requirements, you can simply download the MovieFlix.exe file. After double-clicking the executable, a terminal will open similar to the one below, and you can direct your browser to the local IP address shown.
+Using MovieFlix is incredibly simple; if you would like to run the application locally without worrying about installing the requirements, you can simply download the MovieFlix.exe file. After double-clicking the executable, a terminal will open similar to the one below, and the webpage will open automatically. To exit, simply close the terminal and webpage.
 <div align="center">
   <img src="pictures/setup.png">
 </div>
 <br>
 
-## IDE Setup
+## Developer Setup
 
 ### Requirements
 
@@ -32,9 +32,9 @@ These libraries can be installed by using pip in your shell of choice and runnin
 
 ### To run
 
-After cloning the repository into the directory of your choice. You will first need a txt file with your API Key for the TMDB API in your root directory named 'apikey.txt'
+After cloning the repository into the directory of your choice. You will first need a txt file containing your API Key for TMDB's API in your root directory titled 'apikey.txt'
 
-Then, to run MovieFlix locally, simply run the MovieFlix.py file in your IDE and access the page by directing your browser to the local IP address displayed in your terminal
+Then, to run MovieFlix locally, simply run the MovieFlix.py file in your IDE and the page should open automatically. To exit, CTRL+C the terminal and exit the webpage.
 
 <div align="center">
   <img src="pictures/setup.png">
