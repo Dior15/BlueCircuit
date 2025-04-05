@@ -1,4 +1,9 @@
 # MovieFlix by BlueCircuit
+<div align="center">
+  <img src="pictures/homepage.png?">
+</div>
+<br>
+
 MovieFlix is a full-stack movie cataloguing and discovery web application, designed using Python, Flask, and The Movie Database (TMDb) API. The goal of the project is to give users a modern, interactive platform where they can search for movies, TV shows, and people (actors, directors, etc.), view detailed information, and build a personalized watchlist. The application mimics the functionality of popular movie platforms by dynamically fetching data from TMDb and presenting it with rich visuals, genre tags, cast listings, posters, ratings, and more.
 
 The backend is powered by Flask and structured around modular files (movies.py, search.py, login.py) that encapsulate all TMDb API logic, user authentication, and search filtering. User accounts are stored in a SQLite database, and Flask sessions manage login state. Users can log in, sign up, and save movies to their watchlists — which are rendered using the same logic as the global search results. The frontend is built with HTML, CSS, and JavaScript, including interactive components like a trending movie carousel, modals, and hover effects. Unit testing is handled with pytest and mocking to ensure isolated, testable logic across user authentication, data fetching, and presentation.
