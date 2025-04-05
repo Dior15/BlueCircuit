@@ -28,10 +28,10 @@ document.addEventListener('DOMContentLoaded', () => {
           // Update button text and style
           if (isSaved) {
             button.innerHTML = "&#45; Remove from Watchlist";
-            button.style.backgroundColor = "#1c1c1c";
+            button.style.backgroundColor = "#601313";
           } else {
             button.innerHTML = "&#43; Add to Watchlist";
-            button.style.backgroundColor = "#1c1c1c";
+            button.style.backgroundColor = "#B22222";
           }
         }
       })

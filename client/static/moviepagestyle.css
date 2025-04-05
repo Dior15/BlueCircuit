@@ -120,9 +120,9 @@ a:active {
     white-space: nowrap;
 }
 
-#add-to-watchlist {
-  background-color: #B22222;
-  width: 15vh;
+#watchlist-toggle-btn {
+  /* background-color: #B22222; */
+  width: 18vh;
   height: 4vh;
   border: 0;
   border-radius: 49px;

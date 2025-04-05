@@ -30,7 +30,7 @@ class UserWatchlist:
         
         db.session.delete(entry)
         db.session.commit()
-        return {'success': True, 'message': 'Movie removed from wathchlist'}, 200
+        return {'success': True, 'message': 'Movie removed from watchlist'}, 200
     
     def is_movie_saved(user_id, movie_id):
         return Watchlist.query.filter_by(user_id=user_id, movie_id=movie_id).first() is not None

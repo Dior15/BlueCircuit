@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify, session, redirect
 from models import db, User, Watchlist
 import tmdbsimple as tmdb
 from werkzeug.security import generate_password_hash, check_password_hash
+import webbrowser
 from movies import *
 from search import *
 from login import *
@@ -163,4 +164,5 @@ def remove_watchlist():
     return jsonify(response), status
      
 if __name__ == '__main__':
-    app.run(debug=True)
+    webbrowser.open("http://127.0.0.1:5000")
+    app.run()
