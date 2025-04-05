@@ -4,7 +4,7 @@
 
 #web-name a:link {
     text-decoration: none;
-    font-family: Broadway, sans-serif;
+    font-family: Broadway, Impact, sans-serif;
     font-size: 3vw;
     margin-left: 2%;
     transition: transform 0.3s ease;
@@ -13,7 +13,7 @@
   
 #web-name a:visited {
     text-decoration: none;
-    font-family: Broadway, sans-serif;
+    font-family: Broadway, Impact, sans-serif;
     font-size: 3vw;
     margin-left: 2%;
     transition: transform 0.3s ease;
@@ -22,7 +22,7 @@
   
 #web-name a:hover {
     text-decoration: none;
-    font-family: Broadway, sans-serif;
+    font-family: Broadway, Impact, sans-serif;
     font-size: 3vw;
     margin-left: 2%;
     transition: transform 0.3s ease;
@@ -31,7 +31,7 @@
   
 #web-name a:active {
     text-decoration: none;
-    font-family: Broadway, sans-serif;
+    font-family: Broadway, Impact, sans-serif;
     font-size: 3vw;
     margin-left: 2%;
     transition: transform 0.3s ease;
@@ -61,9 +61,9 @@ button:hover{
 }
 
 #web-name{
-    font-family: Broadway, sans-serif;
+    font-family: Broadway, Impact, sans-serif;
     font-size: 3vw;
-    margin-left: 2%;
+    margin-left: 1%;
     transition: transform 0.3s ease;
     color: white;
     text-decoration: none;
