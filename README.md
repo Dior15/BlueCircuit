@@ -22,14 +22,12 @@ Using MovieFlix is incredibly simple; if you would like to run the application l
 
 ### Requirements
 
-To run MovieFlix through an IDE, it will require Python3 and the Python libraries 'Flask', 'Flask-sqlalchemy', 'werkzeug', and 'tmdbsimple'
+To run MovieFlix through an IDE, it will require Python3 and the Python libraries 'Flask', 'Flask-SqlAlchemy', 'Werkzeug', and 'TmdbSimple'
 
-These libraries can be installed by using pip in your shell of choice and running the commands:
-- pip install flask
-- pip install tmdbsimple
-- pip install flask-sqlalchemy
-- pip install werkzeug
-
+These libraries can be installed by using pip in your shell of choice and running the command:
+```
+pip install flask flask-sqlalchemy tmdbsimple werkzeug
+```
 ### To run
 
 After cloning the repository into the directory of your choice. You will first need a txt file containing your API Key for TMDB's API in your root directory titled 'apikey.txt'
