@@ -1,10 +1,5 @@
-import tmdbsimple as tmdb
 from models import Watchlist, db
 from flask import session
-
-# Set TMDB API key
-with open("apikey.txt", "r") as file:
-    tmdb.API_KEY = file.readline().strip()
     
 class UserWatchlist:
     def add_movie(user_id, movie_id):
