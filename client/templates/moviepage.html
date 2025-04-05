@@ -42,7 +42,17 @@
             </div>
             <div class="flex">
               <div class="rating-container">
-                <button class="header-buttons" id="add-to-watchlist">&#43; Add to Watchlist</button>
+                <!--<button class="header-buttons" id="add-to-watchlist">&#43; Add to Watchlist</button> -->
+                <button id="watchlist-toggle-btn"
+                    class="header-buttons"
+                    data-movie-id="{{ movie_id }}"
+                    data-saved="{{ 'true' if is_saved else 'false' }}">
+                  {% if is_saved %}
+                    &#45; Remove from Watchlist
+                  {% else %}
+                    &#43; Add to Watchlist
+                  {% endif %}
+                </button>
                 <div id="rating-circle" 
                   style="border-color: {{ ratingColor }}; 
                         background: conic-gradient({{ ratingColor }} {{ rating }}%, #444444 {{ rating }}%);">

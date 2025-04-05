@@ -68,8 +68,12 @@ def search():
 def movie(movieId):
     # Get movie details
     movie = movieEngine.getMovieDict(movieId)
+    
+    is_saved = False
+    if 'user_id' in session:
+        is_saved = UserWatchlist.is_movie_saved(session['user_id'], movieId)
 
-    return render_template('moviepage.html', **movie)
+    return render_template('moviepage.html', **movie, movie_id=movieId, is_saved=is_saved)
 
 @app.route('/tv/<int:tvId>')
 def tv(tvId):

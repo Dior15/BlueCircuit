@@ -28,6 +28,9 @@ class UserWatchlist:
         if not entry:
             return {'success': False, 'message': 'Movie not found in watchlist'}, 404
         
-        db.session.delet(entry)
+        db.session.delete(entry)
         db.session.commit()
         return {'success': True, 'message': 'Movie removed from wathchlist'}, 200
+    
+    def is_movie_saved(user_id, movie_id):
+        return Watchlist.query.filter_by(user_id=user_id, movie_id=movie_id).first() is not None
